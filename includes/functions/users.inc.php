@@ -18,7 +18,8 @@ class User extends CPHPDatabaseRecordClass {
 			'Plan'		=>	"plan"
 		),
 		'boolean' => array(
-			'Active' 	=> "active"
+			'Active' 	=> "active",
+			'InitialSetup'	=>	"initial_setup",
 		)
 	);
 	
@@ -148,6 +149,7 @@ class User extends CPHPDatabaseRecordClass {
 			$sUser = new User($result);
 			if($sUser->VerifyPassword($uPassword)){
 				$_SESSION['user_id'] = $sUser->sId;
+				$_SESSION['password'] = $uPassword;
 				header("Location: main.php");
 				die();
 			} else {

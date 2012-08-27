@@ -1,9 +1,6 @@
 <?php
 include('./includes/loader.php');
 
-$sPanelTitle = Core::GetSetting('panel_title');
-$sRegistrationEnabled = Core::GetSetting('registration_enabled');
-
 if($sRegistrationEnabled->sValue == 'enabled')
 {
 	if($LoggedIn === true)

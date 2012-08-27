@@ -10,4 +10,6 @@ if(isset($_SESSION['user_id'])){
 }
 
 $sErrorMessage = NULL;
+
+require_once('./includes/global_settings.php');
 ?>
