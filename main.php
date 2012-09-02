@@ -6,8 +6,6 @@ include('./includes/loader.php');
 		header("Location: index.php");
 		die();
 	} else {
-		if($sUser->sInitialSetup == false){
-		}
 		$sContent = Templater::AdvancedParse('/blue_default/main', $locale->strings, array(
 		'PanelTitle'  => $sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",

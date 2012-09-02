@@ -19,7 +19,6 @@ class User extends CPHPDatabaseRecordClass {
 		),
 		'boolean' => array(
 			'Active' 	=> "active",
-			'InitialSetup'	=>	"initial_setup",
 		)
 	);
 	
@@ -112,6 +111,8 @@ class User extends CPHPDatabaseRecordClass {
 	
 	public static function register($uUsername, $uPasswordOne, $uPasswordTwo, $uEmailAddress){
 		global $database;
+		global $root_ssh;
+		global $sWriteLog;
 		if(User::ValidateUsername($uUsername) === true){
 			if(User::ValidatePasswords($uPasswordOne, $uPasswordTwo) === true){
 				if(User::ValidateEmail($uEmailAddress) === true){
@@ -125,6 +126,11 @@ class User extends CPHPDatabaseRecordClass {
 						$sUser->GenerateHash();
 						$sUser->uEmailAddress = $uEmailAddress;
 						$sUser->InsertIntoDatabase();
+						$uPassword = stripslashes(str_replace("'", '', $uPasswordOne));
+						$dev_null = $root_ssh->exec('useradd '.$uUsername);
+						fwrite($sWriteLog, 'useradd '.$uUsername.' -> '.$dev_null);
+						$dev_null = $root_ssh->exec('echo -e "'.$uPassword.'\n'.$uPassword.'" | passwd '.$uUsername);
+						fwrite($sWriteLog, 'echo -e "####\n####" | passwd '.$uUsername.' -> '.$dev_null);
 						header("Location: register.php?id=activate");
 						die();
 					} else {
@@ -149,6 +155,7 @@ class User extends CPHPDatabaseRecordClass {
 			$sUser = new User($result);
 			if($sUser->VerifyPassword($uPassword)){
 				$_SESSION['user_id'] = $sUser->sId;
+				$uPassword = stripslashes(str_replace("'", '', $uPassword));
 				$_SESSION['password'] = $uPassword;
 				header("Location: main.php");
 				die();

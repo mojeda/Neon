@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2012 at 03:32 PM
+-- Generation Time: Sep 02, 2012 at 10:50 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -36,14 +36,19 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `activation_code` varchar(65) NOT NULL,
   `plan` int(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
--- Dumping data for table `accounts`
+-- Table structure for table `domains`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `password`, `salt`, `email`, `active`, `activation_code`, `plan`) VALUES
-(4, 'root', '3utu0/UmMnEfhD6evIAE4fUzWL.PlBgcefnSCf.ZcN9', 'U4ezjrd1cx', 'admin@bluevm.com', 1, 'sGU4HruD7Vt9stRQPfmVUMseh', 1);
+CREATE TABLE IF NOT EXISTS `domains` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `user_id` int(8) NOT NULL,
+  `domain_name` varchar(65) NOT NULL,
+  `status` int(8) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -57,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `setting_value` varchar(65) NOT NULL,
   `setting_group` varchar(65) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `settings`
@@ -65,9 +70,10 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) VALUES
 (1, 'template', 'blue_default', 'design_settings'),
-(2, 'panel_title', 'BlueCP', 'panel_settings'),
+(2, 'panel_title', 'NEON', 'panel_settings'),
 (3, 'registration_enabled', 'enabled', 'panel_settings'),
-(4, 'forgotpassword_enabled', 'enabled', 'panel_settings');
+(4, 'forgotpassword_enabled', 'enabled', 'panel_settings'),
+(5, 'default_ip', 'localhost', 'panel_settings');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

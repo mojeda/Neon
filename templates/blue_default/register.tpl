@@ -6,7 +6,7 @@
 {%/if}
 
 <div align="center">
-	<strong>BlueCP Registration</strong>
+	<strong>NEON Registration</strong>
 </div>
 
 <form id="form1" name="form1" method="post" action="register.php?id=register">

@@ -92,6 +92,7 @@
 					<li><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
                     <li><a href="dns.php"><img src="templates/blue_default/img/icons/sidemenu/star.png" width="16" height="16" alt="icon"/>DNS Editor</a></li>
 					<li><a href="usermanager.php"><img src="templates/blue_default/img/icons/sidemenu/user_edit.png" width="16" height="16" alt="icon"/>Additional Users</a></li>
+					<li><a href="usermanager.php"><img src="templates/blue_default/img/icons/sidemenu/photo.png" width="16" height="16" alt="icon"/>Domain Manager</a></li>
 					<li><a href="security.php"><img src="templates/blue_default/img/icons/sidemenu/lock.png" width="16" height="16" alt="icon"/>Security Settings</a></li>
                     <li><a href="backups.php"><img src="templates/blue_default/img/icons/sidemenu/download.png" width="16" height="16" alt="icon"/>Backups</a></li>
                     <li><a href="errorpages.php"><img src="templates/blue_default/img/icons/sidemenu/error.png" width="16" height="16" alt="icon"/>Error Pages</a></li>
