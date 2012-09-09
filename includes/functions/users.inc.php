@@ -19,6 +19,7 @@ class User extends CPHPDatabaseRecordClass {
 		),
 		'boolean' => array(
 			'Active' 	=> "active",
+			'InitialSetup'	=>	"initial_setup"
 		)
 	);
 	
@@ -127,6 +128,10 @@ class User extends CPHPDatabaseRecordClass {
 						$sUser->uEmailAddress = $uEmailAddress;
 						$sUser->InsertIntoDatabase();
 						$uPassword = stripslashes(str_replace("'", '', $uPasswordOne));
+						if (!$root_ssh->login('root', $root_key)) {
+							fwrite($sWriteLog, 'Login to root via key failed -> System Failed To Connect To The Server - Error #00001');
+							exit('System Failed To Connect To The Server - Error: #00001');
+						}
 						$dev_null = $root_ssh->exec('useradd '.$uUsername);
 						fwrite($sWriteLog, 'useradd '.$uUsername.' -> '.$dev_null);
 						$dev_null = $root_ssh->exec('echo -e "'.$uPassword.'\n'.$uPassword.'" | passwd '.$uUsername);
@@ -150,6 +155,7 @@ class User extends CPHPDatabaseRecordClass {
 	
 	public static function login($uUsername, $uPassword){
 		global $database;
+		global $user_ssh;
 		if($result = $database->CachedQuery("SELECT * FROM accounts WHERE (`email` = :Username || `username` = :Username) && `active` = :Active", array(
 		':Username' => $uUsername, ':Active' => '1'), 5)){
 			$sUser = new User($result);
@@ -157,6 +163,10 @@ class User extends CPHPDatabaseRecordClass {
 				$_SESSION['user_id'] = $sUser->sId;
 				$uPassword = stripslashes(str_replace("'", '', $uPassword));
 				$_SESSION['password'] = $uPassword;
+				if (!$user_ssh->login($sUser->sUsername, $uPassword)) {
+					fwrite($sWriteLog, 'Login to '.$sUser->sUsername.' via users password failed -> System Failed To Connect To The Server - Error #00002');
+					exit('System Failed To Connect The User To The Server - Error: #00002');
+				}
 				header("Location: main.php");
 				die();
 			} else {

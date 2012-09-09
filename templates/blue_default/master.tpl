@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/typography.css" /> 
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/jquery-plugin-base.css" />
+	<link rel="stylesheet" type="text/css" href="templates/blue_default/style/colorbox.css" />
     <!--[if IE 7]>	  <link rel="stylesheet" type="text/css" href="templates/blue_default/style/ie7-style.css" />	<![endif]-->
 	<script type="text/javascript" src="templates/blue_default/js/jquery.min.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery-ui-1.8.11.custom.min.js"></script>
@@ -30,7 +31,8 @@
 	<script type="text/javascript" src="templates/blue_default/js/jquery.ui.datepicker.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.ui.tabs.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.ui.accordion.js"></script>
-	<script type="text/javascript" src="templates/blue_default/https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="templates/blue_default/js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.dataTables.js"></script>
 </head>
 <body>
