@@ -5,14 +5,8 @@ if($LoggedIn === false){
 	header("Location: index.php");
 	die();
 } else {
-	$sPageContents = Templater::AdvancedParse('/blue_default/setup', $locale->strings, array(
-		'PanelTitle'  => $sPanelTitle->sValue,
-		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername
-	));
-	echo(Templater::AdvancedParse('blue_default/master.setup', $locale->strings, array(
-		'PanelTitle'	=> $sPanelTitle->sValue,
-		'PageTitle'	=> "Setup",
-		'contents'	=> $sPageContents
-	)));
+	if(($_GET['submit'] == 1) && ($_POST['domain'] != NULL) && ($_POST['stats'] != NULL)){
+	$return = Domain::AddDomain($_POST['domain']);
+	$return .= User::UpdateStatsEmail($_POST['stats']);
+	}
 }

@@ -16,10 +16,18 @@ class Domain extends CPHPDatabaseRecordClass {
 			'Active'		=> "active"
 		),
 		'numeric' => array(
-			'OwnerId'		=> "user_id"
-		),
-		'user' => array(
 			'Owner'			=> "user_id"
 		)
 	);
+	
+	public static function AddDomain($uDomainName){
+	global $sWriteLog;
+	global $sUser;
+		$sDomain = new Domain(0);
+		$sDomain->uName = $uDomainName;
+		$sDomain->uOwner = $sUser->sId;
+		$sDomain->uActive = 1;
+		$sDomain->InsertIntoDatabase();
+		fwrite($sWriteLog, 'Updated User: '.$sUser->sUsername.' - Added domain: '.$uDomainName.PHP_EOL);
+	}
 }

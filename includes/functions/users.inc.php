@@ -17,11 +17,20 @@ class User extends CPHPDatabaseRecordClass {
 			'ActivationCode'    => "activation_code",
 			'Plan'		=>	"plan"
 		),
+		'numeric' => array(
+			'StatsEmail'	=>	"stats_email",
+		),
 		'boolean' => array(
 			'Active' 	=> "active",
-			'InitialSetup'	=>	"initial_setup"
+			'InitialSetup'	=>	"initial_setup",
 		)
 	);
+	
+	public static function UpdateStatsEmail($uStatsEmail){
+	global $sUser;
+	$sUser->sStatsEmail = $uStatsEmail;
+	$sUser->InsertIntoDatabase();
+	}
 	
 	public function GenerateSalt(){
 		$this->uSalt = random_string(10);
@@ -129,13 +138,13 @@ class User extends CPHPDatabaseRecordClass {
 						$sUser->InsertIntoDatabase();
 						$uPassword = stripslashes(str_replace("'", '', $uPasswordOne));
 						if (!$root_ssh->login('root', $root_key)) {
-							fwrite($sWriteLog, 'Login to root via key failed -> System Failed To Connect To The Server - Error #00001');
+							fwrite($sWriteLog, 'Login to root via key failed -> System Failed To Connect To The Server - Error #00001'.PHP_EOL);
 							exit('System Failed To Connect To The Server - Error: #00001');
 						}
 						$dev_null = $root_ssh->exec('useradd '.$uUsername);
-						fwrite($sWriteLog, 'useradd '.$uUsername.' -> '.$dev_null);
+						fwrite($sWriteLog, 'useradd '.$uUsername.' -> '.$dev_null.PHP_EOL);
 						$dev_null = $root_ssh->exec('echo -e "'.$uPassword.'\n'.$uPassword.'" | passwd '.$uUsername);
-						fwrite($sWriteLog, 'echo -e "####\n####" | passwd '.$uUsername.' -> '.$dev_null);
+						fwrite($sWriteLog, 'echo -e "####\n####" | passwd '.$uUsername.' -> '.$dev_null.PHP_EOL);
 						header("Location: register.php?id=activate");
 						die();
 					} else {
@@ -164,7 +173,7 @@ class User extends CPHPDatabaseRecordClass {
 				$uPassword = stripslashes(str_replace("'", '', $uPassword));
 				$_SESSION['password'] = $uPassword;
 				if (!$user_ssh->login($sUser->sUsername, $uPassword)) {
-					fwrite($sWriteLog, 'Login to '.$sUser->sUsername.' via users password failed -> System Failed To Connect To The Server - Error #00002');
+					fwrite($sWriteLog, 'Login to '.$sUser->sUsername.' via users password failed -> System Failed To Connect To The Server - Error #00002'.PHP_EOL);
 					exit('System Failed To Connect The User To The Server - Error: #00002');
 				}
 				header("Location: main.php");

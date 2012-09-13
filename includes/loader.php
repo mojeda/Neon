@@ -5,7 +5,7 @@ require_once('./includes/global_settings.php');
 require_once('./includes/lib/net/ssh.php');
 require_once('./includes/lib/crypt/RSA.php');
 
-$sWriteLog = fopen($cphp_config->settings->commandlog, 'w');
+$sWriteLog = fopen($cphp_config->settings->commandlog, 'a');
 
 $root_ssh = new Net_SSH2($sDefaultIP->sValue);
 $root_key = new Crypt_RSA();

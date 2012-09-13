@@ -34,6 +34,7 @@
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="templates/blue_default/js/jquery.form.js"></script>
 </head>
 <body>
 <div class="wrapper">

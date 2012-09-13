@@ -1,12 +1,17 @@
 	{%if InitialSetup == false}
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#setup").colorbox({escKey:false,overlayClose:false,width:"408",height:"390",open:true,onLoad: function() {
+			$("#setup").colorbox({escKey:false,href:"#InitialSetup",overlayClose:false,inline:true,width:"408",height:"390",open:true,onLoad: function() {
 				$('#cboxClose').remove();
 			}});
+			$('#SetupForm').ajaxForm(function() { 
+                $.colorbox.close();
+				$("#InitialSetup").css("display", "none");
+            }); 
 		});
 		</script>
 		{%?InitialSetupContent}
+		<div id="setup"></div>
 	{%/if}
 <div align="center" class="LaunchSetup">
 	<div style="z-index: 140;padding-top:10px;" class="simplebox grid740">
