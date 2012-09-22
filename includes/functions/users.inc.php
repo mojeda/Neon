@@ -23,14 +23,9 @@ class User extends CPHPDatabaseRecordClass {
 		'boolean' => array(
 			'Active' 	=> "active",
 			'InitialSetup'	=>	"initial_setup",
+			'WelcomeClosed'	=>	"welcome_closed",
 		)
 	);
-	
-	public static function UpdateStatsEmail($uStatsEmail){
-	global $sUser;
-	$sUser->sStatsEmail = $uStatsEmail;
-	$sUser->InsertIntoDatabase();
-	}
 	
 	public function GenerateSalt(){
 		$this->uSalt = random_string(10);

@@ -35,6 +35,7 @@
 	<script type="text/javascript" src="templates/blue_default/js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.form.js"></script>
+	<script type="text/javascript" src="templates/blue_default/js/ajaxsubmit.js"></script>
 </head>
 <body>
 <div class="wrapper">

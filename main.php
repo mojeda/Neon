@@ -21,6 +21,7 @@ include('./includes/loader.php');
 		'ErrorMessage'	=>	"",
 		'Username'	=>	$sUser->sUsername,
 		'InitialSetup'	=>	$sUser->sInitialSetup,
+		'WelcomeClosed'	=>	$sUser->sWelcomeClosed,
 		'InitialSetupContent'	=>	$sInitialSetupContent
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(

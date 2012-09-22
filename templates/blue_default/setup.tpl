@@ -16,7 +16,7 @@
 		<br><br>
 		<strong>NOTE:</strong> You can change these settings at any time!
 	</div>
-	<form id="SetupForm" name="SetupForm" method="post" action="setup.php?submit=1">
+	<form id="SetupForm" name="SetupForm" method="post" action="post_settings.php?id=InitialSetup" onsubmit="xmlhttpPost('post_settings.php?id=InitialSetup', 'SetupForm', 'formsubmit', ''); return false;">
         <span class="st-labeltext" style="width:85px">Your Domain:</span>
         <input name="domain" type="text" class="st-forminput" id="textfield1" style="width:178px;margin-left:2px;" value="www.domain.com" onclick="this.value='';" />
         <div class="clear"></div><br>
@@ -29,8 +29,8 @@
 				<option value="0">Never</option>
 			</select>
         <div class="clear"></div> 
-		<div align="center" style="margin-top:20px;">
-			<input type="submit" name="button" id="button" value="Finish Setup >>" class="st-button"/>
+		<div align="center" style="margin-top:20px;" id="formsubmit">
+			<input type="submit" name="button" id="submitsetupbutton" value="Finish Setup >>" class="st-button"/>
 		</div>
 	</form>
 	<div align="center" style="margin-top:20px;">*How often Neon sends you statistics info on your site.</div>
