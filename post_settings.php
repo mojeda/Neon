@@ -7,8 +7,9 @@ if($LoggedIn === false){
 } else {
 	if(($_GET['id'] == InitialSetup) && ($_POST['domain'] != NULL) && ($_POST['stats'] != NULL)){
 		$return = Domain::AddDomain($_POST['domain']);
-		$return .= UpdateSettings::UpdateStatsEmail($_POST['stats']);
-		$return .= UpdateSettings::UpdateInitialSetup('1');
+		$sUser->uStatsEmail = $_POST['stats'];
+		$sUser->uInitialSetup = true;
+		$sUser->InsertIntoDatabase();
 		// Add perl execution to add domain later
 		// Add user folder creator later
 		// Write nginx config file

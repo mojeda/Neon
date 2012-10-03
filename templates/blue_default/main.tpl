@@ -40,4 +40,5 @@
         </div>
     </div>
 {%/if}
+->Graph of Usage<-
 </div>

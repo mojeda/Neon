@@ -19,6 +19,7 @@ class User extends CPHPDatabaseRecordClass {
 		),
 		'numeric' => array(
 			'StatsEmail'	=>	"stats_email",
+			'MaxListFiles'	=>	"max_list_files",
 		),
 		'boolean' => array(
 			'Active' 	=> "active",

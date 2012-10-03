@@ -1,5 +1,4 @@
 <?php
-$_SESSION['user_id'] = 4;
 include('./includes/loader.php');
 
 	if($LoggedIn === false){
@@ -26,6 +25,7 @@ include('./includes/loader.php');
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 		'PageTitle'  => "Main Dashboard",
+		'PageName'	=>	"main",
 		'PanelTitle'	=>	$sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",
 		'Username'	=>	$sUser->sUsername,

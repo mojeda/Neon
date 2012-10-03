@@ -89,18 +89,18 @@
             <!-- start sidemenu -->
             <div id="sidemenu">
             	<ul>
-                	<li class="active"><a href="index.php"><img src="templates/blue_default/img/icons/sidemenu/laptop.png" width="16" height="16" alt="icon"/>Dashboard</a></li>
-                    <li><a href="filemanager.php"><img src="templates/blue_default/img/icons/sidemenu/file.png" width="16" height="16" alt="icon"/>File Manager</a></li>
-                    <li><a href="email.php"><img src="templates/blue_default/img/icons/sidemenu/mail.png" width="16" height="16" alt="icon"/>Email Accounts</a></li>
-                	<li><a href="mysql.php"><img src="templates/blue_default/img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MYSQL Databases</a></li>
-					<li><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
-                    <li><a href="dns.php"><img src="templates/blue_default/img/icons/sidemenu/star.png" width="16" height="16" alt="icon"/>DNS Editor</a></li>
-					<li><a href="usermanager.php"><img src="templates/blue_default/img/icons/sidemenu/user_edit.png" width="16" height="16" alt="icon"/>Additional Users</a></li>
-					<li><a href="usermanager.php"><img src="templates/blue_default/img/icons/sidemenu/photo.png" width="16" height="16" alt="icon"/>Domain Manager</a></li>
-					<li><a href="security.php"><img src="templates/blue_default/img/icons/sidemenu/lock.png" width="16" height="16" alt="icon"/>Security Settings</a></li>
-                    <li><a href="backups.php"><img src="templates/blue_default/img/icons/sidemenu/download.png" width="16" height="16" alt="icon"/>Backups</a></li>
-                    <li><a href="errorpages.php"><img src="templates/blue_default/img/icons/sidemenu/error.png" width="16" height="16" alt="icon"/>Error Pages</a></li>
-                    <li><a href="help.php"><img src="templates/blue_default/img/icons/sidemenu/info.png" width="16" height="16" alt="icon"/>Help & Information</a></li>
+                	<li{%if PageName == main} class="active"{%/if}><a href="index.php"><img src="templates/blue_default/img/icons/sidemenu/laptop.png" width="16" height="16" alt="icon"/>Dashboard</a></li>
+                    <li{%if PageName == filemanager} class="active"{%/if}><a href="filemanager.php"><img src="templates/blue_default/img/icons/sidemenu/file.png" width="16" height="16" alt="icon"/>File Manager</a></li>
+                    <li{%if PageName == email} class="active"{%/if}><a href="email.php"><img src="templates/blue_default/img/icons/sidemenu/mail.png" width="16" height="16" alt="icon"/>Email Accounts</a></li>
+                	<li{%if PageName == mysql} class="active"{%/if}><a href="mysql.php"><img src="templates/blue_default/img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MYSQL Databases</a></li>
+					<li{%if PageName == ftp} class="active"{%/if}><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
+                    <li{%if PageName == dns} class="active"{%/if}><a href="dns.php"><img src="templates/blue_default/img/icons/sidemenu/star.png" width="16" height="16" alt="icon"/>DNS Editor</a></li>
+					<li{%if PageName == usermanager} class="active"{%/if}><a href="usermanager.php"><img src="templates/blue_default/img/icons/sidemenu/user_edit.png" width="16" height="16" alt="icon"/>Additional Users</a></li>
+					<li{%if PageName == domainmanager} class="active"{%/if}><a href="domainmanager.php"><img src="templates/blue_default/img/icons/sidemenu/photo.png" width="16" height="16" alt="icon"/>Domain Manager</a></li>
+					<li{%if PageName == security} class="active"{%/if}><a href="security.php"><img src="templates/blue_default/img/icons/sidemenu/lock.png" width="16" height="16" alt="icon"/>Security Settings</a></li>
+                    <li{%if PageName == backups} class="active"{%/if}><a href="backups.php"><img src="templates/blue_default/img/icons/sidemenu/download.png" width="16" height="16" alt="icon"/>Backups</a></li>
+                    <li{%if PageName == errorpages} class="active"{%/if}><a href="errorpages.php"><img src="templates/blue_default/img/icons/sidemenu/error.png" width="16" height="16" alt="icon"/>Error Pages</a></li>
+                    <li{%if PageName == help} class="active"{%/if}><a href="help.php"><img src="templates/blue_default/img/icons/sidemenu/info.png" width="16" height="16" alt="icon"/>Help & Information</a></li>
                 </ul>
             </div>
             <!-- end sidemenu -->
