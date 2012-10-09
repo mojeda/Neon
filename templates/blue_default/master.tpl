@@ -9,8 +9,9 @@
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/typography.css" /> 
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="templates/blue_default/style/jquery-plugin-base.css" />
-	<link rel="stylesheet" type="text/css" href="templates/blue_default/style/colorbox.css" />
+	<link rel="stylesheet" type="text/css" href="templates/blue_default/style/basic.css" />
     <!--[if IE 7]>	  <link rel="stylesheet" type="text/css" href="templates/blue_default/style/ie7-style.css" />	<![endif]-->
+	<!--[if lt IE 7]> <link type='text/css' href='css/basic_ie.css' rel='stylesheet' media='screen' /> <![endif]-->
 	<script type="text/javascript" src="templates/blue_default/js/jquery.min.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery-ui-1.8.11.custom.min.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery-settings.js"></script>
@@ -32,7 +33,8 @@
 	<script type="text/javascript" src="templates/blue_default/js/jquery.ui.tabs.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.ui.accordion.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="templates/blue_default/js/jquery.colorbox.js"></script>
+	<script type="text/javascript" src="templates/blue_default/js/jquery.simplemodal.js"></script>
+	<script type="text/javascript" src="templates/blue_default/js/basic.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.form.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/ajaxsubmit.js"></script>

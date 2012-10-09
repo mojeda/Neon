@@ -11,7 +11,7 @@
 			<a original-title="close" href="#" class="close tips">close</a>
 		</div>
 	{%/if}
-	<div align="center" style="margin-bottom:15px;">
+	<div align="center" style="margin-bottom:15px;color:#333;">
 		Neon needs to collect some information about your website to setup your account for the first time.
 		<br><br>
 		<strong>NOTE:</strong> You can change these settings at any time!
@@ -33,7 +33,7 @@
 			<input type="submit" name="button" id="submitsetupbutton" value="Finish Setup >>" class="st-button"/>
 		</div>
 	</form>
-	<div align="center" style="margin-top:20px;">*How often Neon sends you statistics info on your site.</div>
+	<div align="center" style="margin-top:20px;color:#333;">*How often Neon sends you statistics info on your site.</div>
 		</div>
 	</div>
 </div>

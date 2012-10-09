@@ -254,7 +254,7 @@ input, select, textarea{background:#fff; border:1px solid #D2D4D4; border-top:1p
 #footer .left-column{float:left; width:660px}
 #footer .right-column{float:right; width:280px; text-align:right}
 
-.loginform{width:360px; margin:0px auto; margin-top:140px; box-shadow:0px 4px 90px #EEE}
+.loginform{width:360px; margin:0px auto; margin-top:140px; }
 .loginform .title{background:url(../img/login-title.png) no-repeat; text-align:center; height:50px; padding-top:20px}
 .loginform .body{padding:23px 29px 40px 29px; background:url(../img/login-form-body-bg.png) repeat-x bottom}
 .login-input-pass{border:none; font:19px Arial,Helvetica,sans-serif; color:#B6C3C9; width:250px; border:1px solid #CED3D8; border-radius:3px; border-top:1px solid #A0A4A9; padding:10px; padding-left:40px; margin-bottom:19px; background:url(../img/password-input.png) repeat-x top}

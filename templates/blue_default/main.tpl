@@ -1,12 +1,10 @@
 {%if InitialSetup == false}
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$("#setup").colorbox({escKey:false,href:"#InitialSetup",overlayClose:false,inline:true,width:"408",height:"390",open:true,onLoad: function() {
-			$('#cboxClose').remove();
-		}});
+		$("#InitialSetup").modal({close:false});
 		$('#SetupForm').ajaxForm(function() {
 			$('#formsubmit').replaceWith('<input type="sname="button" disabled="disabled" id="submitsetupbutton" value="Please Wait..." class="st-button"/>');
-               $.colorbox.close();
+				$.modal.close();
 			$("#InitialSetup").css("display", "none");
          }); 
 	});
@@ -16,12 +14,12 @@
 {%/if}
 {%if WelcomeClosed == false}
 	<script type="text/javascript">
-	$(document).ready(function(){
-	$("#RemoveWelcome").click(function(){
-		$("#Welcome").remove();
-		$.post("post_settings.php?id=WelcomeClosed");
-	});
-	});
+		$(document).ready(function(){
+			$("#RemoveWelcome").click(function(){
+				$("#Welcome").remove();
+				$.post("post_settings.php?id=WelcomeClosed");
+			});
+		});
 	</script>
 {%/if}
 <div align="center" class="LaunchSetup">
