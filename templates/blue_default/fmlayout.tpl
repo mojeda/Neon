@@ -83,8 +83,37 @@
 					});
 				}
 			});
-			$(".NoSubmit").keypress(function(e) {
+			$(".SubmitFolder").keypress(function(e) {
 				if (e.which == 13) {
+					var folder = $("#FolderName").val();
+					$('#FormSubmitFolder').html('<a class="button-blue" name="SubmitFolder" />Please Wait...</a>');
+					if(!folder){
+						$('#FormSubmitFolder').html('<a class="button-blue" name="SubmitFolder" id="SubmitFolder" />Add Folder</a>');
+					}
+					else {
+						$.modal.close();
+						$("#FileManager").html('<img src="./templates/blue_default/img/loading/7.gif">');
+						$.getJSON("filemanager.php?ajax=1&add_folder=" + folder + "",function(result){
+							$("#FileManager").html(result.content);
+						});
+					}
+					return false;
+				}
+			});
+			$(".SubmitFile").keypress(function(e) {
+				if (e.which == 13) {
+					var file = $("#FileName").val();
+					$('#FormSubmitFile').html('<a class="button-blue" name="SubmitFile" />Please Wait...</a>');
+					if(!file){
+						$('#FormSubmitFile').html('<a class="button-blue" name="SubmitFile" id="SubmitFile" />Add Folder</a>');
+					}
+					else {
+						$.modal.close();
+						$("#FileManager").html('<img src="./templates/blue_default/img/loading/7.gif">');
+						$.getJSON("filemanager.php?ajax=1&add_file=" + file + "",function(result){
+							$("#FileManager").html(result.content);
+						});
+					}
 					return false;
 				}
 			});
@@ -133,10 +162,10 @@
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add Folder</h3></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form1" name="form1" class="NoSubmit">	
+			<form id="form1" name="form1" class="SubmitFolder">	
                     Folder Name: <input name="folder" class="st-forminput" id="FolderName" style="width:150px" value="" type="text"> 
 					<div style="padding:12px;"></div>
-				<div align="center" style="margin-bottom:5px;" id="FormSubmitFolder"><a class="button-blue" id="SubmitFolder">Submit</a></div>
+				<div align="center" style="margin-bottom:5px;" id="FormSubmitFolder"><a class="button-blue" style="cursor:pointer;" id="SubmitFolder">Submit</a></div>
 			</form>
 		</div>
 	</div>
@@ -145,10 +174,10 @@
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add File</h3></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form2" name="form2" class="NoSubmit">	
+			<form id="form2" name="form2" class="SubmitFile">	
                     File Name: <input name="file" class="st-forminput" id="FileName" style="width:150px" value="" type="text"> 
 					<div style="padding:12px;"></div>
-				<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" id="SubmitFile">Submit</a></div>
+				<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitFile">Submit</a></div>
 			</form>
 		</div>
 	</div>

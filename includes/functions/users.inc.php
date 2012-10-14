@@ -15,7 +15,8 @@ class User extends CPHPDatabaseRecordClass {
 			'Salt'			=>	"salt",
 			'EmailAddress'	    => "email",
 			'ActivationCode'    => "activation_code",
-			'Plan'		=>	"plan"
+			'Plan'		=>	"plan",
+			'DefaultEditorTheme'	=>	"default_editor",
 		),
 		'numeric' => array(
 			'StatsEmail'	=>	"stats_email",

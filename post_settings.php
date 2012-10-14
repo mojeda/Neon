@@ -14,6 +14,10 @@ if($LoggedIn === false){
 		// Add user folder creator later
 		// Write nginx config file
 	} elseif($_GET['id'] == WelcomeClosed){
-		$return = UpdateSettings::UpdateWelcomeClosed('1');
+		$sUser->uWelcomeClosed = 1;
+		$sUser->InsertIntoDatabase();
+	} elseif($_GET['id'] == DefaultEditorTheme){
+		$sUser->uDefaultEditorTheme = $_POST['theme'];
+		$sUser->InsertIntoDatabase();
 	}
 }

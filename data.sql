@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 22, 2012 at 08:13 AM
+-- Generation Time: Oct 14, 2012 at 10:44 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -38,6 +38,9 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `initial_setup` int(1) NOT NULL DEFAULT '0',
   `stats_email` int(1) NOT NULL,
   `welcome_closed` int(1) NOT NULL,
+  `max_list_files` int(8) NOT NULL DEFAULT '-1',
+  `save_sort_files` int(2) NOT NULL DEFAULT '0',
+  `default_editor` varchar(65) NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
@@ -53,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `domains` (
   `domain_name` varchar(65) NOT NULL,
   `active` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 -- --------------------------------------------------------
 

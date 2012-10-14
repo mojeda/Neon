@@ -50,22 +50,29 @@ include('./includes/loader.php');
 			
 			// If editor, load editor and file.
 			if(!empty($_GET['editor'])){
-				$sFileName = $_GET['file'];
+				$sSaveName = basename($sCurrentDirectory);
+				$sDirectorySave = dirname($sCurrentDirectory);
+				$sFileName = $sCurrentDirectory;
 				if(!empty($_GET['save'])){
-					$sSavingCode = random_string(50);
+					$sSavingCode = random_string(15);
 					$uPostContent = $_POST['content'];
-					$file_contents = $ssh->exec('cat > '.$sCurrentDirectory.' <<'.$sSavingCode.' 
-'.$uPostContent.' 
-'.$sSavingCode);
+					$file_contents = $user_ssh->exec("cat >".$sFileName." <<".$sSavingCode."
+".$uPostContent);
+				echo "File Has Been Saved!";
 				} else {
 					$sFileContent = $user_ssh->exec('cat '.$sCurrentDirectory);
+					$sCheckNonExistant = "cat: ".$sCurrentDirectory.": No such file or directory";
+					if(stristr($sFileContent, $sCheckNonExistant)){
+						$sFileContent = "";
+					}
 					$sEditor = Templater::AdvancedParse('/blue_default/edit', $locale->strings, array(
 						'PanelTitle'  => $sPanelTitle->sValue,
 						'ErrorMessage'	=>	"",
 						'Username'	=>	$sUser->sUsername,
 						'FileName'	=>	$sFileName,
 						'FilePath'	=>	$sCurrentDirectory,
-						'FileContent'	=>	$sFileContent
+						'FileContent'	=>	$sFileContent,
+						'DefaultEditorTheme'	=>	$sUser->sDefaultEditorTheme
 					));
 					echo $sEditor;
 				}
