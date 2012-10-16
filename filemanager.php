@@ -11,6 +11,7 @@ include('./includes/loader.php');
 		
 			// Users Root Directory
 			$sUser->sRootDir = '/home/'.$sUser->sUsername.'/';
+			$sUser->TrashDirectory = '/home/'.$sUser->sUsername.'/.trash/';
 			
 			// Check if user is in a subdirectory if yes use it, if no use root path.
 			if((!empty($_SESSION['current_directory'])) && (!empty($_GET['ajax']))){
@@ -89,6 +90,14 @@ include('./includes/loader.php');
 					$sFileName = preg_replace("/[^a-z0-9_-s.]/i", "", $_GET['add_file']);
 					if(!empty($sFileName)){
 						$sCreateFile = $user_ssh->exec('echo -n " " >> '.$sCurrentDirectory.$sFileName);
+					}
+				}
+				
+				// Delete files/folders.
+				if(!empty($_GET['delete'])){
+					$sDelete = preg_replace("/[^a-z0-9_-s.]/i", "", $_GET['delete']);
+					if(!empty($sDelete)){
+						$sCreateFolder = $user_ssh->exec('mv '.$sCurrentDirectory.$sDelete.' '.$sUser->TrashDirectory);
 					}
 				}
 			

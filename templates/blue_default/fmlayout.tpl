@@ -117,6 +117,31 @@
 					return false;
 				}
 			});
+			$(".DeleteFolder").click(function() {
+				var folder = $(this).attr('rel');
+				$("#DeleteFormType").html("folder");
+				$("#DeleteFormValue").html(folder);
+				$("#DeleteFormTitle").html("<h3>Delete Folder</h3>");
+				$("#DeleteForm").modal({containerCss:{width:"290", height:"135"}});
+			});
+			$(".DeleteFile").click(function() {
+				var file = $(this).attr('rel');
+				$("#DeleteFormType").html("file");
+				$("#DeleteFormValue").html(file);
+				$("#DeleteFormTitle").html("<h3>Delete File</h3>");
+				$("#DeleteForm").modal({containerCss:{width:"290", height:"135"}});
+			});
+			$("#ConfirmDelete").click(function() {
+				var deletefile = $("#DeleteFormValue").text();
+				$.modal.close();
+				$("#FileManager").html('<img src="./templates/blue_default/img/loading/7.gif">');
+				$.getJSON("filemanager.php?ajax=1&delete=" + deletefile + "",function(result){
+					$("#FileManager").html(result.content);
+				});
+			});
+			$("#CancelDelete").click(function() {
+				$.modal.close();
+			});
 		});
 	</script>
 <!-- End Data Tables Initialisation code -->
@@ -124,7 +149,7 @@
 		<thead>
 			<tr>
 				<th width="5%"></th>
-				<th width="63%">File Name</th>
+				<th width="58%">File Name</th>
 				<th width="10%">Size</th>
 				<th width="27%">Actions</th>
 			</tr>
@@ -136,9 +161,10 @@
 					<td>{%?directory[name]}</td>
 					<td>{%?directory[size]}</td>
 					<td>
-						<a original-title="Delete" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;" id="DeleteFolder" value="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Permissions" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;"  id="PermissionsFolder" value="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Download" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;"  id="DownloadFolder" value="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Delete" class="icon-button tips DeleteFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Permissions" class="icon-button tips PermissionsFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Rename / Move / Copy" class="icon-button tips MultiToolFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/paperpencil32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Download" class="icon-button tips DownloadFolder" style="padding-left:5px;padding-right:5px;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
 					</td>
 				</tr>
 			{%/foreach}
@@ -148,9 +174,10 @@
 					<td>{%?file[name]}</td>
 					<td>{%?file[size]}</td>
 					<td>
-						<a original-title="Delete" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;" id="DeleteFile" value="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Permissions" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;" id="PermissionsFile" value="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Download" href="#" class="icon-button tips" style="padding-left:5px;padding-right:5px;" id="DownloadFile" value="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Delete" class="icon-button tips DeleteFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Permissions" class="icon-button tips PermissionsFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Rename / Move / Copy" class="icon-button tips MultiToolFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/paperpencil32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Download" class="icon-button tips DownloadFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Edit" href="filemanager.php?editor=1&file={%?FilePath}{%?file[name]}" target="_blank" class="icon-button tips" style="padding-left:5px;padding-right:5px;"><img src="./templates/blue_default/img/icons/32x32/pencil32.png" alt="icon" height="16" width="16"></a>
 					</td>
 				</tr>
@@ -178,6 +205,18 @@
                     File Name: <input name="file" class="st-forminput" id="FileName" style="width:150px" value="" type="text"> 
 					<div style="padding:12px;"></div>
 				<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitFile">Submit</a></div>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="DeleteForm" style="display:none;height:130px;" align="center">
+	<div style="z-index: 610;" class="simplebox">
+        <div style="z-index: 600;" class="titleh" align="center" id="DeleteFormTitle"></div>
+		<div style="z-index: 590;" class="body padding10">
+			<form id="form3" name="form3" class="Delete">	
+                    Do you want to delete the <a style="color:#737F89;" id="DeleteFormType"></a> <a style="color:#737F89;" id="DeleteFormValue"></a>?
+					<div style="padding:12px;"></div>
+				<div align="center" style="margin-bottom:5px;" id="FormDelete"><a class="button-blue" style="cursor:pointer;" id="ConfirmDelete">Yes</a> <a class="button-blue" style="cursor:pointer;" id="CancelDelete">No</a></div>
 			</form>
 		</div>
 	</div>
