@@ -10,6 +10,13 @@ if($LoggedIn === false){
 		$sUser->uStatsEmail = $_POST['stats'];
 		$sUser->uInitialSetup = true;
 		$sUser->InsertIntoDatabase();
+		
+		if (!$user_ssh->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
+		$sFolderName = preg_replace("/[^a-z0-9_ .-]/i", "", $_POST['domain']);
+		$sUser->sRootDir = '/home/'.$sUser->sUsername.'/';
+		if(!empty($sFolderName)){
+			$sCreateFolder = $user_ssh->exec("mkdir '".$sUser->sRootDir.$sFolderName."'");
+		}
 		// Add perl execution to add domain later
 		// Add user folder creator later
 		// Write nginx config file

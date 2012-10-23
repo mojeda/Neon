@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 14, 2012 at 10:44 AM
+-- Generation Time: Oct 23, 2012 at 07:00 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `domains` (
   `domain_name` varchar(65) NOT NULL,
   `active` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `setting_value` varchar(65) NOT NULL,
   `setting_group` varchar(65) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `settings`
@@ -95,7 +95,8 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (2, 'panel_title', 'NEON', 'panel_settings'),
 (3, 'registration_enabled', 'enabled', 'panel_settings'),
 (4, 'forgotpassword_enabled', 'enabled', 'panel_settings'),
-(5, 'default_ip', 'localhost', 'panel_settings');
+(5, 'default_ip', 'localhost', 'panel_settings'),
+(6, 'max_panel_upload_size', '25MB', 'panel_settings');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

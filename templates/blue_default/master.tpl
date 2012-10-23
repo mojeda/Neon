@@ -38,6 +38,7 @@
 	<script type="text/javascript" src="templates/blue_default/js/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/jquery.form.js"></script>
 	<script type="text/javascript" src="templates/blue_default/js/ajaxsubmit.js"></script>
+	<script type="text/javascript" src="templates/blue_default/js/plupload.full.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -111,7 +112,8 @@
         <!-- END SIDEBAR -->
 
         <!-- START PAGE -->
-        <div id="page">
+        <div id="page" style="margin:0;">
+		<div id="LoadingImage" align="right" style="padding-right:10px;margin-top:10px;visibility:hidden;"><img src="./templates/blue_default/img/loading/9.gif"></img></div>
 		{%?Content}
 		</div>
 		
