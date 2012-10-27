@@ -54,7 +54,7 @@
 				});
 			});
 			$("#NewFolderOpen").click(function(){
-				$("#NewFolderForm").modal({containerCss:{width:"290", height:"155"}});
+				$("#NewFolderForm").modal({containerCss:{width:"400", height:"200"}});
 			});
 			$('#SubmitFolder').click(function() {
 				var folder = $("#FolderName").val();
@@ -78,7 +78,7 @@
 				}
 			});
 			$("#NewFileOpen").click(function(){
-				$("#NewFileForm").modal({containerCss:{width:"290", height:"155"}});
+				$("#NewFileForm").modal({containerCss:{width:"400", height:"200"}});
 			});
 			$('#SubmitFile').click(function() {
 				var file = $("#FileName").val();
@@ -154,14 +154,14 @@
 				$("#DeleteFormType").html("folder");
 				$("#DeleteFormValue").html(folder);
 				$("#DeleteFormTitle").html("<h3>Delete Folder</h3>");
-				$("#DeleteForm").modal({containerCss:{width:"290", height:"135"}});
+				$("#DeleteForm").modal({containerCss:{width:"400", height:"200"}});
 			});
 			$(".DeleteFile").click(function() {
 				var file = $(this).attr('rel');
 				$("#DeleteFormType").html("file");
 				$("#DeleteFormValue").html(file);
 				$("#DeleteFormTitle").html("<h3>Delete File</h3>");
-				$("#DeleteForm").modal({containerCss:{width:"290", height:"135"}});
+				$("#DeleteForm").modal({containerCss:{width:"400", height:"200"}});
 			});
 			$("#ConfirmDelete").click(function() {
 				var deletefile = $("#DeleteFormValue").text();
@@ -204,6 +204,7 @@
 				});
 				uploader.init();
 				uploader.bind('FilesAdded', function(up, files) {
+					$('#InstructionsUpload').remove();
 					$.each(files, function(i, file) {
 						$('#FileList').append(
 						'<div id="' + file.id + '" style="z-index:630;width:65%;" class="albox dialogbox">' +
@@ -272,15 +273,17 @@
 		</tbody>
 	</table>
 </div>
-<div id="NewFolderForm" style="display:none;height:145px;" align="center">
+<div id="NewFolderForm" style="display:none;" align="center">
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add Folder</h3></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form1" name="form1" class="SubmitFolder">	
+			<div style="height:120px;">
+				<form id="form1" name="form1" class="SubmitFolder">	
                     Folder Name: <input name="folder" class="st-forminput" id="FolderName" style="width:150px" value="" type="text"> 
 					<div style="padding:12px;"></div>
-				<div align="center" style="margin-bottom:5px;" id="FormSubmitFolder"><a class="button-blue" style="cursor:pointer;" id="SubmitFolder">Submit</a></div>
-			</form>
+					<div align="center" style="margin-bottom:5px;" id="FormSubmitFolder"><a class="button-blue" style="cursor:pointer;" id="SubmitFolder">Submit</a></div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -288,11 +291,13 @@
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add File</h3></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form2" name="form2" class="SubmitFile">	
-                    File Name: <input name="file" class="st-forminput" id="FileName" style="width:150px" value="" type="text"> 
-					<div style="padding:12px;"></div>
-				<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitFile">Submit</a></div>
-			</form>
+			<div style="height:120px;">
+				<form id="form2" name="form2" class="SubmitFile">	
+						File Name: <input name="file" class="st-forminput" id="FileName" style="width:150px" value="" type="text"> 
+						<div style="padding:12px;"></div>
+					<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitFile">Submit</a></div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -300,11 +305,13 @@
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center" id="DeleteFormTitle"></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form3" name="form3" class="Delete">	
-                    Do you want to delete the <a style="color:#737F89;" id="DeleteFormType"></a> <a style="color:#737F89;" id="DeleteFormValue"></a>?
-					<div style="padding:12px;"></div>
-				<div align="center" style="margin-bottom:5px;" id="FormDelete"><a class="button-blue" style="cursor:pointer;" id="ConfirmDelete">Yes</a> <a class="button-blue" style="cursor:pointer;" id="CancelDelete">No</a></div>
-			</form>
+			<div style="height:120px;">
+				<form id="form3" name="form3" class="Delete">	
+						Do you want to delete the <a style="color:#737F89;" id="DeleteFormType"></a> <a style="color:#737F89;" id="DeleteFormValue"></a>?
+						<div style="padding:12px;"></div>
+					<div align="center" style="margin-bottom:5px;" id="FormDelete"><a class="button-blue" style="cursor:pointer;" id="ConfirmDelete">Yes</a> <a class="button-blue" style="cursor:pointer;" id="CancelDelete">No</a></div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -313,12 +320,13 @@
         <div style="z-index: 600;" class="titleh" align="center" id="UploadFormTitle"><h3>Upload File</h3></div>
 		<div style="z-index: 590;" class="body padding10">
 			<form id="form4" name="form4" class="Upload">	
-				<div id="UploadContainer" style="height:400px;max-height:400px;valign:bottom;">
+				<div id="UploadContainer" style="height:395px;max-height:395px;">
+					<div id="InstructionsUpload" align="center">Use Select Files to select all of the files you wish to upload, then press Upload Files. Wait until every file listed has finished uploading, then close this window.</div>
 					<div id="FileList" style="overflow:auto;max-height:350px;" align="center"></div>
 					<br />
 					<div style="position:absolute;left:25px;right:25px;bottom:0;">
 							<a class="button-blue" style="cursor:pointer;" id="SelectFiles">Select Files</a>
-							<a class="button-blue" style="cursor:pointer;" id="UploadFiles">Upload files</a>
+							<a class="button-blue" style="cursor:pointer;" id="UploadFiles">Upload Files</a>
 					</div>
 				</div>
 				<div style="padding:12px;"></div>
