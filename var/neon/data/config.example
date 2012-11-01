@@ -1,0 +1,18 @@
+{
+  "locale": {
+    "path":     "templates/languages",
+    "extension":    "lng",
+    "default_locale":   "english",
+    "default_timezone":   "Europe/Amsterdam"
+  },
+  "class_map": {
+  },
+  "settings": {
+  "defaulttemplate":    "blue_default",
+  "commandlog":	"../../../database/log.txt"
+  },
+  "components": [
+    "router",
+    "errorhandler"
+  ]
+}
