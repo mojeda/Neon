@@ -124,7 +124,7 @@ if (!$chunks || $chunk == $chunks - 1) {
 	rename("{$filePath}.part", $filePath);
 }
 
-$sReturnSFTP = $user_sftp->put($sCurrentDirectory.$fileName, $filePath, NET_SFTP_LOCAL_FILE);
+$sReturnSFTP = $user_sftp->put($sRequest.$fileName, $filePath, NET_SFTP_LOCAL_FILE);
 
 // Return JSON-RPC response
 die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');

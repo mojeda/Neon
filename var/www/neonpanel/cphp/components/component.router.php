@@ -13,8 +13,6 @@
 
 cphp_dependency_provides("cphp_router", "1.1");
 
-class RouterException extends Exception {}
-
 class CPHPRouter extends CPHPBaseClass
 {
 	public $routes = array();
@@ -140,11 +138,6 @@ class CPHPRouter extends CPHPBaseClass
 					}
 				}
 			}
-		}
-		
-		if($found === false)
-		{
-			throw new RouterException("No suitable route found");
 		}
 	}
 }
