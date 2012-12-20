@@ -138,9 +138,41 @@ if($LoggedIn === false){
 			$sDelete = $user_ssh->exec('cd '.$sRequest.'; rm -rf '.$sDelete.';');
 		}
 	}
-			
-			
-			
+	
+	if(($sAction == rename_folder) || ($sAction == rename_file)){
+		$sFrom = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['from']);
+		$sTo = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['to']);
+		if((!empty($sFrom)) || (!empty($sTo))){
+			$sRename = $user_ssh->exec('cd '.$sRequest.'; mv '.$sFrom.' '.$sTo);
+		}
+	}
+	
+	if(($sAction == copy_folder) || ($sAction == move_folder) || ($sAction == copy_file) || ($sAction == move_file)){
+		$uFrom = $_GET['from'];
+		$uTo = $_GET['to'];
+		$sFromValidate = new PathValidator($uFrom);
+		if($sFromValidate->ValidatePath($sUser->sRootDir)){
+			$sFrom = $uFrom;
+			$sToValidate = new PathValidator($uTo);
+			if($sToValidate->ValidatePath($sUser->sRootDir)){
+				$sTo = $uTo;
+				if($sAction == copy_folder){
+					$sCopy = $user_ssh->exec('cd '.$sFrom.'; cp -r * '.$sTo);
+				} elseif(($sAction == move_folder) || ($sAction == move_file)){
+					$sMove = $user_ssh->exec('mv '.$sFrom.' '.$sTo);
+				} elseif($sAction == copy_file){
+					$sCopy = $user_ssh->exec('cp -r '.$sFrom.' '.$sTo);
+				}
+			} else {
+				die("There seems to be a problem with your request. Please go back and try again.");
+			}
+		} else {
+			die("There seems to be a problem with your request. Please go back and try again.");
+		}
+	}
+	
+	
+	
 	// Begin pulling folder & file data to display to the user.
 			
 			

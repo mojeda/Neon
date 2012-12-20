@@ -1,33 +1,37 @@
 =====================================
-BLUECP README UPDATED: AUG 2012
+NEON README UPDATED: DEC 2012
 =====================================
-BlueCP is a project which is still
-in development and as such the code
-in here is probably crap.
+Neon is a project which is still
+in development. The intent of neon
+is to be a fully usable control panel
+for servers with multiple user support
+and to offer easy to use tools for
+building and maintaining websites.
 
 =====================================
 SETUP DIRECTIONS UNTIL INSTALL EXISTS
 =====================================
-1. Generate an RSA key for your server
+1. Upload the var folder to the root
+of your server. 
+
+2. Run neon-installer.sh
+
+3. Generate an RSA key for your server
 by issuing the following commands from
 the root user... If any of thesecommands
 ask you questions just hit enter:
 	cd $HOME
 	ssh-keygen -t rsa
 	cat id_rsa.pub >> .ssh/authorized_keys
-	cp id_rsa /usr/share/nginx/
+	cp id_rsa /var/neon/data/
 
-2. Create a database and a user via mysql,
+4. Create a database and a user via mysql,
 use the data.sql file to populate the database.
 Update the table settings, set the default_ip
 to your servers IP. 
 	
-3. Make a file in /usr/share/nginx and
-call it config.json . Use the config.example
-file as a template. You should only need to
-update the database settings and enter a
-random salt. DO NOT USE THE DEFAULT!
+5. cd /var/neon/data/
+	cp config.example config.json
 
-4. ???
-
-5. Profit!
+6. Edit config.json and update your database
+settings and add a random salt.
