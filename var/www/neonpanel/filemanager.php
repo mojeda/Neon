@@ -157,7 +157,7 @@ if($LoggedIn === false){
 			if($sToValidate->ValidatePath($sUser->sRootDir)){
 				$sTo = $uTo;
 				if($sAction == copy_folder){
-					$sCopy = $user_ssh->exec('cd '.$sFrom.'; cp -r * '.$sTo);
+					$sCopy = $user_ssh->exec('cd '.$sFrom.'; mkdir '.$sTo.'; cp -r * '.$sTo);
 				} elseif(($sAction == move_folder) || ($sAction == move_file)){
 					$sMove = $user_ssh->exec('mv '.$sFrom.' '.$sTo);
 				} elseif($sAction == copy_file){
