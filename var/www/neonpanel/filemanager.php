@@ -103,7 +103,7 @@ if($LoggedIn === false){
 		$sDownloadFileName = basename($sRequest);
 		$sDownloadFilePath = dirname($sRequest);
 		// In a nutshell: zip file(s) -> download to local host -> redirect to said files for the user to download.
-		$sFileContent = $user_ssh->exec('cd '.$sDownloadFilePath.'; zip -r '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip '.$sDownloadFileName);
+		$sFileContent = $user_ssh->exec('cd '.escapeshellarg($sDownloadFilePath).'; zip -r '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip '.escapeshellarg($sDownloadFileName));
 		$user_sftp->get($sUser->sRootDir.'download.'.$sTimestamp.'.zip', 'downloads/'.$sUser->sUsername.'/download.'.$sTimestamp.'.zip');
 		$sFileContent = $user_ssh->exec('rm -rf '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip');
 		header("Location: downloads/$sUser->sUsername/download.$sTimestamp.zip");
@@ -111,7 +111,7 @@ if($LoggedIn === false){
 	}
 			
 	if($sAction == download_folder){
-		$sFileContent = $user_ssh->exec('cd '.$sUser->sRootDir.'; zip -r '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip '.$sRequest);
+		$sFileContent = $user_ssh->exec('cd '.$sUser->sRootDir.'; zip -r '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip '.escapeshellarg($sRequest));
 		$user_sftp->get($sUser->sRootDir.'download.'.$sTimestamp.'.zip', 'downloads/'.$sUser->sUsername.'/download.'.$sTimestamp.'.zip');
 		$sFileContent = $user_ssh->exec('rm -rf '.$sUser->sRootDir.'download.'.$sTimestamp.'.zip');
 		header("Location: downloads/$sUser->sUsername/download.$sTimestamp.zip");
@@ -119,37 +119,71 @@ if($LoggedIn === false){
 	}
 			
 	if($sAction == add_folder){
-			$sFolderName = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['name']);
+		$uFolderName = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['name']);
+		$sNewValidate = new PathValidator($sRequest.$uFolderName);
+		if($sNewValidate->ValidatePath($sUser->sRootDir)){
+			$sFolderName = $uFolderName;
 			if(!empty($sFolderName)){
-				$sCreateFolder = $user_ssh->exec("mkdir '".$sRequest.$sFolderName."'");
+				$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sRequest.$sFolderName));
+			} else {
+				die("No folder to create!");
 			}
+		} else {
+			die("Invalid Path!");
+		}
 	}
 			
 	if($sAction == add_file){
-		$sFileName = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['name']);
-		if(!empty($sFileName)){
-			$sCreateFile = $user_ssh->exec('echo -n " " >> \''.$sRequest.$sFileName.'\'');
+		$uFileName = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['name']);
+		$sNewValidate = new PathValidator($sRequest.$uFileName);
+		if($sNewValidate->ValidatePath($sUser->sRootDir)){
+			$sFileName = $uFileName;
+			if(!empty($sFileName)){
+				$sCreateFile = $user_ssh->exec('echo -n " " >> '.escapeshellarg($sRequest.$sFileName));
+			} else {
+				die("No file to create!");
+			}
+		} else {
+			die("Invalid Path!");
 		}
 	}
 			
 	if($sAction == delete){
-		$sDelete = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['delete']);
-		if(!empty($sDelete)){
-			$sDelete = $user_ssh->exec('cd '.$sRequest.'; rm -rf '.$sDelete.';');
+		$uDelete = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['delete']);
+		$sDeleteValidate = new PathValidator($sRequest.$uDelete);
+		if($sDeleteValidate->ValidatePath($sUser->sRootDir)){
+			$sDelete = $uDelete;
+			if(!empty($sDelete)){
+				$sRemove = $user_ssh->exec('rm -rf '.escapeshellarg($sRequest.$sDelete).';');
+			} else {
+				die("No file/folder specified");
+			}
+		} else {
+			die("Invalid Path");
 		}
 	}
 	
 	if(($sAction == rename_folder) || ($sAction == rename_file)){
-		$sFrom = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['from']);
-		$sTo = preg_replace("/[^a-z0-9\/_ \.-]/i", "", $_GET['to']);
-		if((!empty($sFrom)) || (!empty($sTo))){
-			$sRename = $user_ssh->exec('cd '.$sRequest.'; mv '.$sFrom.' '.$sTo);
+		$uFrom = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['from']);
+		$uTo = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['to']);
+		$sFromValidate = new PathValidator($sRequest.$uFrom);
+		if($sFromValidate->ValidatePath($sUser->sRootDir)){
+			$sFrom = $uFrom;
+			$sToValidate = new PathValidator($sRequest.$uTo);
+			if($sToValidate->ValidatePath($sUser->sRootDir)){
+				$sTo = $uTo;
+				$sRename = $user_ssh->exec('mv '.escapeshellarg($sRequest.$sFrom).' '.escapeshellarg($sRequest.$sTo));
+			} else {
+				die("Invalid Path!");
+			}
+		} else {
+			die("Invalid Path!");
 		}
 	}
 	
 	if(($sAction == copy_folder) || ($sAction == move_folder) || ($sAction == copy_file) || ($sAction == move_file)){
-		$uFrom = $_GET['from'];
-		$uTo = $_GET['to'];
+		$uFrom = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['from']);
+		$uTo = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['to']);
 		$sFromValidate = new PathValidator($uFrom);
 		if($sFromValidate->ValidatePath($sUser->sRootDir)){
 			$sFrom = $uFrom;
@@ -157,11 +191,11 @@ if($LoggedIn === false){
 			if($sToValidate->ValidatePath($sUser->sRootDir)){
 				$sTo = $uTo;
 				if($sAction == copy_folder){
-					$sCopy = $user_ssh->exec('cd '.$sFrom.'; mkdir '.$sTo.'; cp -r * '.$sTo);
+					$sCopy = $user_ssh->exec('cd '.escapeshellarg($sFrom).'; mkdir '.escapeshellarg($sTo).'; cp -r * '.escapeshellarg($sTo));
 				} elseif(($sAction == move_folder) || ($sAction == move_file)){
-					$sMove = $user_ssh->exec('mv '.$sFrom.' '.$sTo);
+					$sMove = $user_ssh->exec('mv '.escapeshellarg($sFrom).' '.escapeshellarg($sTo));
 				} elseif($sAction == copy_file){
-					$sCopy = $user_ssh->exec('cp -r '.$sFrom.' '.$sTo);
+					$sCopy = $user_ssh->exec('cp -r '.escapeshellarg($sFrom).' '.escapeshellarg($sTo));
 				}
 			} else {
 				die("There seems to be a problem with your request. Please go back and try again.");
@@ -171,13 +205,26 @@ if($LoggedIn === false){
 		}
 	}
 	
-	
+	if($sAction == permissions){
+		$uName = preg_replace("/[^a-z0-9\/;_ \.-]/i", "", $_GET['name']);
+		if(is_numeric($_GET['value'])){
+			$sNameValidate = new PathValidator($sRequest.$uName);
+			if($sNameValidate->ValidatePath($sUser->sRootDir)){
+				$sName = $uName;
+				$sPerms = $user_ssh->exec('chmod '.$_GET["value"].' '.escapeshellarg($sRequest.$sName));
+			} else {
+				die("Invalud File Path");
+			}
+		} else {
+			die("Permissions error!");
+		}
+	}
 	
 	// Begin pulling folder & file data to display to the user.
 			
 			
 			
-	$sPullDirectories = $user_ssh->exec('ls -l "'.$sRequest.'" |grep ^d');
+	$sPullDirectories = $user_ssh->exec('ls -l '.escapeshellarg($sRequest).' |grep ^d');
 	$sParsedDirectories = preg_split('/\r\n|\r|\n/', $sPullDirectories);
 	$sDirectories = array();
 	foreach($sParsedDirectories as $sValue){
@@ -192,9 +239,10 @@ if($LoggedIn === false){
 						$sDirectoryName .= " ".str_replace("/","", $value);
 					}
 				}
-				$sPullSize = $user_ssh->exec('du -hs "'.$sRequest.$sDirectoryName.'/"');
+				$sPullSize = $user_ssh->exec('du -hs '.escapeshellarg($sRequest.$sDirectoryName));
+				$sDirPerm = $user_ssh->exec('stat -c %a '.escapeshellarg($sRequest.$sDirectoryName));
 				$sSizeValues = explode("	", $sPullSize);
-				array_push($sDirectories, array("name" => trim($sDirectoryName), "size" => trim($sSizeValues[0])));
+				array_push($sDirectories, array("name" => trim($sDirectoryName), "size" => trim($sSizeValues[0]), "perms" => trim($sDirPerm)));
 			}
 			unset($values);
 			if(!empty($sDirectoryName)){
@@ -203,7 +251,7 @@ if($LoggedIn === false){
 		}
 	}
 			
-	$sPullFiles = $user_ssh->exec('ls -lsph1 "'.$sRequest.'" | grep -v "\/"');
+	$sPullFiles = $user_ssh->exec('ls -lsph1 '.escapeshellarg($sRequest).' | grep -v "\/"');
 	$sParsedFiles = preg_split('/\r\n|\r|\n/', $sPullFiles);
 	$sFiles = array();
 	foreach($sParsedFiles as $value){
@@ -220,10 +268,11 @@ if($LoggedIn === false){
 					}
 				}
 				$sFileSize = $values[5];
+				$sFilePerm = $user_ssh->exec('stat -c %a '.escapeshellarg($sRequest.$sFileName));
 				if(is_numeric($sFileSize)){
 					$sFileSize = $sFileSize.'.0B';
 				}
-				array_push($sFiles, array("name" => trim($sFileName), "size" => trim($sFileSize)));
+				array_push($sFiles, array("name" => trim($sFileName), "size" => trim($sFileSize), "perms" => trim($sFilePerm)));
 				unset($values);
 			}
 		}

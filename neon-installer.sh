@@ -45,3 +45,7 @@ cd /var/www
 echo "<div align='center'>Neon Panel Default Page</div>" > index.php
 for s in nginx php5-fpm mysql; do service $s restart; done
 apt-get -y install php5-apc && service php5-fpm restart
+mkdir /var/www/neonpanel/downloads
+mkdir /var/www/neonpanel/uploads
+chmod 777 downloads
+chmod 777 uploads

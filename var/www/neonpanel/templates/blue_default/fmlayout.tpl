@@ -100,54 +100,6 @@
 					});
 				}
 			});	
-			$(".SubmitFolder").keypress(function(e) {
-				if (e.which == 13) {
-					var folder = $("#FolderName").val();
-					$('#FormSubmitFolder').html('<a class="button-blue" name="SubmitFolder" />Please Wait...</a>');
-					if(!folder){
-						$('#FormSubmitFolder').html('<a class="button-blue" name="SubmitFolder" id="SubmitFolder" />Add Folder</a>');
-					}
-					else {
-						$.modal.close();
-						$("#LoadingImage").css({visibility: "visible"});
-						$('#filemanager').dataTable().fnAddData( [
-							'<a href="#" class="directory" value="' + folder + '"><img src="./templates/blue_default/img/icons/shortcut/folder.png" alt="Directory"></img></a><a style="display:none;">Directory</a>',
-							folder,
-							'4.0K',
-							'',
-						]);
-						$.getJSON("filemanager.php?request={%?FilePath}&action=add_folder&name=" + folder + "&format=1",function(result){
-							$("#FileManager").html(result.content);
-							$("#LoadingImage").css({visibility: "hidden"});
-						});
-					}
-					return false;
-				}
-			});	
-			$(".SubmitFile").keypress(function(e) {
-				if (e.which == 13) {
-					var file = $("#FileName").val();
-					$('#FormSubmitFile').html('<a class="button-blue" name="SubmitFile" />Please Wait...</a>');
-					if(!file){
-						$('#FormSubmitFile').html('<a class="button-blue" name="SubmitFile" id="SubmitFile" />Add Folder</a>');
-					}
-					else {
-						$.modal.close();
-						$("#LoadingImage").css({visibility: "visible"});
-						$('#filemanager').dataTable().fnAddData( [
-							'<img src="./templates/blue_default/img/icons/shortcut/file.png" alt="File"></img><a style="display:none;">File</a>',
-							file,
-							'1.0B',
-							'<a original-title="Edit" href="filemanager.php?request={%?FilePath}' + file + '&action=editor" target="_blank" class="icon-button tips" style="padding-left:5px;padding-right:5px;"><img src="./templates/blue_default/img/icons/32x32/pencil32.png" alt="icon" height="16" width="16"></a>',
-						]);
-						$.getJSON("filemanager.php?request={%?FilePath}&action=add_file&name=" + file + "&format=1",function(result){
-							$("#FileManager").html(result.content);
-							$("#LoadingImage").css({visibility: "hidden"});
-						});
-					}
-					return false;
-				}
-			});
 			$(".DeleteFolder").click(function() {
 				var folder = $(this).attr('rel');
 				$("#DeleteFormType").html("folder");
@@ -303,6 +255,27 @@
 					$("#LoadingImage").css({visibility: "hidden"});
 				});
 			});
+			$('.noEnterSubmit').keypress(function(e){
+    				if ( e.which == 13 ) e.preventDefault();
+			});
+			$(".Permissions").click(function() {
+				var file = $(this).attr('value');
+				var perm = $(this).attr('rel');
+				$(".Perm").val(perm);
+				$('.FormPerm').html(file);
+				$('.PermFormName').val(file);
+				$("#PermForm").modal({containerCss:{width:"400", height:"200"}});
+			});
+			$("#ChangePerms").click(function() {
+				var value = $("#PermValue").val();
+				var fname = $("#PermName").val();
+				$("#LoadingImage").css({visibility: "visible"});
+				$.modal.close();
+				$.getJSON("filemanager.php?request={%?FilePath}&action=permissions&name=" + fname + "&value=" + value + "&format=1",function(result){
+					$("#FileManager").html(result.content);
+					$("#LoadingImage").css({visibility: "hidden"});
+				});
+			});
 		});
 	</script>
 
@@ -327,7 +300,7 @@
 					<td>{%?directory[size]}</td>
 					<td>
 						<a original-title="Delete" class="icon-button tips DeleteFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Permissions" class="icon-button tips PermissionsFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Permissions" class="icon-button tips Permissions" style="padding-left:5px;padding-right:5px;cursor:pointer;" value="{%?directory[name]}" rel="{%?directory[perms]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Rename / Move / Copy" class="icon-button tips RCMFolder" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?directory[name]}"><img src="./templates/blue_default/img/icons/32x32/paperpencil32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Download" href="filemanager.php?request={%?FilePath}{%?directory[name]}&action=download_folder" target="_blank" class="icon-button tips" style="padding-left:5px;padding-right:5px;"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
 					</td>
@@ -340,7 +313,7 @@
 					<td>{%?file[size]}</td>
 					<td>
 						<a original-title="Delete" class="icon-button tips DeleteFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a>
-						<a original-title="Permissions" class="icon-button tips PermissionsFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
+						<a original-title="Permissions" class="icon-button tips Permissions" style="padding-left:5px;padding-right:5px;cursor:pointer;"  value="{%?file[name]}" rel="{%?file[perms]}"><img src="./templates/blue_default/img/icons/32x32/lock32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Rename / Move / Copy" class="icon-button tips RCMFile" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?file[name]}"><img src="./templates/blue_default/img/icons/32x32/paperpencil32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Download" href="filemanager.php?request={%?FilePath}{%?file[name]}&action=download_file" target="_blank"  class="icon-button tips" style="padding-left:5px;padding-right:5px;cursor:pointer;"><img src="./templates/blue_default/img/icons/32x32/boxdownload32.png" alt="icon" height="16" width="16"></a>
 						<a original-title="Edit" href="filemanager.php?request={%?FilePath}{%?file[name]}&action=editor" target="_blank" class="icon-button tips" style="padding-left:5px;padding-right:5px;"><img src="./templates/blue_default/img/icons/32x32/pencil32.png" alt="icon" height="16" width="16"></a>
@@ -355,7 +328,7 @@
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add Folder</h3></div>
 		<div style="z-index: 590;" class="body padding10">
 			<div style="height:120px;">
-				<form id="form1" name="form1" class="SubmitFolder">	
+				<form id="form1" name="form1" class="SubmitFolder noEnterSubmit">	
                     Folder Name: <input name="folder" class="st-forminput" id="FolderName" style="width:150px" value="" type="text"> 
 					<div style="padding:12px;"></div>
 					<div align="center" style="margin-bottom:5px;" id="FormSubmitFolder"><a class="button-blue" style="cursor:pointer;" id="SubmitFolder">Create Folder</a></div>
@@ -369,7 +342,7 @@
         <div style="z-index: 600;" class="titleh" align="center"><h3>Add File</h3></div>
 		<div style="z-index: 590;" class="body padding10">
 			<div style="height:120px;">
-				<form id="form2" name="form2" class="SubmitFile">	
+				<form id="form2" name="form2" class="SubmitFile noEnterSubmit">	
 						File Name: <input name="file" class="st-forminput" id="FileName" style="width:150px" value="" type="text"> 
 						<div style="padding:12px;"></div>
 					<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitFile">Create File</a></div>
@@ -383,7 +356,7 @@
         <div style="z-index: 600;" class="titleh" align="center" id="DeleteFormTitle"></div>
 		<div style="z-index: 590;" class="body padding10">
 			<div style="height:120px;">
-				<form id="form3" name="form3" class="Delete">	
+				<form id="form3" name="form3" class="Delete noEnterSubmit">	
 						Do you want to delete the <a style="color:#737F89;" id="DeleteFormType"></a> <a style="color:#737F89;" id="DeleteFormValue"></a>?
 						<div style="padding:12px;"></div>
 					<div align="center" style="margin-bottom:5px;" id="FormDelete"><a class="button-blue" style="cursor:pointer;" id="ConfirmDelete">Yes</a> <a class="button-blue" style="cursor:pointer;" id="CancelDelete">No</a></div>
@@ -396,7 +369,7 @@
 	<div style="z-index: 610;" class="simplebox">
         <div style="z-index: 600;" class="titleh" align="center" id="UploadFormTitle"><h3>Upload File</h3></div>
 		<div style="z-index: 590;" class="body padding10">
-			<form id="form4" name="form4" class="Upload">	
+			<form id="form4" name="form4" class="Upload noEnterSubmit">	
 				<div id="UploadContainer" style="height:395px;max-height:395px;">
 					<div id="InstructionsUpload" align="center">Use Select Files to select all of the files you wish to upload, then press Upload Files. Wait until every file listed has finished uploading, then close this window.</div>
 					<div id="FileList" style="overflow:auto;max-height:350px;" align="center"></div>
@@ -415,24 +388,24 @@
 	<div id="accordionfolder">
 		<h3><a href="#" style="color:#496578;">Rename</a></h3>
 		<div class="in-accordion">
-			<form id="form5" name="form5" class="Rename">
-			<input name="file1" class="st-forminput RFolderValue" id="RenameFolderFromValue" style="width:150px;" value="" type="hidden">
+			<form id="form5" name="form5" class="Rename noEnterSubmit">
+			<input name="file1" class="st-forminput RFolderValue" id="RenameFolderFromValue" value="" type="hidden">
 			Rename Folder To: <input name="file2" class="st-forminput RFolderValue" id="RenameFolderToValue" style="width:150px;" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="RenameFolder">Rename</a></div>
 			</form>
 		</div>
 		<h3><a href="#" style="color:#496578;">Copy</a></h3>
 		<div class="in-accordion">
-			<form id="form6" name="form6" class="Copy">
-			<input name="file" class="st-forminput CMFolderValue" id="CopyFolderFromValue" style="width:150px" value="" type="hidden">
+			<form id="form6" name="form6" class="Copy noEnterSubmit">
+			<input name="file" class="st-forminput CMFolderValue" id="CopyFolderFromValue" value="" type="hidden">
 			Copy Folder To: <input name="file" class="st-forminput CMFolderValue" id="CopyFolderToValue" style="width:150px" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="CopyFolder">Copy</a></div>
 			</form>
 		</div>
 		<h3><a href="#" style="color:#496578;">Move</a></h3>
 		<div class="in-accordion">
-			<form id="form6" name="form7" class="Move">
-			<input name="file" class="st-forminput CMFolderValue" id="MoveFolderFromValue" style="width:150px" value="" type="hidden">
+			<form id="form6" name="form7" class="Move noEnterSubmit">
+			<input name="file" class="st-forminput CMFolderValue" id="MoveFolderFromValue" value="" type="hidden">
 			Move Folder To: <input name="file" class="st-forminput CMFolderValue" id="MoveFolderToValue" style="width:150px" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="MoveFolder">Move</a></div>
 			</form>
@@ -443,27 +416,42 @@
 	<div id="accordionfile">
 		<h3><a href="#" style="color:#496578;">Rename</a></h3>
 		<div class="in-accordion">
-			<form id="form5" name="form8" class="Rename">
-			<input name="file1" class="st-forminput RFileValue" id="RenameFileFromValue" style="width:150px;" value="" type="hidden">
+			<form id="form5" name="form8" class="Rename noEnterSubmit">
+			<input name="file1" class="st-forminput RFileValue" id="RenameFileFromValue" value="" type="hidden">
 			Rename Folder To: <input name="file2" class="st-forminput RFileValue" id="RenameFileToValue" style="width:150px;" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="RenameFile">Rename</a></div>
 			</form>
 		</div>
 		<h3><a href="#" style="color:#496578;">Copy</a></h3>
 		<div class="in-accordion">
-			<form id="form6" name="form9" class="Copy">
-			<input name="file" class="st-forminput CMFileValue" id="CopyFileFromValue" style="width:150px" value="" type="hidden">
+			<form id="form6" name="form9" class="Copy noEnterSubmit">
+			<input name="file" class="st-forminput CMFileValue" id="CopyFileFromValue" value="" type="hidden">
 			Copy Folder To: <input name="file" class="st-forminput CMFileValue" id="CopyFileToValue" style="width:150px" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="CopyFile">Copy</a></div>
 			</form>
 		</div>
 		<h3><a href="#" style="color:#496578;">Move</a></h3>
 		<div class="in-accordion">
-			<form id="form6" name="form10" class="Move">
-			<input name="file" class="st-forminput CMFileValue" id="MoveFileFromValue" style="width:150px" value="" type="hidden">
+			<form id="form6" name="form10" class="Move noEnterSubmit">
+			<input name="file" class="st-forminput CMFileValue" id="MoveFileFromValue" value="" type="hidden">
 			Move Folder To: <input name="file" class="st-forminput CMFileValue" id="MoveFileToValue" style="width:150px" value="" type="text"><br><br>
 			<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="MoveFile">Move</a></div>
 			</form>
+		</div>
+	</div>
+</div>
+<div id="PermForm" style="display:none;height:130px;" align="center">
+	<div style="z-index: 610;" class="simplebox">
+		<div style="z-index: 600;" class="titleh" align="center" id="PermFormTitle"><h3>File Permissions</h3></div>
+		<div style="z-index: 590;" class="body padding10">
+			<div style="height:120px;">
+				<form id="form11" name="form11" class="Perms noEnterSubmit">
+					Change permissions on: <z class="FormPerm"></z><br><br>
+					<input name="file" class="st-forminput PermFormName" id="PermName" value="" type="hidden">
+					Permissions: <input name="file" class="st-forminput Perm" id="PermValue" style="width:150px" value="" type="text"><br><br><br>
+					<div align="center" style="margin-bottom:5px;"><a class="button-blue" style="cursor:pointer;" id="ChangePerms">Apply</a></div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
