@@ -5,7 +5,7 @@ apt-get update
 [[ $(pgrep apache2) ]] && service apache2 stop && update-rc.d -f apache2 disable
 apt-get -y install nginx
 apt-get -y install php5-fpm php5-gd php5-curl php5-mysql php5-cli php5-sqlite
-apt-get -y install mysql-server
+apt-get -y install mysql-server unzip
 mkdir /var/www/neonpanel
 cd /etc/nginx/sites-enabled/
 echo "server {
@@ -41,6 +41,11 @@ echo "server {
         fastcgi_hide_header X-Powered-By;
     }
 }" > neonpanel
+cd $HOME;
+wget https://github.com/BlueVM/Neon/archive/develop.zip
+unzip develop.zip
+cd Neon-develop
+mv var /
 cd /var/www
 echo "<div align='center'>Neon Panel Default Page</div>" > index.php
 for s in nginx php5-fpm mysql; do service $s restart; done
@@ -49,3 +54,9 @@ mkdir /var/www/neonpanel/downloads
 mkdir /var/www/neonpanel/uploads
 chmod 777 downloads
 chmod 777 uploads
+cd $HOME
+ssh-keygen -t rsa
+cat id_rsa.pub >> .ssh/authorized_keys
+cp id_rsa /var/neon/data/
+cd /var/neon/data/
+cp config.example config.json
