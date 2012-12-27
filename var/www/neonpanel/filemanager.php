@@ -95,7 +95,6 @@ if($LoggedIn === false){
 		if (!is_dir('downloads/'.$sUser->sUsername.'/')) {
 			mkdir('downloads/'.$sUser->sUsername.'/');
 		}
-		unlink('downloads/'.$sUser->sUsername.'/download.*.zip');
 		$sTimestamp = time();
 	}
 			
