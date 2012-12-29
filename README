@@ -11,10 +11,8 @@ building and maintaining websites.
 ==========================================
 SETUP DIRECTIONS UNTIL FULL INSTALL EXISTS
 ==========================================
-cd $HOME;
-wget https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh
-chmod 777 neon-installer.sh
-./neon-installer.sh
+cd
+wget -qO- https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh | sh
 
 1. Create a database and a user via mysql,
 use the data.sql file to populate the database.
