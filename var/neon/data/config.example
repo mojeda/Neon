@@ -2,9 +2,9 @@
   "database": {
     "driver": "mysql",
     "hostname": "localhost",
-    "username": "",
-    "password": "",
-    "database": "data",
+    "username": "databaseusernamehere",
+    "password": "databasepasswordhere",
+    "database": "databasenamehere",
     "pdo": true
   },
   "locale": {
@@ -20,7 +20,7 @@
   
   },
   "settings": {
-  "salt": "examplesalt",
+  "salt": "randomlygeneratedsalthere",
   "defaulttemplate": "blue_default",
   "rootkey": "../../neon/data/id_rsa",
   "commandlog": "../../neon/data/log.txt"
