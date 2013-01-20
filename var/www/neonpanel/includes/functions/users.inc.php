@@ -132,6 +132,7 @@ class User extends CPHPDatabaseRecordClass {
 						$sUser->uPassword = $uPasswordOne;
 						$sUser->GenerateSalt();
 						$sUser->GenerateHash();
+						$sUser->uActive = true;
 						$sUser->uEmailAddress = $uEmailAddress;
 						$sUser->InsertIntoDatabase();
 						$uPassword = stripslashes(str_replace("'", '', $uPasswordOne));

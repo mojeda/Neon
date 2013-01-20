@@ -90,7 +90,7 @@ rm -rf  /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> neon-install.log 2>&1
 echo ================Neon Install Complete================
 echo Mysql Root Password: $mysqlpassword
-echo You can now login at http://yourip/neonpanel
+echo You can now login at http://yourip:2026
 echo Username: admin
 echo Password: admin
 echo =====================================================
