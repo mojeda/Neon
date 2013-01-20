@@ -38,7 +38,6 @@ server {
 	}
 }" > /etc/nginx/sites-enabled/neonpanel
 apt-get -y install acl >> install-neon.log 2>&1
-setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 echo Percent complete: 30%
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 salt=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
@@ -56,6 +55,11 @@ mv ~/Neon-develop/var/www/neonpanel /var/www/ >> neon-install.log 2>&1
 echo Percent complete: 70%
 rm -rf /etc/php5/fpm/php.ini
 mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
+touch /var/neon/data/log.txt
+mkdir /var/www/neonpanel/uploads
+mkdir /var/www/neonpanel/downloads
+setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
+setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 query="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u root --password="$mysqlpassword" --execute="$query"
 mysql -u root --password="$mysqlpassword" panel < ~/Neon-develop/data.sql

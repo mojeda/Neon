@@ -62,7 +62,8 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (2, 'panel_title', 'NEON', 'panel_settings'),
 (3, 'registration_enabled', 'enabled', 'panel_settings'),
 (4, 'forgotpassword_enabled', 'enabled', 'panel_settings'),
-(5, 'default_ip', 'localhost', 'panel_settings');
+(5, 'default_ip', 'localhost', 'panel_settings'),
+(6, 'max_panel_upload_size', '25M', 'panel_settings');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
