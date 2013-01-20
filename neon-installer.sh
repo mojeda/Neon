@@ -75,6 +75,8 @@ ssh-keygen -t rsa -N "" -f ~/id_rsa >> neon-install.log 2>&1
 mkdir ~/.ssh/ >> neon-install.log 2>&1
 cat id_rsa.pub >> ~/.ssh/authorized_keys >> neon-install.log 2>&1
 cp id_rsa /var/neon/data/ >> neon-install.log 2>&1
+setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
+setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 php /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 echo Finishing and cleaning up...
 cd ~ >> neon-install.log 2>&1

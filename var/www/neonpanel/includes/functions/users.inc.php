@@ -119,6 +119,7 @@ class User extends CPHPDatabaseRecordClass {
 	public static function register($uUsername, $uPasswordOne, $uPasswordTwo, $uEmailAddress){
 		global $database;
 		global $root_ssh;
+		global $root_key;
 		global $sWriteLog;
 		if(User::ValidateUsername($uUsername) === true){
 			if(User::ValidatePasswords($uPasswordOne, $uPasswordTwo) === true){
