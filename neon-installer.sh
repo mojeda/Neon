@@ -20,7 +20,7 @@ echo "server {
 
 	location ~\.php$ {
 		include fastcgi_params;
-		fastcgi_intercept_errors on;
+		fastcgi_intercept_errors off;
 		fastcgi_pass 127.0.0.1:9000;
 	}
 }
@@ -33,10 +33,12 @@ server {
 
 	location ~\.php$ {
 		include fastcgi_params;
-		fastcgi_intercept_errors on;
+		fastcgi_intercept_errors off;
 		fastcgi_pass 127.0.0.1:9000;
 	}
 }" > /etc/nginx/sites-enabled/neonpanel
+apt-get -y install acl >> install-neon.log 2>&1
+setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 echo Percent complete: 30%
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 salt=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
@@ -52,6 +54,8 @@ unzip develop.zip >> neon-install.log 2>&1
 mv ~/Neon-develop/var/neon /var/ >> neon-install.log 2>&1
 mv ~/Neon-develop/var/www/neonpanel /var/www/ >> neon-install.log 2>&1
 echo Percent complete: 70%
+rm -rf /etc/php5/fpm/php.ini
+mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
 query="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u root --password="$mysqlpassword" --execute="$query"
 mysql -u root --password="$mysqlpassword" panel < ~/Neon-develop/data.sql
@@ -64,8 +68,8 @@ sed -i 's/randomlygeneratedsalthere/'${salt}'/g' /var/neon/data/config.json >> n
 cd ~ >> neon-install.log 2>&1
 echo Percent complete: 95%
 ssh-keygen -t rsa -N "" -f ~/id_rsa >> neon-install.log 2>&1
-mkdir /home/root/.ssh/ >> neon-install.log 2>&1
-cat id_rsa.pub >> /home/root/.ssh/authorized_keys >> neon-install.log 2>&1
+mkdir ~/.ssh/ >> neon-install.log 2>&1
+cat id_rsa.pub >> ~/.ssh/authorized_keys >> neon-install.log 2>&1
 cp id_rsa /var/neon/data/ >> neon-install.log 2>&1
 php /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 echo Finishing and cleaning up...
@@ -73,9 +77,11 @@ cd ~ >> neon-install.log 2>&1
 rm -rf dotdeb.gpg >> install-neon.log 2>&1
 rm -rf Neon-develop >> neon-install.log 2>&1
 rm -rf develop.zip >> neon-install.log 2>&1
-rm -rf id_rsa
-rm -rf id_rsa.pub
+rm -rf id_rsa >> neon-install.log 2>&1
+rm -rf id_rsa.pub >> neon-install.log 2>&1
+rm -rf  /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 /etc/init.d/nginx restart >> neon-install.log 2>&1
+/etc/init.d/php5-fpm restart >> neon-install.log 2>&1
 echo ================Neon Install Complete================
 echo Mysql Root Password: $mysqlpassword
 echo You can now login at http://yourip/neonpanel
