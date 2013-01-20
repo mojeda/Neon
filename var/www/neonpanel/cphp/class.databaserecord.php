@@ -585,7 +585,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	
 	public function Export()
 	{
-		// Exports the object as a nested array. Observes the export prototype.
+		/* This function is DEPRECATED and should not be used. Please manually build your arrays instead. */
 		$export_array = array();
 		
 		foreach($this->prototype_export as $field)
@@ -609,6 +609,40 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 		}
 		
 		return $export_array;
+	}
+	
+	public static function CreateFromQuery($query, $parameters = array(), $expiry = 0, $first_only = false)
+	{
+		global $database;
+		
+		$result = $database->CachedQuery($query, $parameters, $expiry);
+		
+		if($result)
+		{
+			if($first_only === true)
+			{
+				return new static($result);
+			}
+			elseif(count($result->data) == 1)
+			{
+				return array(new static($result));
+			}
+			else
+			{
+				$result_array = array();
+				
+				foreach($result->data as $row)
+				{
+					$result_array[] = new static($row);
+				}
+				
+				return $result_array;
+			}
+		}
+		else
+		{
+			throw new NotFoundException("No results for specified query.");
+		}
 	}
 	
 	// Define events
