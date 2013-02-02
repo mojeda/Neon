@@ -62,11 +62,8 @@ if($LoggedIn === false){
 		if($sSave == 1){
 			$sSavingCode = random_string(15);
 			$sPostContent = $_POST['content'];
-			$pattern = array("0" => '\', "1" => '$', "2" => "`");
-			$replacement = array("0" => '\\', "1" => '\$', "2" => "\`");
-			$sPostContent = preg_replace($pattern, $replacement, $sPostContent);
-			$sFileContent = $user_ssh->exec('cat > '.$sRequest.' <<'.$sSavingCode.'
-'.$sPostContent.'
+			$sFileContent = $user_ssh->exec('cat > '.escapeshellarg($sRequest).' <<'.$sSavingCode.'
+'.escapeshellarg($sPostContent).'
 '.$sSavingCode);
 			echo "File Has Been Saved!";
 			die();
