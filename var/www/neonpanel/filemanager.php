@@ -20,7 +20,7 @@ if($LoggedIn === false){
 	
 	if(!empty($_GET['action'])){
 		$sAction = $_GET['action'];
-		if(($sAction == download_file) || ($sAction == download_folder) || ($sAction == upload)){
+		if(($sAction == download_file) || ($sAction == download_folder) || ($sAction == upload) || ($sAction == editor)){
 			if (!$user_sftp->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
 		}
 	}
@@ -62,17 +62,11 @@ if($LoggedIn === false){
 		if($sSave == 1){
 			$sSavingCode = random_string(15);
 			$sPostContent = $_POST['content'];
-			$sFileContent = $user_ssh->exec('cat > '.escapeshellarg($sRequest).' <<'.$sSavingCode.'
-'.escapeshellarg($sPostContent).'
-'.$sSavingCode);
+			$sFileContent = $user_sftp->put($sRequest, $sPostContent);
 			echo "File Has Been Saved!";
 			die();
 		} else {
-			$sFileContent = $user_ssh->exec('cat "'.$sRequest.'"');
-			$sCheckNonExistant = "cat: ".$sCurrentDirectory.": No such file or directory";
-			if(stristr($sFileContent, $sCheckNonExistant)){
-				$sFileContent = "";
-			}
+			$sFileContent = $user_sftp->get($sRequest);
 			$sEditor = Templater::AdvancedParse('/blue_default/edit', $locale->strings, array(
 				'PanelTitle'  => $sPanelTitle->sValue,
 				'ErrorMessage'	=>	"",
