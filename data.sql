@@ -1,5 +1,3 @@
-
-
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `username` varchar(65) NOT NULL,
@@ -83,7 +81,3 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (4, 'forgotpassword_enabled', 'enabled', 'panel_settings'),
 (5, 'default_ip', 'localhost', 'panel_settings'),
 (6, 'max_panel_upload_size', '25MB', 'panel_settings');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
