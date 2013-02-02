@@ -9,17 +9,18 @@ and to offer easy to use tools for
 building and maintaining websites.
 
 ==========================================
-SETUP DIRECTIONS UNTIL FULL INSTALL EXISTS
+SETUP DIRECTIONS (FULL INSTALLER)
 ==========================================
-cd
-wget -qO- https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh | sh
+As a precaution I would like to take the time
+to make sure that if you have a copy of nginx,
+mysql, php or apache installed on your server 
+please DO NOT install NEON. NEON will overwrite
+any configuration you have, delete files and
+folders you may need and may without jusification
+destroy anything and everything on your server.
 
-1. Create a database and a user via mysql,
-use the data.sql file to populate the database.
-Update the table settings, set the default_ip
-to your servers IP. 
+As such please only install neon on a blank server/vps.
 
-2. Edit config.json to match your new
-your database settings and add a random
-salt key string (12+ characters is better).
-The config.json file is in: /var/neon/data/
+Copy & paste this command into SSH:
+
+cd ~ && wget --no-check-certificate https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh && chmod 777 neon-installer.sh && ./neon-installer.sh

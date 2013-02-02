@@ -58,6 +58,7 @@ mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
 touch /var/neon/data/log.txt
 mkdir /var/www/neonpanel/uploads
 mkdir /var/www/neonpanel/downloads
+mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
 setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 query="CREATE DATABASE IF NOT EXISTS panel;"
@@ -91,6 +92,6 @@ rm -rf  /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 echo ================Neon Install Complete================
 echo Mysql Root Password: $mysqlpassword
 echo You can now login at http://yourip:2026
-echo Username: admin
-echo Password: admin
+echo Username: root
+echo Password: your_root_password
 echo =====================================================

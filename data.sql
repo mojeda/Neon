@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `username`, `email`, `active`, `activation_code`, `plan`, `initial_setup`, `stats_email`, `welcome_closed`, `max_list_files`, `save_sort_files`, `default_editor`) VALUES
-(4, 'root', 'admin@localhost', 1, '', 1, 0, 0, 0, 0, 0, 'default');
+INSERT INTO `accounts` (`username`, `email`, `active`, `activation_code`, `plan`, `initial_setup`, `stats_email`, `welcome_closed`, `max_list_files`, `save_sort_files`, `default_editor`) VALUES
+('root', 'admin@localhost', 1, '', 1, 0, 0, 0, '10', 0, 'default');
 
 -- --------------------------------------------------------
 
