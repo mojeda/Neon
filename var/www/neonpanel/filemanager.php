@@ -62,8 +62,8 @@ if($LoggedIn === false){
 		if($sSave == 1){
 			$sSavingCode = random_string(15);
 			$sPostContent = $_POST['content'];
-			$sFileContent = $user_ssh->exec("cat >".$sRequest." <<".$sSavingCode."
-".$sPostContent);
+			$sFileContent = $user_ssh->exec('cat >'.$sRequest.' <<'.$sSavingCode.'
+'.$sPostContent);
 			echo "File Has Been Saved!";
 			die();
 		} else {
@@ -323,4 +323,4 @@ if($LoggedIn === false){
 		echo json_encode($sReturnArray);
 	}
 }
-ob_flush();			
+ob_flush();
