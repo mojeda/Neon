@@ -15,7 +15,7 @@ apt-get -y install nginx >> install-neon.log 2>&1
 echo "server {
 	listen 2026;
 
-	root /var/www/neonpanel;
+	root /var/neon/neonpanel;
 	index index.php;
 
 	location ~\.php$ {
@@ -28,7 +28,7 @@ echo "server {
 server {
 	listen 80;
 
-	root /home/admin;
+	root /home/root;
 	index index.php index.html index.htm;
 
 	location ~\.php$ {
@@ -51,16 +51,14 @@ cd ~ >> neon-install.log 2>&1
 wget https://github.com/BlueVM/Neon/archive/develop.zip >> neon-install.log 2>&1
 unzip develop.zip >> neon-install.log 2>&1
 mv ~/Neon-develop/var/neon /var/ >> neon-install.log 2>&1
-mv ~/Neon-develop/var/www/neonpanel /var/www/ >> neon-install.log 2>&1
 echo Percent complete: 70%
 rm -rf /etc/php5/fpm/php.ini
 mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
 touch /var/neon/data/log.txt
-mkdir /var/www/neonpanel/uploads
-mkdir /var/www/neonpanel/downloads
+mkdir /var/neon/neonpanel/uploads
+mkdir /var/neon/neonpanel/downloads
 mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
-setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 query="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u root --password="$mysqlpassword" --execute="$query"
 mysql -u root --password="$mysqlpassword" panel < ~/Neon-develop/data.sql
@@ -77,8 +75,6 @@ mkdir ~/.ssh/ >> neon-install.log 2>&1
 cat id_rsa.pub >> ~/.ssh/authorized_keys >> neon-install.log 2>&1
 cp id_rsa /var/neon/data/ >> neon-install.log 2>&1
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
-setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
-php /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 echo Finishing and cleaning up...
 cd ~ >> neon-install.log 2>&1
 rm -rf dotdeb.gpg >> install-neon.log 2>&1
@@ -86,7 +82,6 @@ rm -rf Neon-develop >> neon-install.log 2>&1
 rm -rf develop.zip >> neon-install.log 2>&1
 rm -rf id_rsa >> neon-install.log 2>&1
 rm -rf id_rsa.pub >> neon-install.log 2>&1
-rm -rf  /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 /etc/init.d/nginx restart >> neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> neon-install.log 2>&1
 echo ================Neon Install Complete================
