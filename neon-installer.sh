@@ -2,14 +2,14 @@ echo Cleaning up please wait...
 cd ~ >> neon-install.log 2>&1
 /etc/init.d/apache2 stop >> install-neon.log 2>&1
 /etc/init.d/apache stop >> install-neon.log 2>&1
-apt-get -y remove apache apache2 mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-cli nginx httpd >> install-neon.log 2>&1
+apt-get -y remove apache apache2 mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-curl php5-curl php-cli nginx httpd >> install-neon.log 2>&1
 echo Starting installation please wait...
 echo "deb http://packages.dotdeb.org stable all" >> /etc/apt/sources.list
 wget http://www.dotdeb.org/dotdeb.gpg >> install-neon.log 2>&1
 cat dotdeb.gpg | apt-key add - >> install-neon.log 2>&1
 echo Percent complete: 10%
 apt-get update >> install-neon.log 2>&1
-apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-mysql php5-cli php5-gd >> install-neon.log 2>&1
+apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-curl php5-mysql php5-cli php5-gd >> install-neon.log 2>&1
 echo Percent complete: 20%
 apt-get -y install nginx >> install-neon.log 2>&1
 echo "server {
@@ -84,6 +84,10 @@ rm -rf id_rsa >> neon-install.log 2>&1
 rm -rf id_rsa.pub >> neon-install.log 2>&1
 /etc/init.d/nginx restart >> neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> neon-install.log 2>&1
+cd /var/neon/neonpanel/ >> neon-install.log 2>&1
+php init.php >> neon-install.log 2>&1
+rm -rf init.php >> neon-install.log 2>&1
+cd ~ >> neon-install.log 2>&1
 echo ================Neon Install Complete================
 echo Mysql Root Password: $mysqlpassword
 echo You can now login at http://yourip:2026
