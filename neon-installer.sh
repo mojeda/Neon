@@ -48,12 +48,10 @@ echo Percent complete: 45%
 apt-get -q -y install zip unzip >> neon-install.log 2>&1
 echo Percent complete: 60%
 cd ~ >> neon-install.log 2>&1
-wget https://github.com/BlueVM/Neon/archive/develop.zip >> neon-install.log 2>&1
-unzip develop.zip >> neon-install.log 2>&1
-mv ~/Neon-develop/var/neon /var/ >> neon-install.log 2>&1
+git clone -b develop https://github.com/BlueVM/Neon.git /var/neon/  >> neon-install.log 2>&1
 echo Percent complete: 70%
 rm -rf /etc/php5/fpm/php.ini
-mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
+mv /var/neon/php.ini /etc/php5/fpm/php.ini
 touch /var/neon/data/log.txt
 mkdir /var/neon/neonpanel/uploads
 mkdir /var/neon/neonpanel/downloads
@@ -61,7 +59,7 @@ mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
 query="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u root --password="$mysqlpassword" --execute="$query"
-mysql -u root --password="$mysqlpassword" panel < ~/Neon-develop/data.sql
+mysql -u root --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> neon-install.log 2>&1
 sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> neon-install.log 2>&1
@@ -77,11 +75,9 @@ cp id_rsa /var/neon/data/ >> neon-install.log 2>&1
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
 echo Finishing and cleaning up...
 cd ~ >> neon-install.log 2>&1
-rm -rf dotdeb.gpg >> install-neon.log 2>&1
-rm -rf Neon-develop >> neon-install.log 2>&1
-rm -rf develop.zip >> neon-install.log 2>&1
-rm -rf id_rsa >> neon-install.log 2>&1
-rm -rf id_rsa.pub >> neon-install.log 2>&1
+rm -rf ~/dotdeb.gpg >> install-neon.log 2>&1
+rm -rf ~/id_rsa >> neon-install.log 2>&1
+rm -rf ~/id_rsa.pub >> neon-install.log 2>&1
 /etc/init.d/nginx restart >> neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> neon-install.log 2>&1
 cd /var/neon/neonpanel/ >> neon-install.log 2>&1

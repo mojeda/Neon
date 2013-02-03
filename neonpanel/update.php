@@ -19,7 +19,7 @@ function get_commits($type){
 if(!empty($_GET['id'])){
 	if($_GET['id'] == develop){
 		if (!$user_ssh->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
-		$sUpdate = $user_ssh->exec('cd /;git clone git://github.com/BlueVM/Neon.git /;rm -rf README;rm -rf data.sql;rm -rf neon-installer.sh;rm -rf php.ini;');
+		$sUpdate = $user_ssh->exec('cd ~;wget https://github.com/BlueVM/Neon/archive/develop.zip;unzip develop.zip;mv ~/Neon-develop/var/neon /var/;rm -rf Neon-develop;rm -rf develop.zip');
 		$sVersion = get_commits("develop");
 		$sData = Core::UpdateSetting('version', $sVersion["sha"]);
 	}
