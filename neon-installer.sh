@@ -9,7 +9,7 @@ wget http://www.dotdeb.org/dotdeb.gpg >> install-neon.log 2>&1
 cat dotdeb.gpg | apt-key add - >> install-neon.log 2>&1
 echo Percent complete: 10%
 apt-get update >> install-neon.log 2>&1
-apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-curl php5-mysql php5-cli php5-gd >> install-neon.log 2>&1
+apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-curl php5-mysql php5-cli php5-gd git-core >> install-neon.log 2>&1
 echo Percent complete: 20%
 apt-get -y install nginx >> install-neon.log 2>&1
 echo "server {

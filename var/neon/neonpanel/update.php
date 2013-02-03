@@ -16,6 +16,15 @@ function get_commits($type){
   return json_decode(get_json("repos/BlueVM/Neon/commits/$type"),true);
 }
 
+if(!empty($_GET['id'])){
+	if($_GET['id'] == develop){
+		if (!$user_ssh->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
+		$sUpdate = $user_ssh->exec('cd /;git clone git://github.com/BlueVM/Neon.git /;rm -rf README;rm -rf data.sql;rm -rf neon-installer.sh;rm -rf php.ini;');
+		$sVersion = get_commits("develop");
+		$sData = Core::UpdateSetting('version', $sVersion["sha"]);
+	}
+}
+
 $sDevelop = get_commits("develop");
 
 if($sDevelop["sha"] == $sVersion->sValue){
