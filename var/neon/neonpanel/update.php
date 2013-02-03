@@ -18,7 +18,7 @@ function get_commits($type){
 
 $sDevelop = get_commits("develop");
 
-if($sDevelop["sha"] == $sVersion){
+if($sDevelop["sha"] == $sVersion->sValue){
 	$sOutdated = false;
 } else {
 	$sOutdated = true;
@@ -32,7 +32,7 @@ if($LoggedIn === false){
 		'PanelTitle'  => $sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",
 		'Username'	=>	$sUser->sUsername,
-		'Outdated' => $sOutdated;
+		'Outdated' => $sOutdated
 	));
 	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 		'PageTitle'  => "Neon Updater",
