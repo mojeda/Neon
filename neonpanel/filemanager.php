@@ -55,7 +55,8 @@ if($LoggedIn === false){
 	// Begin preforming actions. Actions ending in die(); do not need to load the template engine or have their own template.
 			
 			
-			
+	// For whatever reason I program like crap when I'm drunk so the first time I tried to make this editor I had it saving/pulling files via cat.
+	// Now it uses SFTP which is far more secure and far less buggy.
 	if($sAction == editor){
 		$sEditorFileName = basename($sRequest);
 		$sEditorDirectoryName = dirname($sRequest);

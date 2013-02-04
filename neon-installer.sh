@@ -2,20 +2,20 @@ echo Cleaning up please wait...
 cd ~ >> neon-install.log 2>&1
 /etc/init.d/apache2 stop >> install-neon.log 2>&1
 /etc/init.d/apache stop >> install-neon.log 2>&1
-apt-get -y remove apache apache2 mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-cli nginx httpd >> install-neon.log 2>&1
+apt-get -y remove apache apache2 mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-curl php5-curl php-cli nginx httpd >> install-neon.log 2>&1
 echo Starting installation please wait...
 echo "deb http://packages.dotdeb.org stable all" >> /etc/apt/sources.list
 wget http://www.dotdeb.org/dotdeb.gpg >> install-neon.log 2>&1
 cat dotdeb.gpg | apt-key add - >> install-neon.log 2>&1
 echo Percent complete: 10%
 apt-get update >> install-neon.log 2>&1
-apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-mysql php5-cli php5-gd >> install-neon.log 2>&1
+apt-get -y install php5 php5-fpm php-pear php5-common php5-mcrypt php5-curl php5-mysql php5-cli php5-gd git-core >> install-neon.log 2>&1
 echo Percent complete: 20%
 apt-get -y install nginx >> install-neon.log 2>&1
 echo "server {
 	listen 2026;
 
-	root /var/www/neonpanel;
+	root /var/neon/neonpanel;
 	index index.php;
 
 	location ~\.php$ {
@@ -28,7 +28,7 @@ echo "server {
 server {
 	listen 80;
 
-	root /home/admin;
+	root /home/root;
 	index index.php index.html index.htm;
 
 	location ~\.php$ {
@@ -48,22 +48,18 @@ echo Percent complete: 45%
 apt-get -q -y install zip unzip >> neon-install.log 2>&1
 echo Percent complete: 60%
 cd ~ >> neon-install.log 2>&1
-wget https://github.com/BlueVM/Neon/archive/develop.zip >> neon-install.log 2>&1
-unzip develop.zip >> neon-install.log 2>&1
-mv ~/Neon-develop/var/neon /var/ >> neon-install.log 2>&1
-mv ~/Neon-develop/var/www/neonpanel /var/www/ >> neon-install.log 2>&1
+git clone -b develop https://github.com/BlueVM/Neon.git /var/neon/  >> neon-install.log 2>&1
 echo Percent complete: 70%
 rm -rf /etc/php5/fpm/php.ini
-mv ~/Neon-develop/php.ini /etc/php5/fpm/php.ini
+mv /var/neon/php.ini /etc/php5/fpm/php.ini
 touch /var/neon/data/log.txt
-mkdir /var/www/neonpanel/uploads
-mkdir /var/www/neonpanel/downloads
+mkdir /var/neon/neonpanel/uploads
+mkdir /var/neon/neonpanel/downloads
 mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
-setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
 query="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u root --password="$mysqlpassword" --execute="$query"
-mysql -u root --password="$mysqlpassword" panel < ~/Neon-develop/data.sql
+mysql -u root --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> neon-install.log 2>&1
 sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> neon-install.log 2>&1
@@ -77,18 +73,17 @@ mkdir ~/.ssh/ >> neon-install.log 2>&1
 cat id_rsa.pub >> ~/.ssh/authorized_keys >> neon-install.log 2>&1
 cp id_rsa /var/neon/data/ >> neon-install.log 2>&1
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
-setfacl -Rm user:www-data:rwx /var/www/* >> install-neon.log 2>&1
-php /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
 echo Finishing and cleaning up...
 cd ~ >> neon-install.log 2>&1
-rm -rf dotdeb.gpg >> install-neon.log 2>&1
-rm -rf Neon-develop >> neon-install.log 2>&1
-rm -rf develop.zip >> neon-install.log 2>&1
-rm -rf id_rsa >> neon-install.log 2>&1
-rm -rf id_rsa.pub >> neon-install.log 2>&1
-rm -rf  /var/www/neonpanel/delete_admin_generator.php >> neon-install.log 2>&1
+rm -rf ~/dotdeb.gpg >> install-neon.log 2>&1
+rm -rf ~/id_rsa >> neon-install.log 2>&1
+rm -rf ~/id_rsa.pub >> neon-install.log 2>&1
 /etc/init.d/nginx restart >> neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> neon-install.log 2>&1
+cd /var/neon/neonpanel/ >> neon-install.log 2>&1
+php init.php >> neon-install.log 2>&1
+rm -rf init.php >> neon-install.log 2>&1
+cd ~ >> neon-install.log 2>&1
 echo ================Neon Install Complete================
 echo Mysql Root Password: $mysqlpassword
 echo You can now login at http://yourip:2026

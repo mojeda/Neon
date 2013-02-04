@@ -5,6 +5,7 @@ $sRegistrationEnabled = Core::GetSetting('registration_enabled');
 $sForgotPasswordEnabled = Core::GetSetting('forgotpassword_enabled');
 $sDefaultIP = Core::GetSetting('default_ip');
 $sMaxPanelUploadSize = Core::GetSetting('max_panel_upload_size');
+$sVersion = Core::GetSetting('version');
 
 function remove_magic_quotes($array) {
     foreach ($array as $k => $v) {

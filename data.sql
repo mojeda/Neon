@@ -80,4 +80,5 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (3, 'registration_enabled', 'enabled', 'panel_settings'),
 (4, 'forgotpassword_enabled', 'enabled', 'panel_settings'),
 (5, 'default_ip', 'localhost', 'panel_settings'),
-(6, 'max_panel_upload_size', '25MB', 'panel_settings');
+(6, 'max_panel_upload_size', '25MB', 'panel_settings'),
+(7, 'version', '0', 'panel_settings');
