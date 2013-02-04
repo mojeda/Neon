@@ -1,6 +1,11 @@
 <?php
 include('./includes/loader.php');
 
+if($LoggedIn === false){
+	header("Location: index.php");
+	die();
+}
+
 function get_json($url){
 	$base = "https://api.github.com/";
 	$curl = curl_init();
@@ -14,15 +19,6 @@ function get_json($url){
 
 function get_commits($type){
   return json_decode(get_json("repos/BlueVM/Neon/commits/$type"),true);
-}
-
-if(!empty($_GET['id'])){
-	if($_GET['id'] == develop){
-		if (!$user_ssh->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
-		$sUpdate = $user_ssh->exec('cd ~;wget https://github.com/BlueVM/Neon/archive/develop.zip;unzip develop.zip;mv ~/Neon-develop/var/neon /var/;rm -rf Neon-develop;rm -rf develop.zip');
-		$sVersion = get_commits("develop");
-		$sData = Core::UpdateSetting('version', $sVersion["sha"]);
-	}
 }
 
 $sDevelop = get_commits("develop");

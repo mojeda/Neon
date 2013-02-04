@@ -1,8 +1,24 @@
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#UpdateImage").css({visibility: "invisible"});
+	$("#Update").click(function() {
+		$("#UpdateImage").css({visibility: "visible"});
+		$("#UpdateText").css({visibility: "invisible"});
+		$.getJSON("doupdate.php?id=1",function(result){
+			$("#Result").html(result.content);
+			$("#UpdateImage").css({visibility: "hidden"});
+		});
+	});
+});
+</script>
 <div align="center" class="UpdateHome">
 	{%if Outdated == true}
-		Neon is currently out of date and updates to it's code are available for download. Please click the update button only once if you wish to update.
-		<br><br><br>
-		<a href="update.php?id=develop" class="icon-button"><img src="img/icons/button/download.png" alt="icon" height="18" width="18"><span>Update To Development Edition</span></a>
+		<div id="UpdateText" align="center">
+			Neon is currently out of date.<br><br><br>
+			<a id="Update" class="icon-button"><img src="img/icons/button/download.png" alt="icon" height="18" width="18"><span>Download Updates</span></a>
+		</div>
+		<div id="UpdateImage" align="center"><img src="img/loading/7.gif" alt="icon" style="margin-right:15px;"><br>Please wait...</div>
+		<div id="Result"></div>
 	{%/if}
 	{%if Outdated == false}
 		Neon is up to date.
