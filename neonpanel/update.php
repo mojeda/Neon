@@ -17,11 +17,11 @@ function get_json($url){
 	return $content;
 }
 
-function get_commits($type){
+function get_commit($type){
   return json_decode(get_json("repos/BlueVM/Neon/commits/$type"),true);
 }
 
-$sDevelop = get_commits("develop");
+$sDevelop = get_commit("develop");
 
 if($sDevelop["sha"] == $sVersion->sValue){
 	$sOutdated = false;
