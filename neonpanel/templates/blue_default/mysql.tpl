@@ -1,5 +1,10 @@
 <div align="center" class="MysqlHome">
-	<div class="ui-tabs ui-widget ui-widget-content ui-corner-all" style="z-index: 590;" id="tabs">
+<script type="text/javascript">
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+</script>
+	<div id="tabs">
 		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active ui-state-focus"><a href="#tabs-1">Databases</a></li>
 			<li class="ui-state-default ui-corner-top"><a href="#tabs-2">Users</a></li>
