@@ -18,7 +18,9 @@ if($LoggedIn === false){
 			$sUser->sRootDir = '/home/'.$sUser->sUsername.'/';
 				$sValidate = new PathValidator($sUser->sRootDir.$sDomain);
 				if($sValidate->ValidatePath($sUser->sRootDir)){
-					$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sUser->sRootDir.$sFolderName).";mkdir ".escapeshellarg($sUser->sRootDir.$sFolderName."/public_html/".).";mkdir ".escapeshellarg($sUser->sRootDir."/logs/".).";");
+					$sPublic = $sUser->sRootDir.$sFolderName."/public_html/";
+					$sLogs = $sUser->sRootDir."/logs/";
+					$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sUser->sRootDir.$sFolderName).";mkdir ".escapeshellarg($sPublic).";mkdir ".escapeshellarg($sLogs).";");
 					$sReplace = array("0" => "{domain_name}", "1" => "{username}");
 					$sReplacements = array("0" => $sFolderName, "1" => $sUser->sUsername);
 					$sConfig = preg_replace($sReplace, $sReplacements, file_get_contents('./includes/configs/nginx.default.conf'));
