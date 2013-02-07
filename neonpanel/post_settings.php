@@ -6,10 +6,9 @@ if($LoggedIn === false){
 	die();
 } else {
 	if(($_GET['id'] == InitialSetup) && ($_POST['domain'] != NULL) && ($_POST['stats'] != NULL)){
-		$sRemove = array("http://", "www.", "https://", "ftp://");
-		$sDomain = preg_replace($sRemove, '', $_POST['domain']);
-		if((preg_match("^(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,6}$", $sDomain)) && (!empty($sDomain))){
-			$return = Domain::AddDomain($_POST['domain']);
+		$sDomain = preg_replace("/[^a-z0-9_ .-]/i", "", $_POST['domain']);
+		if(!empty($sDomain)){
+			$return = Domain::AddDomain($sDomain);
 			$sUser->uStatsEmail = $_POST['stats'];
 			$sUser->uInitialSetup = true;
 			$sUser->InsertIntoDatabase();
@@ -18,13 +17,15 @@ if($LoggedIn === false){
 			$sUser->sRootDir = '/home/'.$sUser->sUsername.'/';
 				$sValidate = new PathValidator($sUser->sRootDir.$sDomain);
 				if($sValidate->ValidatePath($sUser->sRootDir)){
-					$sPublic = $sUser->sRootDir.$sFolderName."/public_html/";
+					$sPublic = $sUser->sRootDir.$sDomain."/public_html/";
 					$sLogs = $sUser->sRootDir."/logs/";
-					$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sUser->sRootDir.$sFolderName).";mkdir ".escapeshellarg($sPublic).";mkdir ".escapeshellarg($sLogs).";");
-					$sReplace = array("0" => "{domain_name}", "1" => "{username}");
-					$sReplacements = array("0" => $sFolderName, "1" => $sUser->sUsername);
-					$sConfig = preg_replace($sReplace, $sReplacements, file_get_contents('./includes/configs/nginx.default.conf'));
-					$sFileContent = $user_sftp->put('/etc/nginx/sites-enabled/'.$sDomain.'.conf', $sPostContent);
+					$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sUser->sRootDir.$sDomain).";mkdir ".escapeshellarg($sPublic).";mkdir ".escapeshellarg($sLogs).";");
+					$sReplace = array('domain_name' => $sDomain, 'username' => $sUser->sUsername);
+					$sConfig = file_get_contents('./includes/configs/nginx.default.conf');
+					foreach($sReplace as $key => $value){	
+						$sConfig = preg_replace($key, $value, $sConfig);
+					}
+					$sFileContent = $user_sftp->put('/etc/nginx/sites-enabled/'.$sDomain.'.conf', $sConfig);
 					$sReload = $user_ssh->exec("/etc/init.d/nginx reload");
 					fwrite($sWriteLog, $sReload);
 				} else {
