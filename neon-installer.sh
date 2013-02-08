@@ -57,12 +57,13 @@ mkdir /var/neon/neonpanel/uploads
 mkdir /var/neon/neonpanel/downloads
 mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
+mysql -u root --password="$mysqlpassword" --execute="update mysql.user set user = 'neon' where user = 'root';"
 query="CREATE DATABASE IF NOT EXISTS panel;"
-mysql -u root --password="$mysqlpassword" --execute="$query"
-mysql -u root --password="$mysqlpassword" panel < /var/neon/data.sql
+mysql -u neon --password="$mysqlpassword" --execute="$query"
+mysql -u neon --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> neon-install.log 2>&1
-sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> neon-install.log 2>&1
+sed -i 's/databaseusernamehere/neon/g' /var/neon/data/config.json >> neon-install.log 2>&1
 sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /var/neon/data/config.json >> neon-install.log 2>&1
 sed -i 's/databasenamehere/panel/g' /var/neon/data/config.json >> neon-install.log 2>&1
 sed -i 's/randomlygeneratedsalthere/'${salt}'/g' /var/neon/data/config.json >> neon-install.log 2>&1
