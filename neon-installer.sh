@@ -58,8 +58,8 @@ mkdir /var/neon/neonpanel/downloads
 mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
 mysql -u root --password="$mysqlpassword" --execute="update mysql.user set user = 'neon' where user = 'root';"
-query="CREATE DATABASE IF NOT EXISTS panel;"
-mysql -u neon --password="$mysqlpassword" --execute="$query"
+/etc/init.d/mysql restart >> neon-install.log 2>&1
+mysql -u neon --password="$mysqlpassword" --execute="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u neon --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> neon-install.log 2>&1
