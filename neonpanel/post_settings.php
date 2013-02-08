@@ -20,7 +20,7 @@ if($LoggedIn === false){
 					$sPublic = $sUser->sRootDir.$sDomain."/public_html/";
 					$sLogs = $sUser->sRootDir."/logs/";
 					$sCreateFolder = $user_ssh->exec("mkdir ".escapeshellarg($sUser->sRootDir.$sDomain).";mkdir ".escapeshellarg($sPublic).";mkdir ".escapeshellarg($sLogs).";");
-					$sReplace = array("{domain_name}" => $sDomain, "{username}" => $sUser->sUsername);
+					$sReplace = array("domain_name" => $sDomain, "username" => $sUser->sUsername);
 					$sConfig = file_get_contents('./includes/configs/nginx.default.conf');
 					foreach($sReplace as $key => $value){	
 						$sConfig = str_replace($key, $value, $sConfig);
