@@ -57,7 +57,9 @@ mkdir /var/neon/neonpanel/uploads
 mkdir /var/neon/neonpanel/downloads
 mkdir /home/root/
 setfacl -Rm user:www-data:rwx /var/neon/* >> install-neon.log 2>&1
-mysql -u root --password="$mysqlpassword" --execute="update mysql.user set user = 'neon' where user = 'root';"
+mysql -u root --password="$mysqlpassword" --execute="USE mysql;CREATE USER 'neon'@'localhost' IDENTIFIED BY '$mysqlpassword';GRANT ALL PRIVILEGES ON *.* TO ‘neon’@'localhost’ IDENTIFIED BY ‘$mysqlpassword’ WITH GRANT OPTION;"
+/etc/init.d/mysql restart >> neon-install.log 2>&1
+mysql -u neon --password="$mysqlpassword" --execute="USE mysql;DROP USER root;"
 /etc/init.d/mysql restart >> neon-install.log 2>&1
 mysql -u neon --password="$mysqlpassword" --execute="CREATE DATABASE IF NOT EXISTS panel;"
 mysql -u neon --password="$mysqlpassword" panel < /var/neon/data.sql
