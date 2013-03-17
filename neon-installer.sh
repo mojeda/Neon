@@ -28,9 +28,9 @@ check_root
 echo Neon is now being installed.
 echo Begining cleanup...
 
-apt-get update >> ~/neon-install/neon-install.log 2>&1
 mkdir ~/neon-install/
 cd ~/neon-install/
+apt-get update >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/apache2 stop >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/apache stop >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/httpd stop >> ~/neon-install/neon-install.log 2>&1
@@ -43,32 +43,58 @@ echo "deb http://packages.dotdeb.org stable all" >> /etc/apt/sources.list
 wget http://www.dotdeb.org/dotdeb.gpg >> ~/neon-install/neon-install.log 2>&1
 cat dotdeb.gpg | apt-key add - >> ~/neon-install/neon-install.log 2>&1
 rm -rf dotdeb.gpg
-apt-get update ~/neon-install/neon-install.log 2>&1
+apt-get update >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 10%
 
-apt-get -y install nginx php5 phpmyadmin php5-mysql zip unzip sqlite3 php5-sqlite php5-curl php-pear php5-dev acl libcurl4-openssl-dev php5-gd php5-imagick php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
-echo Percent complete: 20%
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q install nginx >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 12%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  php5 >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 15%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install php5-mysql zip unzip sqlite3 >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 18%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install php5-sqlite php5-curl php-pear php5-dev acl >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 20%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install libcurl4-openssl-dev php5-gd php5-imagick >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 24%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 30%
+
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 37%
 
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 salt=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 export DEBIAN_FRONTEND=noninteractive >> ~/neon-install/neon-install.log 2>&1
 apt-get -q -y install mysql-server >> ~/neon-install/neon-install.log 2>&1
 mysqladmin -u root password $mysqlpassword >> ~/neon-install/neon-install.log 2>&1
-echo Percent Complete: 30%
+apt-get -q -y install phpmyadmin >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 40%
 
 /etc/init.d/mysql stop >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/nginx stop >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/php5-fpm stop >> ~/neon-install/neon-install.log 2>&1
-echo Percent Complete: 35%
+echo Percent Complete: 44%
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/my.cnf >> ~/neon-install/neon-install.log 2>&1
 mv /etc/my.cnf /etc/my.cnf.backup >> ~/neon-install/neon-install.log 2>&1
 mv my.cnf /etc/my.cnf >> ~/neon-install/neon-install.log 2>&1
-echo Percent Complete: 40%
+echo Percent Complete: 47%
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/php.conf >> ~/neon-install/neon-install.log 2>&1
 mv php.conf /etc/php5/fpm/pool.d/www.conf >> ~/neon-install/neon-install.log 2>&1
-echo Percent Complete: 45%
+echo Percent Complete: 49%
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
 rm -rf /etc/nginx/sites-enabled/*
