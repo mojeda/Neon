@@ -71,7 +71,7 @@ apt-get -y -q  install php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin p
 echo Percent Complete: 30%
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y -q  install build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
+apt-get -y -q  install build-essential php-apc git-core >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 37%
 
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
