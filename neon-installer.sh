@@ -71,9 +71,6 @@ mv php.conf /etc/php5/fpm/pool.d/www.conf >> ~/neon-install/neon-install.log 2>&
 echo Percent Complete: 45%
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
-wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/nginx.conf >> ~/neon-install/neon-install.log 2>&1
-mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup >> ~/neon-install/neon-install.log 2>&1
-mv nginx.conf /etc/nginx/nginx.conf >> ~/neon-install/neon-install.log 2>&1
 mv nginx.neon.conf /etc/nginx/sites-enabled/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 50%
 
