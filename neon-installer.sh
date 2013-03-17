@@ -28,7 +28,7 @@ check_root
 echo Neon is now being installed.
 echo Begining cleanup...
 
-apt-get update >> install-neon.log 2>&1
+apt-get update >> ~/neon-install/neon-install.log 2>&1
 mkdir ~/neon-install/
 cd ~/neon-install/
 /etc/init.d/apache2 stop >> ~/neon-install/neon-install.log 2>&1
@@ -43,6 +43,7 @@ echo "deb http://packages.dotdeb.org stable all" >> /etc/apt/sources.list
 wget http://www.dotdeb.org/dotdeb.gpg >> ~/neon-install/neon-install.log 2>&1
 cat dotdeb.gpg | apt-key add - >> ~/neon-install/neon-install.log 2>&1
 rm -rf dotdeb.gpg
+apt-get update ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 10%
 
 apt-get -y install nginx php5 phpmyadmin php5-mysql zip unzip sqlite3 php5-sqlite php5-curl php-pear php5-dev acl libcurl4-openssl-dev php5-gd php5-imagick php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
@@ -65,12 +66,6 @@ mv /etc/my.cnf /etc/my.cnf.backup >> ~/neon-install/neon-install.log 2>&1
 mv my.cnf /etc/my.cnf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 40%
 
-touch /etc/php5/conf.d/apc.ini 
-cat > /etc/php5/conf.d/apc.ini <<END
-extension=apc.so
-apc.enabled=1
-apc.shm_size=30M
-END
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/php.conf >> ~/neon-install/neon-install.log 2>&1
 mv php.conf /etc/php5/fpm/pool.d/www.conf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 45%
