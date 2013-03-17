@@ -31,11 +31,12 @@ echo Begining cleanup...
 mkdir ~/neon-install/
 cd ~/neon-install/
 apt-get update >> ~/neon-install/neon-install.log 2>&1
-/etc/init.d/apache2 stop >> ~/neon-install/neon-install.log 2>&1
-/etc/init.d/apache stop >> ~/neon-install/neon-install.log 2>&1
-/etc/init.d/httpd stop >> ~/neon-install/neon-install.log 2>&1
-/etc/init.d/lighttpd stop >> ~/neon-install/neon-install.log 2>&1
-apt-get -y remove --purge apache apache2 mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-curl php5-curl php-cli nginx httpd lighttpd >> ~/neon-install/neon-install.log 2>&1
+service apache stop >> ~/neon-install/neon-install.log 2>&1
+service apache2 stop >> ~/neon-install/neon-install.log 2>&1
+service nginx stop >> ~/neon-install/neon-install.log 2>&1
+service lighttpd stop >> ~/neon-install/neon-install.log 2>&1
+update-rc.d -f apache2 remove >> ~/neon-install/neon-install.log 2>&1
+apt-get -y remove --purge apache2 apache-* mysql-server php5 php php-fpm php-pear php5-common php-common php5-mcrypt php-mcrypt php5-cli php-curl php5-curl php-cli nginx lighttpd >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 5%
 
 echo Starting installation please wait...
@@ -64,7 +65,7 @@ echo Percent Complete: 20%
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y -q  install libcurl4-openssl-dev php5-gd php5-imagick >> ~/neon-install/neon-install.log 2>&1
-echo Percent Complete: 24%
+echo Percent Complete: 27%
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y -q  install php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev >> ~/neon-install/neon-install.log 2>&1
@@ -118,7 +119,7 @@ echo Percent Complete: 70%
 
 setfacl -Rm user:www-data:rwx /var/neon/* >> ~/neon-install/neon-install.log 2>&1
 mysql -u root --password="$mysqlpassword" --execute="CREATE DATABASE IF NOT EXISTS panel;"
-mysql -u neon --password="$mysqlpassword" panel < /var/neon/data.sql
+mysql -u root --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent Complete: 80%
 
 cp /var/neon/data/config.example /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
