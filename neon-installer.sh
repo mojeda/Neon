@@ -45,7 +45,7 @@ cat dotdeb.gpg | apt-key add - >> ~/neon-install/neon-install.log 2>&1
 rm -rf dotdeb.gpg
 echo Percent Complete: 10%
 
-apt-get install nginx php5 phpmyadmin php5-mysql zip unzip sqlite3 php5-sqlite php5-curl php-pear php5-dev acl libcurl4-openssl-dev php5-gd php5-imagick php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
+apt-get -y install nginx php5 phpmyadmin php5-mysql zip unzip sqlite3 php5-sqlite php5-curl php-pear php5-dev acl libcurl4-openssl-dev php5-gd php5-imagick php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev build-essential php-apc >> ~/neon-install/neon-install.log 2>&1
 echo Percent complete: 20%
 
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
@@ -65,6 +65,7 @@ mv /etc/my.cnf /etc/my.cnf.backup >> ~/neon-install/neon-install.log 2>&1
 mv my.cnf /etc/my.cnf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 40%
 
+touch /etc/php5/conf.d/apc.ini 
 cat > /etc/php5/conf.d/apc.ini <<END
 extension=apc.so
 apc.enabled=1
@@ -81,6 +82,7 @@ mv nginx.conf /etc/nginx/nginx.conf >> ~/neon-install/neon-install.log 2>&1
 mv nginx.neon.conf /etc/nginx/sites-enabled/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 50%
 
+mkdir /var/neon/
 git clone -b develop https://github.com/BlueVM/Neon.git /var/neon/ >> ~/neon-install/neon-install.log 2>&1
 echo Percent complete: 60%
 
