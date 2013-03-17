@@ -72,6 +72,7 @@ echo Percent Complete: 45%
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
 mv nginx.neon.conf /etc/nginx/sites-enabled/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
+rm -rf /etc/nginx/sites-enabled/default
 echo Percent Complete: 50%
 
 mkdir /var/neon/
