@@ -1,3 +1,3 @@
-<div align="center" class="EmailHome">
-	Email Account Management & Access
+<div align="center" class="FTPHome">
+	FTP Account Management & Access
 </div>

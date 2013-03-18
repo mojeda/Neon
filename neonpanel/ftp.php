@@ -11,8 +11,8 @@ if($LoggedIn === false){
 		'Username'	=>	$sUser->sUsername
 	));
 	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-		'PageTitle'  => "Email Accounts",
-		'PageName'	=>	"email",
+		'PageTitle'  => "FTP Accounts",
+		'PageName'	=>	"ftp",
 		'PanelTitle'	=>	$sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",
 		'Username'	=>	$sUser->sUsername,
