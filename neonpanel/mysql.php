@@ -41,24 +41,28 @@ if($LoggedIn === false){
 	}
 	
 	if($sView == databases){
+		$sPageTitle = "Mysql Databases";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabases', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'Username'	=>	$sUser->sUsername
 		));
 	} elseif($sView == users){
+		$sPageTitle = "Mysql Users";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlusers', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'Username'	=>	$sUser->sUsername
 		));
 	} elseif($sView == databaseusers){
+		$sPageTitle = "Mysql Database Users";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'Username'	=>	$sUser->sUsername
 		));
 	} elseif($sView == wizard){
+		$sPageTitle = "Mysql Database Wizard";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
