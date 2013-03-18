@@ -10,6 +10,12 @@ if($LoggedIn === false){
 		$sAction = $_GET['action'];
 	}
 	
+	if(!empty($_GET['view'])){
+		$sView = $_GET['view'];
+	} else {
+		die("Unfortunatly no view was selected, thus this page can not load.");
+	}
+	
 	if($sAction == create_database){
 	
 	}
@@ -34,18 +40,41 @@ if($LoggedIn === false){
 	
 	}
 	
-	$sContent = Templater::AdvancedParse('/blue_default/mysql', $locale->strings, array(
-		'PanelTitle'  => $sPanelTitle->sValue,
-		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername
-	));
-	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-		'PageTitle'  => "MYSQL Databases",
-		'PageName'	=>	"mysql",
-		'PanelTitle'	=>	$sPanelTitle->sValue,
-		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername,
-		'Content'	=>	$sContent
-	));
+	if($sView == databases){
+		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabases', $locale->strings, array(
+			'PanelTitle'  => $sPanelTitle->sValue,
+			'ErrorMessage'	=>	"",
+			'Username'	=>	$sUser->sUsername
+		));
+	} elseif($sView == users){
+		$sContent = Templater::AdvancedParse('/blue_default/mysqlusers', $locale->strings, array(
+			'PanelTitle'  => $sPanelTitle->sValue,
+			'ErrorMessage'	=>	"",
+			'Username'	=>	$sUser->sUsername
+		));
+	} elseif($sView == databaseusers){
+		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
+			'PanelTitle'  => $sPanelTitle->sValue,
+			'ErrorMessage'	=>	"",
+			'Username'	=>	$sUser->sUsername
+		));
+	} elseif($sView == wizard){
+		$sContent = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
+			'PanelTitle'  => $sPanelTitle->sValue,
+			'ErrorMessage'	=>	"",
+			'Username'	=>	$sUser->sUsername
+		));
+	} else {
+		die("Unfortunatly no view was selected, thus this page can not load.");
+	}
+	
+echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
+	'PageTitle'  => $sPageTitle,
+	'PageName'	=>	"mysql",
+	'PanelTitle'	=>	$sPanelTitle->sValue,
+	'ErrorMessage'	=>	"",
+	'Username'	=>	$sUser->sUsername,
+	'Content'	=>	$sContent
+));
 }
 ?>

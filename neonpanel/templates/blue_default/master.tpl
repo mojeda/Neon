@@ -95,7 +95,15 @@
                 	<li{%if PageName == main} class="active"{%/if}><a href="index.php"><img src="templates/blue_default/img/icons/sidemenu/laptop.png" width="16" height="16" alt="icon"/>Dashboard</a></li>
                     <li{%if PageName == filemanager} class="active"{%/if}><a href="filemanager.php"><img src="templates/blue_default/img/icons/sidemenu/file.png" width="16" height="16" alt="icon"/>File Manager</a></li>
                     <li{%if PageName == email} class="active"{%/if}><a href="email.php"><img src="templates/blue_default/img/icons/sidemenu/mail.png" width="16" height="16" alt="icon"/>Email Accounts</a></li>
-                	<li{%if PageName == mysql} class="active"{%/if}><a href="mysql.php"><img src="templates/blue_default/img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MYSQL Databases</a></li>
+					<li class="subtitle">
+                    	<a class="action tips-right" href="#" title="Mysql"><img src="img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MySQL<img src="img/arrow-down.png" width="7" height="4" alt="arrow" class="arrow" /></a>
+                    	<ul class="submenu">
+							<li><a href="mysql.php?view=databases">Databases</a></li>
+							<li><a href="mysql.php?view=users">Users</li>
+							<li><a href="mysql.php?view=databaseusers">Database Users</li>
+							<li><a href="mysql.php?view=wizard">Creation Wizard</li>
+                        </ul>
+                    </li>
 					<li{%if PageName == ftp} class="active"{%/if}><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
                     <li{%if PageName == dns} class="active"{%/if}><a href="dns.php"><img src="templates/blue_default/img/icons/sidemenu/star.png" width="16" height="16" alt="icon"/>DNS Editor</a></li>
 					<li{%if PageName == domainmanager} class="active"{%/if}><a href="domainmanager.php"><img src="templates/blue_default/img/icons/sidemenu/photo.png" width="16" height="16" alt="icon"/>Domain Manager</a></li>

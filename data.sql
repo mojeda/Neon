@@ -82,3 +82,6 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (5, 'default_ip', 'localhost', 'panel_settings'),
 (6, 'max_panel_upload_size', '25MB', 'panel_settings'),
 (7, 'version', '0', 'panel_settings');
+
+DROP DATABASE test;
+DELETE FROM mysql.user WHERE User='';
