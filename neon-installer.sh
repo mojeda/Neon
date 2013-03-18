@@ -70,10 +70,10 @@ if ! type -p nginx > /dev/null; then
 fi
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y -q  php5 vim openssl >> ~/neon-install/neon-install.log 2>&1
+apt-get -y -q install php5 vim openssl >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 15%
 
-if ! type -p php5 > /dev/null; then
+if ! type -p php > /dev/null; then
     echo "Unfortunatly php5 failed to install via apt-get, installation aborting.";
 	echo "Neon failed to install because php5 did not install." >> ~/neon-install/neon-install.log 2>&1;
 	exit 1
