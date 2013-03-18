@@ -70,7 +70,7 @@ if ! type -p nginx > /dev/null; then
 fi
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y -q  php5 >> ~/neon-install/neon-install.log 2>&1
+apt-get -y -q  php5 vim openssl >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 15%
 
 if ! type -p php5 > /dev/null; then
@@ -133,8 +133,15 @@ wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/php.c
 mv php.conf /etc/php5/fpm/pool.d/www.conf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 49%
 
+mkdir /usr/ssl >> ~/neon-install/neon-install.log 2>&1
+cd /usr/ssl >> ~/neon-install/neon-install.log 2>&1
+openssl genrsa -out neon.key 1024 >> ~/neon-install/neon-install.log 2>&1
+openssl rsa -in neon.key -out neon.pem >> ~/neon-install/neon-install.log 2>&1
+openssl req -new -key neon.pem -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=www.neonpanel.com" -out neon.csr >> ~/neon-install/neon-install.log 2>&1
+openssl x509 -req -days 365 -in neon.csr -signkey neon.pem -out neon.crt >> ~/neon-install/neon-install.log 2>&1
+cd ~/neon-install/ >> ~/neon-install/neon-install.log 2>&1
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
-rm -rf /etc/nginx/sites-enabled/*
+rm -rf /etc/nginx/sites-enabled/* >> ~/neon-install/neon-install.log 2>&1
 mv nginx.neon.conf /etc/nginx/sites-enabled/nginx.neon.conf >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 50%
 
