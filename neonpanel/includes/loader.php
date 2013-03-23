@@ -1,5 +1,5 @@
 <?php
-session_set_cookie_params(0, '/', 'neon');
+session_name('neon_auth');
 require_once('./includes/db.php');
 require_once('./includes/functions.php');
 require_once('./includes/global_settings.php');
