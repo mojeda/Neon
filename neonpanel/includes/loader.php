@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0, '/', 'neon');
 require_once('./includes/db.php');
 require_once('./includes/functions.php');
 require_once('./includes/global_settings.php');
@@ -19,5 +20,4 @@ if(isset($_SESSION['user_id'])){
 }
 
 $sErrorMessage = NULL;
-
 ?>
