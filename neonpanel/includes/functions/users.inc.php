@@ -34,6 +34,7 @@ class User extends CPHPDatabaseRecordClass {
 		':Username' => $uUsername, ':Active' => '1'), 5)){
 			$sUser = new User($result);
 				$_SESSION['user_id'] = $sUser->sId;
+				$_SESSION['username'] = $sUser->sUsername;
 				$uPassword = stripslashes(str_replace("'", '', $uPassword));
 				$_SESSION['password'] = $uPassword;
 				if (!$user_ssh->login($sUser->sUsername, $uPassword)) {
