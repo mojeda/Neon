@@ -27,7 +27,7 @@ $sDevelop = get_commits("develop");
 if($sDevelop["sha"] != $sVersion->sValue){
 	if(!empty($_GET['id'])){
 			if (!$user_ssh->login($sUser->sUsername, $_SESSION['password'])) { exit('User Connection To Server Failed!');}
-			$sUpdate = $user_ssh->exec('cd /var/neon/;git pull');
+			$sUpdate = $user_ssh->exec('cd /var/neon/ >> /var/log/neon-update.log 2>&1; git pull >> /var/log/neon-update.log 2>&1; cd /var/neon/data/update/ >> /var/log/neon-update.log 2>&1; sh update.sh >> /var/log/neon-update.log 2>&1;');
 			$sVersion = get_commits("develop");
 			$sData = Core::UpdateSetting('version', $sVersion["sha"]);
 			$array = array("content" => "Neon is now up to date.");
