@@ -102,6 +102,7 @@
 							<li><a href="mysql.php?view=users">Users</a></li>
 							<li><a href="mysql.php?view=databaseusers">Database Users</a></li>
 							<li><a href="mysql.php?view=wizard">Creation Wizard</a></li>
+							<li><a href="./phpmyadmin/index.php" target="_blank">PHPMyAdmin</a></li>
                         </ul>
                     </li>
 					<li{%if PageName == ftp} class="active"{%/if}><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
