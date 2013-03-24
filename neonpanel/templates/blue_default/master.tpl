@@ -98,11 +98,11 @@
 					<li class="subtitle">
                     	<a class="action tips-right" href="#" title="Mysql"><img src="templates/blue_default/img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MySQL<img src="templates/blue_default/img/arrow-down.png" width="7" height="4" alt="arrow" class="arrow" /></a>
                     	<ul class="submenu">
-							<li><a href="mysql.php?view=databases">Databases</a></li>
-							<li><a href="mysql.php?view=users">Users</a></li>
-							<li><a href="mysql.php?view=databaseusers">Database Users</a></li>
-							<li><a href="mysql.php?view=wizard">Creation Wizard</a></li>
-							<li><a href="./phpmyadmin/index.php" target="_blank">PHPMyAdmin</a></li>
+							<li><a href="mysql.php?view=databases"><img src="templates/blue_default/img/icons/sidemenu/file.png" width="16" height="16" alt="icon"/>Databases</a></li>
+							<li><a href="mysql.php?view=users"><img src="templates/blue_default/img/icons/sidemenu/user.png" width="16" height="16" alt="icon"/>Users</a></li>
+							<li><a href="mysql.php?view=databaseusers"><img src="templates/blue_default/img/icons/sidemenu/vcard.png" width="16" height="16" alt="icon"/>Database Users</a></li>
+							<li><a href="mysql.php?view=wizard"><img src="templates/blue_default/img/icons/sidemenu/star.png" width="16" height="16" alt="icon"/>Creation Wizard</a></li>
+							<li><a href="./phpmyadmin/index.php" target="_blank"><img src="templates/blue_default/img/icons/sidemenu/pma.png" width="16" height="16" alt="icon"/>PHPMyAdmin</a></li>
                         </ul>
                     </li>
 					<li{%if PageName == ftp} class="active"{%/if}><a href="ftp.php"><img src="templates/blue_default/img/icons/sidemenu/copy.png" width="16" height="16" alt="icon"/>FTP Manager</a></li>
