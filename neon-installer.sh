@@ -92,7 +92,7 @@ apt-get -y -q  install libcurl4-openssl-dev php5-gd php5-imagick >> ~/neon-insta
 echo Percent Complete: 27%
 
 export DEBIAN_FRONTEND=noninteractive
-apt-get -y -q  install php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-suhosin php5-fpm libpcre3-dev >> ~/neon-install/neon-install.log 2>&1
+apt-get -y -q  install php5-imap php5-mcrypt php5-xmlrpc php5-xsl php5-fpm libpcre3-dev >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 30%
 
 export DEBIAN_FRONTEND=noninteractive
@@ -150,7 +150,10 @@ git clone -b develop https://github.com/BlueVM/Neon.git /var/neon/ >> ~/neon-ins
 echo Percent complete: 60%
 
 rm -rf /etc/php5/fpm/php.ini >> ~/neon-install/neon-install.log 2>&1
-mv /var/neon/php.ini /etc/php5/fpm/php.ini >> ~/neon-install/neon-install.log 2>&1
+mv /var/neon/neonpanel/includes/configs/php.ini /etc/php5/fpm/php.ini >> ~/neon-install/neon-install.log 2>&1
+mv /var/neon/neonpanel/includes/configs/pma.php /usr/share/phpmyadmin/ >> ~/neon-install/neon-install.log 2>&1
+mv /etc/phpmyadmin/config.inc.php /etc/phpmyadmin/config.old.inc.php >> ~/neon-install/neon-install.log 2>&1
+mv /var/neon/neonpanel/includes/configs/pma.config.inc.php /etc/phpmyadmin/config.inc.php >> ~/neon-install/neon-install.log 2>&1
 touch /var/neon/data/log.txt >> ~/neon-install/neon-install.log 2>&1
 mkdir /var/neon/neonpanel/uploads >> ~/neon-install/neon-install.log 2>&1
 mkdir /var/neon/neonpanel/downloads >> ~/neon-install/neon-install.log 2>&1
@@ -168,6 +171,7 @@ echo Percent Complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
+sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /etc/phpmyadmin/config.inc.php >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasenamehere/panel/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/randomlygeneratedsalthere/'${salt}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 90%
