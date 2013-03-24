@@ -171,7 +171,7 @@ echo Percent Complete: 80%
 cp /var/neon/data/config.example /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
-sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /etc/phpmyadmin/config.inc.php >> ~/neon-install/neon-install.log 2>&1
+sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /usr/share/phpmyadmin/pma.php >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasenamehere/panel/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/randomlygeneratedsalthere/'${salt}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 90%
