@@ -3,13 +3,13 @@
 		<div class="titleh">
 			<h3>Mysql Databases</h3>
 			<div class="shortcuts-icons">
-				<a class="shortcut tips" href="#" title="Add New Item"><img src="img/icons/shortcut/plus.png" width="25" height="25" alt="icon" /></a>
+				<a class="shortcut tips" href="#" title="Add New Item"><img src="./templates/blue_default/img/icons/shortcut/plus.png" width="25" height="25" alt="icon" /></a>
 			</div>
 		</div>
 		<table id="DatabaseTable" class="tablesorter"> 
 			<thead> 
 				<tr> 
-					<th style="width:90%">Database Name</th> 
+					<th style="width:85%">Database Name</th> 
 					<th>Actions</th> 
 				</tr> 
 			</thead> 
