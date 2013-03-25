@@ -201,7 +201,7 @@ echo "=====================================" >> ~/neon-install/neon-install.log 
 echo
 echo =========NEON_INSTALL_COMPLETE========
 echo Mysql root password: $mysqlpassword
-echo You can login at: http://yourip:2026
+echo You can login at: https://yourip:2026
 echo Username: root
 echo Password: your_root_password
 echo =====================================

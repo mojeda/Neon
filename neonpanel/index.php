@@ -28,9 +28,7 @@ else
 		}
 		
 		$sPageContents = Templater::AdvancedParse('/blue_default/login', $locale->strings, array(
-			'ErrorMessage'		=> $sErrorMessage,
-			'RegistrationEnabled'	=> $sRegistrationEnabled->sValue,
-			'ForgotPasswordEnabled'	=> $sForgotPasswordEnabled->sValue
+			'ErrorMessage'		=> $sErrorMessage
 		));
 	}
 	else
@@ -41,7 +39,6 @@ else
 	}
 	
 	echo(Templater::AdvancedParse('blue_default/master.login', $locale->strings, array(
-		'PanelTitle'	=> $sPanelTitle->sValue,
 		'PageTitle'	=> "Login",
 		'contents'	=> $sPageContents
 	)));

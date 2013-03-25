@@ -42,17 +42,22 @@ if($LoggedIn === false){
 	
 	if($sView == databases){
 		$sPageTitle = "Mysql Databases";
+		$sDatabases = $database->CachedQuery("SHOW DATABASES", array(), 1);
+		$sUsernameLength = strlen($sUser->sUsername) + 1;
+		$sDatabaseList = array();
+		foreach($sDatabases->data as $key => $value){
+			if(substr($value["Database"],0,$sUsernameLength) == $sUser->sUsername.'_'){
+				$sDatabaseList[] = $value["Database"];
+			}
+		}
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabases', $locale->strings, array(
-			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername
+			'DatabaseList' => $sDatabaseList,
 		));
 	} elseif($sView == users){
 		$sPageTitle = "Mysql Users";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlusers', $locale->strings, array(
-			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername
 		));
 	} elseif($sView == databaseusers){
 		$sPageTitle = "Mysql Database Users";
@@ -75,9 +80,7 @@ if($LoggedIn === false){
 echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 	'PageTitle'  => $sPageTitle,
 	'PageName'	=>	"mysql",
-	'PanelTitle'	=>	$sPanelTitle->sValue,
 	'ErrorMessage'	=>	"",
-	'Username'	=>	$sUser->sUsername,
 	'Content'	=>	$sContent
 ));
 }

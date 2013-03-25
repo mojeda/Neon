@@ -1,11 +1,21 @@
 <?php
 $sTimestamp = time();
+
+// Global Settings
 $sPanelTitle = Core::GetSetting('panel_title');
+NewTemplater::SetGlobalVariable("PanelTitle", $sPanelTitle);
 $sRegistrationEnabled = Core::GetSetting('registration_enabled');
+NewTemplater::SetGlobalVariable("RegistrationEnabled", $sRegistrationEnabled);
 $sForgotPasswordEnabled = Core::GetSetting('forgotpassword_enabled');
+NewTemplater::SetGlobalVariable("ForgotPasswordEnabled", $sForgotPasswordEnabled);
 $sDefaultIP = Core::GetSetting('default_ip');
+NewTemplater::SetGlobalVariable("DefaultIP", $sDefaultIP);
 $sMaxPanelUploadSize = Core::GetSetting('max_panel_upload_size');
+NewTemplater::SetGlobalVariable("MaxPanelUploadSize", $sMaxPanelUploadSize);
 $sVersion = Core::GetSetting('version');
+NewTemplater::SetGlobalVariable("Version", $sVersion);
+NewTemplater::SetGlobalVariable("Username", $sUser->sUsername);
+NewTemplater::SetGlobalVariable("UserId", $sUser->sUserId);
 
 function remove_magic_quotes($array) {
     foreach ($array as $k => $v) {

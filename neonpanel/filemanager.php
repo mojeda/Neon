@@ -280,16 +280,13 @@ if($LoggedIn === false){
 
 			
 	$sFileManager = Templater::AdvancedParse('/blue_default/fmlayout', $locale->strings, array(
-		'PanelTitle'  => $sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername,
 		'Directories'	=>	$sDirectories,
 		'Files'	=>	$sFiles,
 		'MaxListFiles' =>	$sUser->sMaxListFiles,
 		'AllowBack'	=>	$sAllowBack,
 		'Back'	=>	$sBack,
 		'FilePath'	=>	$sRequest,
-		'MaxPanelUploadSize'	=>	$sMaxPanelUploadSize->sValue,
 	));
 			
 			
@@ -300,17 +297,13 @@ if($LoggedIn === false){
 			
 	if(!isset($sFormat)){
 		$sContent = Templater::AdvancedParse('/blue_default/filemanager', $locale->strings, array(
-			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername,
 			'FileManagerCode'	=> $sFileManager
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 			'PageTitle'  => "File Manager",
 			'PageName'	=>	"filemanager",
-			'PanelTitle'	=>	$sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername,
 			'Content'	=>	$sContent
 		));
 	} else {
