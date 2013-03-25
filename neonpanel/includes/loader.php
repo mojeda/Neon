@@ -15,6 +15,8 @@ $user_sftp = new Net_SFTP($sDefaultIP->sValue);
 if(isset($_SESSION['user_id'])){
 	$sUser = new User($_SESSION['user_id']);
 	$LoggedIn = true;
+	NewTemplater::SetGlobalVariable("Username", $sUser->sUsername);
+	NewTemplater::SetGlobalVariable("UserId", $sUser->sUserId);
 } else {
 	$LoggedIn = false;
 }

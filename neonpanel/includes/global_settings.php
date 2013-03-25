@@ -14,8 +14,6 @@ $sMaxPanelUploadSize = Core::GetSetting('max_panel_upload_size');
 NewTemplater::SetGlobalVariable("MaxPanelUploadSize", $sMaxPanelUploadSize->sValue);
 $sVersion = Core::GetSetting('version');
 NewTemplater::SetGlobalVariable("Version", $sVersion->sValue);
-NewTemplater::SetGlobalVariable("Username", $sUser->sUsername);
-NewTemplater::SetGlobalVariable("UserId", $sUser->sUserId);
 
 function remove_magic_quotes($array) {
     foreach ($array as $k => $v) {
