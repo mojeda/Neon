@@ -3,17 +3,17 @@ $sTimestamp = time();
 
 // Global Settings
 $sPanelTitle = Core::GetSetting('panel_title');
-NewTemplater::SetGlobalVariable("PanelTitle", $sPanelTitle);
+NewTemplater::SetGlobalVariable("PanelTitle", $sPanelTitle->sValue);
 $sRegistrationEnabled = Core::GetSetting('registration_enabled');
-NewTemplater::SetGlobalVariable("RegistrationEnabled", $sRegistrationEnabled);
+NewTemplater::SetGlobalVariable("RegistrationEnabled", $sRegistrationEnabled->sValue);
 $sForgotPasswordEnabled = Core::GetSetting('forgotpassword_enabled');
-NewTemplater::SetGlobalVariable("ForgotPasswordEnabled", $sForgotPasswordEnabled);
+NewTemplater::SetGlobalVariable("ForgotPasswordEnabled", $sForgotPasswordEnabled->sValue);
 $sDefaultIP = Core::GetSetting('default_ip');
-NewTemplater::SetGlobalVariable("DefaultIP", $sDefaultIP);
+NewTemplater::SetGlobalVariable("DefaultIP", $sDefaultIP->sValue);
 $sMaxPanelUploadSize = Core::GetSetting('max_panel_upload_size');
-NewTemplater::SetGlobalVariable("MaxPanelUploadSize", $sMaxPanelUploadSize);
+NewTemplater::SetGlobalVariable("MaxPanelUploadSize", $sMaxPanelUploadSize->sValue);
 $sVersion = Core::GetSetting('version');
-NewTemplater::SetGlobalVariable("Version", $sVersion);
+NewTemplater::SetGlobalVariable("Version", $sVersion->sValue);
 NewTemplater::SetGlobalVariable("Username", $sUser->sUsername);
 NewTemplater::SetGlobalVariable("UserId", $sUser->sUserId);
 
