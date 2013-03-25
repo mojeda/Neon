@@ -5,16 +5,15 @@
 			$("#NewDatabaseForm").modal({containerCss:{width:"400", height:"200"}});
 		});
 		$('#SubmitDatabase').click(function() {
-				var dbname = $("#DatabaseName").val();
-				$('#FormSubmitDatabase').html('<a class="button-blue" name="SubmitDatabase" />Please Wait...</a>');
-				$.modal.close();
-				$("#LoadingImage").css({visibility: "visible"});
-				$.getJSON("mysql.php?action=createdatabase&name=" + dbname + "&format=1",function(result){
-					$("#MysqlDatabasesHome").html(result.content);
-					$("#LoadingImage").css({visibility: "hidden"});
-				});
-				}
-			});	
+			var dbname = $("#DatabaseName").val();
+			$('#FormSubmitDatabase').html('<a class="button-blue" name="SubmitDatabase" />Please Wait...</a>');
+			$.modal.close();
+			$("#LoadingImage").css({visibility: "visible"});
+			$.getJSON("mysql.php?action=createdatabase&name=" + dbname + "&format=1",function(result){
+				$("#MysqlDatabasesHome").html(result.content);
+				$("#LoadingImage").css({visibility: "hidden"});
+			});
+		});
 	});
 </script>
 	<div class="simplebox grid740">
