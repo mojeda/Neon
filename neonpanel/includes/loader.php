@@ -16,7 +16,7 @@ if(isset($_SESSION['user_id'])){
 	$sUser = new User($_SESSION['user_id']);
 	$LoggedIn = true;
 	NewTemplater::SetGlobalVariable("Username", $sUser->sUsername);
-	NewTemplater::SetGlobalVariable("UserId", $sUser->sUserId);
+	NewTemplater::SetGlobalVariable("UserId", $sUser->sId);
 } else {
 	$LoggedIn = false;
 }
