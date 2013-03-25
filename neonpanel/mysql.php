@@ -10,6 +10,10 @@ if($LoggedIn === false){
 		$sAction = $_GET['action'];
 	}
 	
+	if(!empty($_GET['format'])){
+		$sFormat = $_GET['format'];
+	}
+	
 	if(!empty($_GET['view'])){
 		$sView = $_GET['view'];
 	} else {
@@ -17,7 +21,7 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == create_database){
-	
+		echo $_GET['name'];
 	}
 	
 	if($sAction == delete_database){
@@ -76,12 +80,19 @@ if($LoggedIn === false){
 	} else {
 		die("Unfortunatly no view was selected, thus this page can not load.");
 	}
+
 	
-echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-	'PageTitle'  => $sPageTitle,
-	'PageName'	=>	"mysql",
-	'ErrorMessage'	=>	"",
-	'Content'	=>	$sContent
-));
+	if(!isset($sFormat)){	
+		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
+			'PageTitle'  => $sPageTitle,
+			'PageName'	=>	"mysql",
+			'ErrorMessage'	=>	"",
+			'Content'	=>	$sContent
+		));
+	} else {
+		$sContent = preg_replace('/\r\n|\r|\n/', '', $sContent);
+		$sReturnArray = array("content"	=>	$sContent);
+		echo json_encode($sReturnArray);
+	}
 }
 ?>
