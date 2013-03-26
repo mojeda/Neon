@@ -26,23 +26,27 @@ if($LoggedIn === false){
 		$sCreateDatabase = $database->CachedQuery("CREATE DATABASE {$sDatabaseName}", array(), 1);
 	}
 	
-	if($sAction == delete_database){
+	if($sAction == deletedatabase){
+		$sDatabaseName = $_GET['name'];
+		$sUsernameLength = strlen($sUser->sUsername) + 1;
+		if(substr($sDatabaseName,0,$sUsernameLength) == $sUser->sUsername.'_'){
+			$sDeleteDatabase = $database->CachedQuery("DROP DATABASE {$sDatabaseName}", array(), 1);
+		}
+	}
+	
+	if($sAction == createuser){
 	
 	}
 	
-	if($sAction == create_user){
+	if($sAction == deleteuser){
 	
 	}
 	
-	if($sAction == delete_user){
+	if($sAction == adduser){
 	
 	}
 	
-	if($sAction == add_user){
-	
-	}
-	
-	if($sAction == remove_user){
+	if($sAction == removeuser){
 	
 	}
 	
