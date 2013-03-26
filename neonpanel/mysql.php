@@ -70,26 +70,29 @@ if($LoggedIn === false){
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
-			'Username'	=>	$sUser->sUsername
 		));
 	} else {
 		die("Unfortunatly no view was selected, thus this page can not load.");
 	}
 
 	
-	if(!isset($sFormat)){	
+	if(!isset($sFormat)){
+		$sMysql = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
+			'PanelTitle'  => $sPanelTitle->sValue,
+			'ErrorMessage'	=>	"",
+			'MysqlManagerCode' => $sContent,
+		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 			'PageTitle'  => $sPageTitle,
 			'PageName'	=>	"mysql",
 			'ErrorMessage'	=>	"",
-			'Content'	=>	$sContent
+			'Content'	=>	$sMysql
 		));
 	} else {
 		$sContent = preg_replace('/\r\n|\r|\n/', '', $sContent);

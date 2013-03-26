@@ -1,0 +1,1 @@
+<div align="center" id="MysqlManager" style="margin-top:25px;">{%?MysqlManagerCode}</div>

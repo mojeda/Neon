@@ -10,7 +10,7 @@
 			$.modal.close();
 			$("#LoadingImage").css({visibility: "visible"});
 			$.getJSON("mysql.php?action=createdatabase&view=databases&name=" + dbname + "&format=1",function(result){
-				$("#MysqlDatabasesHome").html(result.content);
+				$("#MysqlManager").html(result.content);
 				$("#LoadingImage").css({visibility: "hidden"});
 			});
 		});
