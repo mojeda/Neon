@@ -20,6 +20,9 @@ if($LoggedIn === false){
 		die("Unfortunatly no view was selected, thus this page can not load.");
 	}
 	
+	// Multi-use variable.
+	$sUsernameLength = strlen($sUser->sUsername) + 1;
+	
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		if(!empty($sDatabaseName)){
@@ -30,7 +33,6 @@ if($LoggedIn === false){
 	
 	if($sAction == deletedatabase){
 		$sDatabaseName = $_GET['name'];
-		$sUsernameLength = strlen($sUser->sUsername) + 1;
 		if(substr($sDatabaseName,0,$sUsernameLength) == $sUser->sUsername.'_'){
 			$sDeleteDatabase = $database->CachedQuery("DROP DATABASE {$sDatabaseName}", array(), 1);
 		}
@@ -47,7 +49,6 @@ if($LoggedIn === false){
 	
 	if($sAction == deleteuser){
 		$sMysqlUsername = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
-		$sUsernameLength = strlen($sUser->sUsername) + 1;
 		if(substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_'){
 			$sDeleteUser = $database->CachedQuery("DROP USER '{$sMysqlUsername}'@'localhost'", array(), 1);
 		}
@@ -60,9 +61,6 @@ if($LoggedIn === false){
 	if($sAction == removeuser){
 	
 	}
-	
-	// Multi-use variable.
-	$sUsernameLength = strlen($sUser->sUsername) + 1;
 	
 	if($sView == databases){
 		$sPageTitle = "Mysql Databases";
