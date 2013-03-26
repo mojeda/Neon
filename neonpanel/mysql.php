@@ -83,7 +83,7 @@ if($LoggedIn === false){
 
 	
 	if(!isset($sFormat)){
-		$sMysql = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
+		$sMysql = Templater::AdvancedParse('/blue_default/mysql', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'MysqlManagerCode' => $sContent,
