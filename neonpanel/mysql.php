@@ -41,7 +41,7 @@ if($LoggedIn === false){
 		$sMysqlPassword = $_GET['password'];
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlPassword))){
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
-			$sCreateUser = $database->CachedQuery("CREATE USER ':Username'@'localhost' IDENTIFIED BY ':Password'", array(':Username' => $sMysqlUsername, ':Password' => $sMysqlPassword), 1);
+			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sMysqlPassword}'", array(), 1);
 		}
 	}
 	
@@ -49,7 +49,7 @@ if($LoggedIn === false){
 		$sMysqlUsername = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		$sUsernameLength = strlen($sUser->sUsername) + 1;
 		if(substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_'){
-			$sDeleteUser = $database->CachedQuery("DROP USER ':Username'@'localhost'", array(':Username' => $sMysqlUsername), 1);
+			$sDeleteUser = $database->CachedQuery("DROP USER '{$sMysqlUsername}'@'localhost'", array(), 1);
 		}
 	}
 	
