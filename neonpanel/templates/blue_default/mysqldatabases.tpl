@@ -84,7 +84,7 @@
 				<form id="form2" name="form2" class="SubmitDatabase noEnterSubmit">	
 						Database Name: {%?Username}_<input name="databasename" class="st-forminput" id="DatabaseName" style="width:150px" value="" type="text"> 
 						<div style="padding:12px;"></div>
-					<div align="center" style="margin-bottom:5px;" id="FormSubmitFile"><a class="button-blue" style="cursor:pointer;" id="SubmitDatabase">Create Database</a></div>
+					<div align="center" style="margin-bottom:5px;" id="FormSubmitDatabase"><a class="button-blue" style="cursor:pointer;" id="SubmitDatabase">Create Database</a></div>
 				</form>
 			</div>
 		</div>
