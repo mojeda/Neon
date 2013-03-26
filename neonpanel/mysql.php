@@ -22,6 +22,7 @@ if($LoggedIn === false){
 	
 	if($sAction == create_database){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
+		$sDatabaseName = $sUser->sUsername."_".$sDatabaseName;
 		$sCreateDatabase = $database->CachedQuery("CREATE DATABASE ':Database'", array(':Database' => $sDatabaseName), 1);
 	}
 	
