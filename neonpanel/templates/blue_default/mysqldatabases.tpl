@@ -26,7 +26,7 @@
 		$("#CancelDelete").click(function() {
 			$.modal.close();
 		});
-		$(".DeleteDB").click(function() {
+		$(".DeleteDatabase").click(function() {
 			var database = $(this).attr('rel');
 			$("#DeleteFormType").html("database");
 			$("#DeleteFormValue").html(database);
