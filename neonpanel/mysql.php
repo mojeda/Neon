@@ -32,14 +32,14 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == deletedatabase){
-		$sDatabaseName = $_GET['name'];
+		$sDatabaseName = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
 		if(substr($sDatabaseName,0,$sUsernameLength) == $sUser->sUsername.'_'){
 			$sDeleteDatabase = $database->CachedQuery("DROP DATABASE {$sDatabaseName}", array(), 1);
 		}
 	}
 	
 	if($sAction == createuser){
-		$sMysqlUsername = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
 		$sMysqlPassword = $_GET['password'];
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlPassword))){
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
@@ -48,7 +48,7 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == deleteuser){
-		$sMysqlUsername = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
 		if(substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_'){
 			$sDeleteUser = $database->CachedQuery("DROP USER '{$sMysqlUsername}'@'localhost'", array(), 1);
 		}
