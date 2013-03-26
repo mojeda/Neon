@@ -88,7 +88,7 @@ if($LoggedIn === false){
 		}
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlusers', $locale->strings, array(
 			'ErrorMessage'	=>	"",
-			'MysqlUsers' => $sUserList,
+			'UserList' => $sUserList,
 		));
 	} elseif($sView == databaseusers){
 		$sPageTitle = "Mysql Database Users";
