@@ -1,4 +1,4 @@
-<div align="center" class="MysqlDatabasesHome">
+<br><br><div align="center" class="MysqlDatabasesHome">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#NewDatabaseOpen").click(function(){
@@ -9,8 +9,8 @@
 			$('#FormSubmitDatabase').html('<a class="button-blue" name="SubmitDatabase" />Please Wait...</a>');
 			$.modal.close();
 			$("#LoadingImage").css({visibility: "visible"});
-			$.getJSON("mysql.php?action=createdatabase&name=" + dbname + "&format=1",function(result){
-				$("#MysqlDatabasesHome").html(result.content);
+			$.getJSON("mysql.php?action=createdatabase&view=database&name=" + dbname + "&format=1",function(result){
+				$("#Page").html(result.content);
 				$("#LoadingImage").css({visibility: "hidden"});
 			});
 		});
