@@ -20,7 +20,7 @@ if($LoggedIn === false){
 		die("Unfortunatly no view was selected, thus this page can not load.");
 	}
 	
-	if($sAction == create_database){
+	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		$sDatabaseName = $sUser->sUsername."_".$sDatabaseName;
 		$sCreateDatabase = $database->CachedQuery("CREATE DATABASE ':Database'", array(':Database' => $sDatabaseName), 1);
