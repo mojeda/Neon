@@ -9,7 +9,7 @@
 			$('#FormSubmitDatabase').html('<a class="button-blue" name="SubmitDatabase" />Please Wait...</a>');
 			$.modal.close();
 			$("#LoadingImage").css({visibility: "visible"});
-			$.getJSON("mysql.php?action=createdatabase&view=database&name=" + dbname + "&format=1",function(result){
+			$.getJSON("mysql.php?action=createdatabase&view=databases&name=" + dbname + "&format=1",function(result){
 				$("#Page").html(result.content);
 				$("#LoadingImage").css({visibility: "hidden"});
 			});
