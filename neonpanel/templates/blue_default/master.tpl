@@ -97,7 +97,7 @@
                     <li{%if PageName == email} class="active"{%/if}><a href="email.php"><img src="templates/blue_default/img/icons/sidemenu/mail.png" width="16" height="16" alt="icon"/>Email Accounts</a></li>
 					<li class="subtitle">
                     	<a class="action tips-right" href="#" title="Mysql"><img src="templates/blue_default/img/icons/sidemenu/file_edit.png" width="16" height="16" alt="icon"/>MySQL<img src="templates/blue_default/img/arrow-down.png" width="7" height="4" alt="arrow" class="arrow" /></a>
-                    	<ul class="submenu">
+                    	<ul{%if PageName != mysql} class="submenu"{%/if}>
 							<li><a href="mysql.php?view=databases"><img src="templates/blue_default/img/icons/sidemenu/file.png" width="16" height="16" alt="icon"/>Databases</a></li>
 							<li><a href="mysql.php?view=users"><img src="templates/blue_default/img/icons/sidemenu/user.png" width="16" height="16" alt="icon"/>Users</a></li>
 							<li><a href="mysql.php?view=databaseusers"><img src="templates/blue_default/img/icons/sidemenu/vcard.png" width="16" height="16" alt="icon"/>Database Users</a></li>
