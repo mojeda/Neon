@@ -94,10 +94,10 @@ if($LoggedIn === false){
 		$sDatabaseList = array();
 		foreach($sDatabases->data as $key => $value){
 			if(substr($value["Database"],0,$sUsernameLength) == $sUser->sUsername.'_'){
-				$sDatabaseUsers = $database->CachedQuery("SELECT User FROM mysql.db WHERE Db='{$svalue["Database"]}'", array(), 1);
+				$sDatabaseUsers = $database->CachedQuery("SELECT User FROM mysql.db WHERE Db='{$value["Database"]}'", array(), 1);
 				if(is_array($sDatabaseUsers->data)){
 					foreach($sDatabaseUsers->data as $subkey => $subvalue){
-						$sUsers[] = array("user" => $subvalue["User"]);
+						$sUsers[] = $subvalue["User"];
 					}
 				}
 				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers);
