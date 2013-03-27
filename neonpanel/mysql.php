@@ -126,7 +126,7 @@ if($LoggedIn === false){
 			'ErrorMessage'	=>	"",
 			'DatabaseList' => $sDatabaseList,
 			'UserList' => $sUserList,
-			'PermissionList' => $sPermissions
+			'PermissionsList' => $sPermissions
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
