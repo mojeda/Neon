@@ -100,8 +100,10 @@ if($LoggedIn === false){
 						$sUsers[] = $subvalue["User"];
 					}
 				}
-				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers);
+				$sNumber = count($sUsers);
+				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers, "number" => $sNumber);
 				unset($sUsers);
+				unset($sNumber);
 			}
 		}
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
