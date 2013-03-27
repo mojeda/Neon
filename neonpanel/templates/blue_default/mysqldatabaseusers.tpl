@@ -132,7 +132,8 @@
 									<td><label class="margin-right10"><input type="checkbox" name="VIEW" id="VIEW" class="uniform" checked="checked"/> VIEW</label></td>
 									<td><label class="margin-right10"><input type="checkbox" name="TRIGGER" id="TRIGGER" class="uniform" checked="checked"/> TRIGGER</label></td>
 								<tr>
-									<td colspan="2"><div align="center"><label class="margin-right10"><input type="checkbox" name="UPDATE" id="UPDATE" class="uniform" checked="checked"/> UPDATE</label></td>
+									<td><div align="center"><label class="margin-right10"><input type="checkbox" name="UPDATE" id="UPDATE" class="uniform" checked="checked"/> UPDATE</label></td>
+									<td></td>
 								</tr>
 							</table>
 						</div>
