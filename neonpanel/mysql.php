@@ -100,7 +100,10 @@ if($LoggedIn === false){
 						$sUsers[] = $subvalue["User"];
 					}
 				}
-				$sNumber = count($sUsers) + 1;
+				$sNumber = count($sUsers);
+				if($sNumber > 0){
+					$sNumber++;
+				}
 				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers, "number" => $sNumber);
 				unset($sUsers);
 				unset($sNumber);
