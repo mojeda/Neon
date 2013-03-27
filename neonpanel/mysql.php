@@ -145,9 +145,10 @@ if($LoggedIn === false){
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 			'PageTitle'  => $sPageTitle,
-			'PageName'	=>	"mysql",
+			'PageName'	=>	$sView,
 			'ErrorMessage'	=>	"",
 			'Content'	=>	$sMysql
+			'MysqlPage' => 1,
 		));
 	} else {
 		$sContent = preg_replace('/\r\n|\r|\n/', '', $sContent);
