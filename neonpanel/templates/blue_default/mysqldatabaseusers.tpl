@@ -63,11 +63,11 @@
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
 						<tr> 
-							<td>{%?database["name"]}</td>
+							<td>{%?database[name]}</td>
 							<td>
 								{%if isempty|database[users] == false}
 									{%foreach user in database[users]}
-										{%?database["name"]}<br>
+										{%?user}<br>
 									{%/foreach}
 								{%/if}
 							</td>
