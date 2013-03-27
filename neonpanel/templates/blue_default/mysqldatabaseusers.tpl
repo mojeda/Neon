@@ -50,15 +50,15 @@
 				{%/if}
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
-						<tr style="border-top:solid 1px #6699CC;">
-							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
+						<tr>
+							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if} style="border-top:solid 1px #6699CC;">{%?database[name]}</td>
 							{%if isempty|database[number] == true}
 								<td></td>
 							{%/if}
 						</tr>
 						{%if isempty|database[users] == false}
 							{%foreach user in database[users]}
-								<tr><td valign="top">
+								<tr><td valign="top" style="border-top:solid 1px #6699CC;">
 									<div height="15"><div style="width:100px;float:left;">{%?user}</div><div style="width:70px;float:right;text-align:right;"><a original-title="RemoveUser" class="icon-button tips RemoveUser" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?user}" id="{%?database[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a></div></div>
 								</td></tr>
 							{%/foreach}
