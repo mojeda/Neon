@@ -63,7 +63,7 @@
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
 						<tr> 
-							<td{%if isempty|database[number] == false}rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
+							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
 						</tr>
 						{%if isempty|database[users] == false}
 							{%foreach user in database[users]}
