@@ -70,8 +70,8 @@
 						</tr>
 						{%if isempty|database[users] == false}
 							{%foreach user in database[users]}
-								<tr><td>
-									<div><div style="width:200px;float:left;">{%?user}</div><div style="width:200px;float:right;text-align:right;"><a original-title="RemoveUser" class="icon-button tips RemoveUser" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?user}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a></div></div>
+								<tr><td valign="top">
+									<div height="15"><div style="width:200px;float:left;">{%?user}</div><div style="width:200px;float:right;text-align:right;"><a original-title="RemoveUser" class="icon-button tips RemoveUser" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?user}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a></div></div>
 								</td></tr>
 							{%/foreach}
 						{%/if}
