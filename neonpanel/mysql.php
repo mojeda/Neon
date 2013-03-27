@@ -90,9 +90,22 @@ if($LoggedIn === false){
 		));
 	} elseif($sView == databaseusers){
 		$sPageTitle = "Mysql Database Users";
+		$sDatabases = $database->CachedQuery("SHOW DATABASES", array(), 1);
+		$sDatabaseList = array();
+		foreach($sDatabases->data as $key => $value){
+			if(substr($value["Database"],0,$sUsernameLength) == $sUser->sUsername.'_'){
+				$sDatabaseUsers = $database->CachedQuery("SELECT User FROM mysql.db WHERE Db='{$svalue["Database"]}'", array(), 1);
+				foreach($sDatabaseUsers->data as $subkey => $subvalue){
+					$sUsers[] = $subvalue["User"];
+				}
+				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers);
+				unset($sUsers);
+			}
+		}
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
+			'DatabaseList' => $sDatabaseList,
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
