@@ -97,7 +97,7 @@ if($LoggedIn === false){
 				$sDatabaseUsers = $database->CachedQuery("SELECT User FROM mysql.db WHERE Db='{$svalue["Database"]}'", array(), 1);
 				if(is_array($sDatabaseUsers->data)){
 					foreach($sDatabaseUsers->data as $subkey => $subvalue){
-						$sUsers[] = $subvalue["User"];
+						$sUsers[] = array("user" => $subvalue["User"]);
 					}
 				}
 				$sDatabaseList[] = array("name" => $value["Database"], "users" => $sUsers);
