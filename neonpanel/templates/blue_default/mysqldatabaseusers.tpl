@@ -51,7 +51,7 @@
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
 						<tr>
-							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if} style="border-top:solid 1px #6699CC;">{%?database[name]}</td>
+							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
 							{%if isempty|database[number] == true}
 								<td></td>
 							{%/if}
@@ -64,7 +64,7 @@
 							{%/foreach}
 						{%/if}
 						<tr>
-							<td colspan="2" style="height:1px;background-color:#6699CC;"></td>
+							<td colspan="2" style="height:1px;background-color:#6699CC;overflow:hidden;"></td>
 						</tr>
 					{%/foreach}
 				{%/if}
