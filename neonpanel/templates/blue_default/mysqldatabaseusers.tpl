@@ -53,7 +53,7 @@
 						<tr>
 							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if} style="border-top:solid 1px #6699CC;">{%?database[name]}</td>
 							{%if isempty|database[number] == true}
-								<td></td>
+								<td style="border-top:solid 1px #6699CC;"></td>
 							{%/if}
 						</tr>
 						{%if isempty|database[users] == false}
