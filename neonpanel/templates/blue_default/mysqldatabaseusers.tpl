@@ -51,7 +51,7 @@
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
 						<tr>
-							<td colspan="2" style="height:1px;background-color:#99CCFF;overflow:hidden;margin:0;padding:0;"></td>
+							<td colspan="2" style="height:0px;background-color:#99CCFF;overflow:hidden;margin:0;padding:0;"></td>
 						</tr>
 						<tr>
 							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
