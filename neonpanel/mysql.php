@@ -55,11 +55,15 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == adduser){
-	
+		
 	}
 	
 	if($sAction == removeuser){
-	
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
+		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['database']);
+		if((substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_') && (substr($sMysqlDatabase,0,$sUsernameLength) == $sUser->sUsername.'_')){
+			$sRemoveUserDatabase =  $database->CachedQuery("REVOKE ALL ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost'", array(), 1);
+		}
 	}
 	
 	if($sView == databases){
@@ -109,10 +113,18 @@ if($LoggedIn === false){
 				unset($sNumber);
 			}
 		}
+		$sUsers = $database->CachedQuery("SELECT User from mysql.user", array(), 1);
+		$sUserList = array();
+		foreach($sUsers->data as $key => $value){
+			if(substr($value["User"],0,$sUsernameLength) == $sUser->sUsername.'_'){
+				$sUserList[] = $value["User"];
+			}
+		}
 		$sContent = Templater::AdvancedParse('/blue_default/mysqldatabaseusers', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'DatabaseList' => $sDatabaseList,
+			'UserList' => $sUserList,
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
