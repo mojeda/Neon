@@ -1,4 +1,4 @@
-<br><br><div align="center" class="MysqlDatabaseUsersHome">
+<br><br><div class="MysqlDatabaseUsersHome">
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#ConfirmRemove").click(function() {
@@ -97,9 +97,10 @@
 						<div class="clear"></div> 
 					</div>
 					<div class="st-form-line">	
-						<span class="st-labeltext">Privledges</span>	
-						<label class="margin-right10"><input type="checkbox" name="alter" id="alter" class="uniform" checked="checked"/> ALTER</label>
-						<label class="margin-right10"><input type="checkbox" name="alter" id="alter" class="uniform" checked="checked"/> ALTER</label>
+						<span class="st-labeltext">Privledges</span>
+						{%foreach permission in PermissionsList}
+							<label class="margin-right10"><input type="checkbox" name="{%?permission}" id="{%?permission}" class="uniform" checked="checked"/> {%?permission}</label>
+						{%/foreach}
 						<div class="clear"></div> 
 					</div>
 					<div class="button-box">

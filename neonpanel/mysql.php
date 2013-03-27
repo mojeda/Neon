@@ -20,9 +20,10 @@ if($LoggedIn === false){
 		die("Unfortunatly no view was selected, thus this page can not load.");
 	}
 	
-	// Multi-use variable.
+	// Multi-use variables.
 	$sUsernameLength = strlen($sUser->sUsername) + 1;
-	
+	$sPermissions = array("ALTER", "CREATE", "CREATE ROUTINE", "CREATE TEMPORARY TABLES", "CREATE VIEW", "DELETE", "DROP", "EXECUTE", "INDEX", "INSERT", "LOCK TABLES", "REFERENCES", "SELECT", "SHOW", "VIEW", "TRIGGER", "UPDATE");
+
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		if(!empty($sDatabaseName)){
@@ -125,6 +126,7 @@ if($LoggedIn === false){
 			'ErrorMessage'	=>	"",
 			'DatabaseList' => $sDatabaseList,
 			'UserList' => $sUserList,
+			'PermissionList' => $sPermissions;
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
