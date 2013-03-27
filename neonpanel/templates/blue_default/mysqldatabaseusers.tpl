@@ -50,7 +50,7 @@
 				{%/if}
 				{%if isempty|DatabaseList == false}
 					{%foreach database in DatabaseList}
-						<tr style="border-top:solid 1px #99CCFF;">
+						<tr style="border-top:solid 1px #6699CC;">
 							<td{%if isempty|database[number] == false} rowspan="{%?database[number]}"{%/if}>{%?database[name]}</td>
 							{%if isempty|database[number] == true}
 								<td></td>
