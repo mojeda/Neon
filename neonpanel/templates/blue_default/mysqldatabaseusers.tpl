@@ -65,9 +65,11 @@
 						<tr> 
 							<td>{%?database["name"]}</td>
 							<td>
-								{%foreach user in database}
-									{%?database["name"]}<br>
-								{%/foreach}
+								{%if isempty|database[users] == false}
+									{%foreach user in database[users]}
+										{%?database["name"]}<br>
+									{%/foreach}
+								{%/if}
 							</td>
 						</tr>
 					{%/foreach}
