@@ -98,9 +98,11 @@
 					</div>
 					<div class="st-form-line">	
 						<span class="st-labeltext">Privledges</span>
-						{%foreach permission in PermissionsList}
-							<label class="margin-right10"><input type="checkbox" name="{%?permission}" id="{%?permission}" class="uniform" checked="checked"/> {%?permission}</label>
-						{%/foreach}
+						<div align="center">
+							{%foreach permission in PermissionsList}
+								<label class="margin-right10"><input type="checkbox" name="{%?permission}" id="{%?permission}" class="uniform" checked="checked"/> {%?permission}</label><br>
+							{%/foreach}
+						</div>
 						<div class="clear"></div> 
 					</div>
 					<div class="button-box">
