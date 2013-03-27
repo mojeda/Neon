@@ -99,9 +99,42 @@
 					<div class="st-form-line">	
 						<span class="st-labeltext">Privledges</span>
 						<div align="center">
-							{%foreach permission in PermissionsList}
-								<label class="margin-right10"><input type="checkbox" name="{%?permission}" id="{%?permission}" class="uniform" checked="checked"/> {%?permission}</label><br>
-							{%/foreach}
+							<table width="90%">
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="ALTER" id="ALTER" class="uniform" checked="checked"/> ALTER</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="CREATE" id="CREATE" class="uniform" checked="checked"/> CREATE</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="CREATE ROUTINE" id="CREATE ROUTINE" class="uniform" checked="checked"/> CREATE ROUTINE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="CREATE TEMPORARY TABLES" id="CREATE TEMPORARY TABLES" class="uniform" checked="checked"/> CREATE TEMPORARY TABLES</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="CREATE VIEW" id="CREATE VIEW" class="uniform" checked="checked"/> CREATE VIEW</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="DELETE" id="DELETE" class="uniform" checked="checked"/> DELETE</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="DROP" id="DROP" class="uniform" checked="checked"/> DROP</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="EXECUTE" id="EXECUTE" class="uniform" checked="checked"/> EXECUTE</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="INDEX" id="INDEX" class="uniform" checked="checked"/> INDEX</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="INSERT" id="INSERT" class="uniform" checked="checked"/> INSERT</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="LOCK TABLES" id="LOCK TABLES" class="uniform" checked="checked"/> LOCK TABLES</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="REFERENCES" id="REFERENCES" class="uniform" checked="checked"/> REFERENCES</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="SELECT" id="SELECT" class="uniform" checked="checked"/> SELECT</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="SHOW" id="SHOW" class="uniform" checked="checked"/> SHOW</label></td>
+								</tr>
+								<tr>
+									<td><label class="margin-right10"><input type="checkbox" name="VIEW" id="VIEW" class="uniform" checked="checked"/> VIEW</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="TRIGGER" id="TRIGGER" class="uniform" checked="checked"/> TRIGGER</label></td>
+								<tr>
+									<td colspan="2"><div align="center"><label class="margin-right10"><input type="checkbox" name="UPDATE" id="UPDATE" class="uniform" checked="checked"/> UPDATE</label></td>
+								</tr>
+							</table>
 						</div>
 						<div class="clear"></div> 
 					</div>

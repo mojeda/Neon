@@ -22,8 +22,7 @@ if($LoggedIn === false){
 	
 	// Multi-use variables.
 	$sUsernameLength = strlen($sUser->sUsername) + 1;
-	$sPermissions = array("ALTER", "CREATE", "CREATE ROUTINE", "CREATE TEMPORARY TABLES", "CREATE VIEW", "DELETE", "DROP", "EXECUTE", "INDEX", "INSERT", "LOCK TABLES", "REFERENCES", "SELECT", "SHOW", "VIEW", "TRIGGER", "UPDATE");
-
+	
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		if(!empty($sDatabaseName)){
@@ -125,8 +124,7 @@ if($LoggedIn === false){
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'DatabaseList' => $sDatabaseList,
-			'UserList' => $sUserList,
-			'PermissionsList' => $sPermissions
+			'UserList' => $sUserList
 		));
 	} elseif($sView == wizard){
 		$sPageTitle = "Mysql Database Wizard";
