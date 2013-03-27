@@ -147,7 +147,7 @@ if($LoggedIn === false){
 			'PageTitle'  => $sPageTitle,
 			'PageName'	=>	$sView,
 			'ErrorMessage'	=>	"",
-			'Content'	=>	$sMysql
+			'Content'	=>	$sMysql,
 			'MysqlPage' => 1,
 		));
 	} else {
