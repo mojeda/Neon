@@ -64,7 +64,7 @@
 							{%/foreach}
 						{%/if}
 						<tr>
-							<td colspan="2" style="height:1px;background-color:#6699CC;overflow:hidden;"></td>
+							<td colspan="2" style="height:1px;background-color:#99CCFF;overflow:hidden;margin:0;padding:0;"></td>
 						</tr>
 					{%/foreach}
 				{%/if}
