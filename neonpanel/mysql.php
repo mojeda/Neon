@@ -92,7 +92,7 @@ if($LoggedIn === false){
 			$sRandomPassword = random_string(25);
 			$sCreateDatabase = $database->CachedQuery("CREATE DATABASE {$sMysqlDatabase}", array(), 1);
 			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sRandomPassword}';FLUSH PRIVILEGES;", array(), 1);
-			foreach($sPermissions as $key => $value){
+			foreach($sPermissionsList as $key => $value){
 				if(!empty($sFirst)){
 					$sGrantQuery .= ", ";
 				}
