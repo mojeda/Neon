@@ -104,7 +104,7 @@
 						<div align="center">
 							<table width="90%">
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" value="ALTER" class="uniform" checked="checked"/> ALTER</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" value="ALTER TABLE" class="uniform" checked="checked"/> ALTER</label></td>
 									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" value="CREATE" class="uniform" checked="checked"/> CREATE</label></td>
 								</tr>
 								<tr>
