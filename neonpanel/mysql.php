@@ -69,7 +69,7 @@ if($LoggedIn === false){
 				$sFirst = 1;
 			}
 		}
-		$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost';FLUSH PRIVILEGES;", array(), 1);
+		$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO '{$sMysqlUsername}'@'localhost';FLUSH PRIVILEGES;", array(), 1);
 	}
 	
 	if($sAction == removeuser){
@@ -80,6 +80,27 @@ if($LoggedIn === false){
 				$sRemoveUserDatabase =  $database->CachedQuery("REVOKE {$value} ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost';", array(), 1);
 			}
 			$sRemoveUserFinish = $database->CachedQuery("DELETE FROM mysql.db WHERE `Db` = '{$sMysqlDatabase}' && `User` = '{$sMysqlUsername}';FLUSH PRIVILEGES;", array(), 1);
+		}
+	}
+	
+	if($sAction == wizard){
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['name']);
+		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['database']);
+		if((!empty($sMysqlUsername)) && (!empty($sMysqlDatabase)){
+			$sMysqlDatabase = $sUser->sUsername."_".$sMysqlDatabase;
+			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
+			$sRandomPassword = random_string(25);
+			$sCreateDatabase = $database->CachedQuery("CREATE DATABASE {$sMysqlDatabase}", array(), 1);
+			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sRandomPassword}';FLUSH PRIVILEGES;", array(), 1);
+			foreach($sPermissions as $key => $value){
+				if(!empty($sFirst)){
+					$sGrantQuery .= ", ";
+				}
+				$sGrantQuery .= $value;
+				$sFirst = 1;
+			}
+			$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO '{$sMysqlUsername}'@'localhost';FLUSH PRIVILEGES;", array(), 1);
+			$sDatabaseReturn[] = array("databasename" => $sMysqlDatabase, "databaseuser" => $sMysqlUsername, "databasepassword" => $sRandomPassword);
 		}
 	}
 	
@@ -149,6 +170,7 @@ if($LoggedIn === false){
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
 			'WizardClosed' => $sUser->sWizardClosed,
+			'DatabaseReturn' => $sDatabaseReturn
 		));
 	} else {
 		die("Unfortunatly no view was selected, thus this page can not load.");
