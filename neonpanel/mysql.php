@@ -58,8 +58,8 @@ if($LoggedIn === false){
 	if($sAction == adduser){
 		$sPermissions = $_POST['permissions'];
 		$sTotalPermissions = count($sPermissions);
-		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqluser']);
-		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqldatabase']);
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqluser']);
+		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqldatabase']);
 		if($sTotalPermissions == 17){
 			$sAddUserToDatabase = $database->CachedQuery("GRANT ALL ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
 		} elseif($sTotalPermissions > 0) {
