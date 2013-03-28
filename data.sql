@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `max_list_files` int(8) NOT NULL DEFAULT '-1',
   `save_sort_files` int(2) NOT NULL DEFAULT '0',
   `default_editor` varchar(65) NOT NULL DEFAULT 'default',
+  `wizard_closed` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
@@ -18,8 +19,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`username`, `email`, `active`, `activation_code`, `plan`, `initial_setup`, `stats_email`, `welcome_closed`, `max_list_files`, `save_sort_files`, `default_editor`) VALUES
-('root', 'admin@localhost', 1, '', 1, 0, 0, 0, '10', 0, 'default');
+INSERT INTO `accounts` (`username`, `email`, `active`, `activation_code`, `plan`, `initial_setup`, `stats_email`, `welcome_closed`, `max_list_files`, `save_sort_files`, `default_editor`, `wizard_closed`) VALUES
+('root', 'admin@localhost', 1, '', 1, 0, 0, 0, '10', 0, 'default', 0);
 
 -- --------------------------------------------------------
 

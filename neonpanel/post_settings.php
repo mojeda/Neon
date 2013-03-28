@@ -39,6 +39,9 @@ if($LoggedIn === false){
 	} elseif($_GET['id'] == WelcomeClosed){
 		$sUser->uWelcomeClosed = 1;
 		$sUser->InsertIntoDatabase();
+	} elseif($_GET['id'] == WizardClosed){
+		$sUser->uWizardClosed = 1;
+		$sUser->InsertIntoDatabase();
 	} elseif($_GET['id'] == DefaultEditorTheme){
 		$sUser->uDefaultEditorTheme = $_POST['theme'];
 		$sUser->InsertIntoDatabase();

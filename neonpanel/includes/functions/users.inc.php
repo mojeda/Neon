@@ -24,6 +24,7 @@ class User extends CPHPDatabaseRecordClass {
 			'Active' 	=> "active",
 			'InitialSetup'	=>	"initial_setup",
 			'WelcomeClosed'	=>	"welcome_closed",
+			'WizardClosed' => "wizard_closed",
 		)
 	);
 	

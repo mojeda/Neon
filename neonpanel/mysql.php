@@ -148,6 +148,7 @@ if($LoggedIn === false){
 		$sContent = Templater::AdvancedParse('/blue_default/mysqlwizard', $locale->strings, array(
 			'PanelTitle'  => $sPanelTitle->sValue,
 			'ErrorMessage'	=>	"",
+			'WizardClosed' => $sUser->sWizardClosed,
 		));
 	} else {
 		die("Unfortunatly no view was selected, thus this page can not load.");
