@@ -84,8 +84,8 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == wizard){
-		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['name']);
-		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['database']);
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqluser']);
+		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqldatabase']);
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlDatabase))){
 			$sMysqlDatabase = $sUser->sUsername."_".$sMysqlDatabase;
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
