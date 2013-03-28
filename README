@@ -1,5 +1,5 @@
 =====================================
-NEON README UPDATED: DEC 2012
+NEON README UPDATED: MARCH 2013
 =====================================
 Neon is a project which is still
 in development. The intent of neon
@@ -19,8 +19,20 @@ any configuration you have, delete files and
 folders you may need and may without jusification
 destroy anything and everything on your server.
 
-As such please only install neon on a blank server/vps.
+As such please only install neon on a blank server/vps with Debian 6.
 
 Copy & paste this command into SSH:
 
 cd ~ && wget --no-check-certificate https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh && chmod 777 neon-installer.sh && ./neon-installer.sh
+
+==========================================
+KNOWN BUGS
+==========================================
+- Upon deleting a user from a database on /mysql.php?view=databaseusers the system will loose styling (visually) for the drop downs. No known solution yet found, does not impact usability or application performance.
+
+==========================================
+SUPPORT & HELP
+==========================================
+If you reqire help it is provided via our IRC channel: irc.obsidianirc.net #neon
+
+Support is provided on a "first come first serve" basis and is not guarenteed.
