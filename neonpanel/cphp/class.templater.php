@@ -1092,10 +1092,11 @@ class TemplateInput extends TemplateStandaloneElement
 		$this->parent = $parent;
 		
 		$type = "text";
-		$value = "";
+		$val = "";
 		$group = "general";
 		$name = null;
 		$additional_list = array();
+		$id = "";
 		
 		$argument_list = implode(" ", $this->tokens);
 		$argument_list = $this->ReplaceInlineVariables($argument_list, $data);
@@ -1109,9 +1110,6 @@ class TemplateInput extends TemplateStandaloneElement
 					case "name":
 						$name = $argument[2];
 						break;
-					case "value":
-						$value = $argument[2];
-						break;
 					case "group":
 						$group = $argument[2];
 						break;
@@ -1122,7 +1120,10 @@ class TemplateInput extends TemplateStandaloneElement
 						$type = $argument[2];
 						break;
 					case "value":
-						$value = $argument[2];
+						$val = $argument[2];
+						break;
+					case "id":
+						$id = $argument[2];
 						break;
 					default:
 						$additional_list[$argument[1]] = $argument[2];
@@ -1137,9 +1138,14 @@ class TemplateInput extends TemplateStandaloneElement
 		
 		if(isset($_POST[$name]))
 		{
-			$value = str_replace('"', '\"', htmlspecialchars($_POST[$name]));
+			$val = str_replace('"', '\"', htmlspecialchars($_POST[$name]));
 		}
-				
+		
+		if(empty($id))
+		{
+			$id = "form_{$group}_{$name}";
+		}
+		
 		$final_list = array();
 		
 		foreach($additional_list as $key => $value)
@@ -1149,7 +1155,7 @@ class TemplateInput extends TemplateStandaloneElement
 		
 		$additional = implode(" ", $final_list);
 		
-		return "<input type=\"{$type}\" id=\"form_{$group}_{$name}\" name=\"{$name}\" value=\"{$value}\" {$additional}>";
+		return "<input type=\"{$type}\" id=\"{$id}\" name=\"{$name}\" value=\"{$val}\" {$additional}>";
 	}
 }
 
@@ -1187,6 +1193,7 @@ class TemplateSelect extends TemplateBlockElement
 		$additional_list = array();
 		$group = "general";
 		$name = "";
+		$id = "";
 		
 		if(preg_match_all('/([a-zA-Z0-9-]+)="([^"]+)"/', $argument_list, $matches, PREG_SET_ORDER))
 		{
@@ -1200,6 +1207,9 @@ class TemplateSelect extends TemplateBlockElement
 					case "name":
 						$name = $argument[2];
 						break;
+					case "id":
+						$id = $argument[2];
+						break;
 					default:
 						$additional_list[$argument[1]] = $argument[2];
 				}
@@ -1211,11 +1221,16 @@ class TemplateSelect extends TemplateBlockElement
 			throw new TemplateEvaluationException("No name was specified for a select element.");
 		}
 		
+		if(empty($id))
+		{
+			$id = "form_{$group}_{$name}";
+		}
+		
 		$this->name = $name;
 		
 		$final_list = array(
 			"name=\"{$name}\"",
-			"id=\"form_{$group}_{$name}\""
+			"id=\"{$id}\""
 		);
 		
 		foreach($additional_list as $key => $value)

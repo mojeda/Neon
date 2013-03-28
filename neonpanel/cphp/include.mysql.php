@@ -22,36 +22,15 @@ if(!empty($cphp_config->database->driver))
 		die("No database was configured. Refer to the CPHP manual for instructions.");
 	}
 	
-	if(empty($cphp_config->database->pdo))
+	try
 	{
-		if(mysql_connect($cphp_config->database->hostname, $cphp_config->database->username, $cphp_config->database->password))
-		{
-			if(mysql_select_db($cphp_config->database->database))
-			{
-				$cphp_mysql_connected = true;
-			}
-			else
-			{
-				die("Could not connect to the specified database. Refer to the CPHP manual for instructions.");
-			}
-		}
-		else
-		{
-			die("Could not connect to the specified database server. Refer to the CPHP manual for instructions.");
-		}
+		$database = new CachedPDO("mysql:host={$cphp_config->database->hostname};dbname={$cphp_config->database->database}", $cphp_config->database->username, $cphp_config->database->password);
+		$database->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
+		$cphp_mysql_connected = true;
 	}
-	else
+	catch (Exception $e)
 	{
-		try
-		{
-			$database = new CachedPDO("mysql:host={$cphp_config->database->hostname};dbname={$cphp_config->database->database}", $cphp_config->database->username, $cphp_config->database->password);
-			$database->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_TO_STRING);
-			$cphp_mysql_connected = true;
-		}
-		catch (Exception $e)
-		{
-			die("Could not connect to the specified database. Refer to the CPHP manual for instructions.");
-		}
+		die("Could not connect to the specified database. Refer to the CPHP manual for instructions.");
 	}
 }
 
@@ -59,6 +38,9 @@ class CachedPDO extends PDO
 {
 	public function CachedQuery($query, $parameters = array(), $expiry = 60)
 	{
+		/* TODO: Do type guessing before checking cache, so as to avoid
+		 *       different parameter hashes depending on input type for
+		 *       numbers. */
 		$query_hash = md5($query);
 		$parameter_hash = md5(serialize($parameters));
 		$cache_hash = $query_hash . $parameter_hash;
@@ -80,12 +62,17 @@ class CachedPDO extends PDO
 				{
 					$type = $this->GuessType($value);
 					
-					if(is_numeric($value) && $type == PDO::PARAM_STR)
+					if(preg_match("/^[0-9]+$/", $value) && $type == PDO::PARAM_STR)
 					{
 						/* PDO library apparently thinks it's part of a strongly typed language and doesn't do any typecasting.
 						 * We'll do it ourselves then. */
 						 $value = (int) $value;
 						 $type = PDO::PARAM_INT;
+					}
+					
+					if($type == PDO::PARAM_STR)
+					{
+						$value = strval($value);
 					}
 					
 					$statement->bindValue($key, $value, $type);
@@ -124,7 +111,7 @@ class CachedPDO extends PDO
 				throw new DatabaseException("The query failed.", 0, null, array('query' => $query, 'parameters' => $parameters));
 			}
 		}
-			
+		
 		return $return_object;
 	}
 	
