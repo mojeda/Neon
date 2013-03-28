@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include('./includes/loader.php');
 
 if($LoggedIn === false){
