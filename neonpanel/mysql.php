@@ -86,7 +86,7 @@ if($LoggedIn === false){
 	if($sAction == wizard){
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['name']);
 		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['database']);
-		if((!empty($sMysqlUsername)) && (!empty($sMysqlDatabase)){
+		if((!empty($sMysqlUsername)) && (!empty($sMysqlDatabase))){
 			$sMysqlDatabase = $sUser->sUsername."_".$sMysqlDatabase;
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
 			$sRandomPassword = random_string(25);
