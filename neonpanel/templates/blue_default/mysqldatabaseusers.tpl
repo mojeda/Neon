@@ -104,38 +104,38 @@
 						<div align="center">
 							<table width="90%">
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="ALTER" id="ALTER" class="uniform" checked="checked"/> ALTER</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="CREATE" id="CREATE" class="uniform" checked="checked"/> CREATE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="ALTER" class="uniform" checked="checked"/> ALTER</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="CREATE" class="uniform" checked="checked"/> CREATE</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="CREATE ROUTINE" id="CREATE ROUTINE" class="uniform" checked="checked"/> CREATE ROUTINE</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="CREATE TEMPORARY TABLES" id="CREATE TEMPORARY TABLES" class="uniform" checked="checked"/> CREATE TEMPORARY TABLES</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="CREATE ROUTINE" class="uniform" checked="checked"/> CREATE ROUTINE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="CREATE TEMPORARY TABLES" class="uniform" checked="checked"/> CREATE TEMPORARY TABLES</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="CREATE VIEW" id="CREATE VIEW" class="uniform" checked="checked"/> CREATE VIEW</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="DELETE" id="DELETE" class="uniform" checked="checked"/> DELETE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="CREATE VIEW" class="uniform" checked="checked"/> CREATE VIEW</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="DELETE" class="uniform" checked="checked"/> DELETE</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="DROP" id="DROP" class="uniform" checked="checked"/> DROP</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="EXECUTE" id="EXECUTE" class="uniform" checked="checked"/> EXECUTE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="DROP" class="uniform" checked="checked"/> DROP</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="EXECUTE" class="uniform" checked="checked"/> EXECUTE</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="INDEX" id="INDEX" class="uniform" checked="checked"/> INDEX</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="INSERT" id="INSERT" class="uniform" checked="checked"/> INSERT</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="INDEX" class="uniform" checked="checked"/> INDEX</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="INSERT" class="uniform" checked="checked"/> INSERT</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="LOCK TABLES" id="LOCK TABLES" class="uniform" checked="checked"/> LOCK TABLES</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="REFERENCES" id="REFERENCES" class="uniform" checked="checked"/> REFERENCES</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="LOCK TABLES" class="uniform" checked="checked"/> LOCK TABLES</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="REFERENCES" class="uniform" checked="checked"/> REFERENCES</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="SELECT" id="SELECT" class="uniform" checked="checked"/> SELECT</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="SHOW" id="SHOW" class="uniform" checked="checked"/> SHOW</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="SELECT" class="uniform" checked="checked"/> SELECT</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="SHOW" class="uniform" checked="checked"/> SHOW</label></td>
 								</tr>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="VIEW" id="VIEW" class="uniform" checked="checked"/> VIEW</label></td>
-									<td><label class="margin-right10"><input type="checkbox" name="TRIGGER" id="TRIGGER" class="uniform" checked="checked"/> TRIGGER</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="VIEW" class="uniform" checked="checked"/> VIEW</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="TRIGGER" class="uniform" checked="checked"/> TRIGGER</label></td>
 								<tr>
-									<td><label class="margin-right10"><input type="checkbox" name="UPDATE" id="UPDATE" class="uniform" checked="checked"/> UPDATE</label></td>
+									<td><label class="margin-right10"><input type="checkbox" name="permissions[]" id="UPDATE" class="uniform" checked="checked"/> UPDATE</label></td>
 									<td></td>
 								</tr>
 							</table>
