@@ -41,7 +41,7 @@ if($LoggedIn === false){
 	
 	if($sAction == createuser){
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
-		$sMysqlPassword = mysql_real_escape_string($_GET['password']);
+		$sMysqlPassword = mysql_escape_string($_GET['password']);
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlPassword))){
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
 			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sMysqlPassword}';FLUSH PRIVILEGES;", array(), 1);
