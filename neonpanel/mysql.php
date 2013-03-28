@@ -22,7 +22,7 @@ if($LoggedIn === false){
 	
 	// Multi-use variables.
 	$sUsernameLength = strlen($sUser->sUsername) + 1;
-	$sPermissionsList = array("ALTER", "CREATE VIEW", "CREATE", "DELETE", "DROP", "INDEX", "INSERT", "SELECT", "SHOW VIEW", "TRIGGER", "UPDATE");
+	$sPermissionsList = array("ALTER", "CREATE VIEW", "CREATE", "DELETE", "DROP", "INDEX", "INSERT", "SELECT", "SHOW VIEW", "TRIGGER", "UPDATE", "USAGE");
 		
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
