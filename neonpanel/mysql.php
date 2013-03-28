@@ -60,23 +60,25 @@ if($LoggedIn === false){
 		$sTotalPermissions = count($sPermissions);
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqluser']);
 		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_POST['mysqldatabase']);
-		if($sTotalPermissions == 11){
-			$sAddUserToDatabase = $database->CachedQuery("GRANT ALL ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
-		} elseif($sTotalPermissions > 0) {
-			foreach($sPermissions as $key => $value){
-				if (in_array($value, $sPermissionsList)) {
-					$sGrantQuery .= $value.", ";
+		foreach($sPermissions as $key => $value){
+			if (in_array($value, $sPermissionsList)) {
+				if(!empty($sFirst)){
+					$sGrantQuery .= ", ";
 				}
+				$sGrantQuery .= $value;
+				$sFirst = 1;
 			}
-			$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
 		}
+		$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
 	}
 	
 	if($sAction == removeuser){
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
 		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['database']);
 		if((substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_') && (substr($sMysqlDatabase,0,$sUsernameLength) == $sUser->sUsername.'_')){
-			$sRemoveUserDatabase =  $database->CachedQuery("REVOKE ALL ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost'", array(), 1);
+			foreach($sPermissionsList as $key => $value){
+				$sRemoveUserDatabase =  $database->CachedQuery("REVOKE {$value} ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost'", array(), 1);
+			}
 		}
 	}
 	
