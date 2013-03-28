@@ -55,7 +55,7 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == adduser){
-		pretty_dump($_GET['permissions']);
+		pretty_dump($_POST['permissions']);
 	}
 	
 	if($sAction == removeuser){
