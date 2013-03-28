@@ -65,7 +65,7 @@ if($LoggedIn === false){
 		} elseif($sTotalPermissions > 0) {
 			foreach($sPermissions as $key => $value){
 				if (in_array($value, $sPermissionList)) {
-					$sGrantQuery .= $value", "
+					$sGrantQuery .= $value", ";
 				}
 			}
 			$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
