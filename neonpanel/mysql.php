@@ -60,11 +60,11 @@ if($LoggedIn === false){
 		$sTotalPermissions = count($sPermissions);
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqluser']);
 		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqldatabase']);
-		if($sTotalPermissions == 16){
+		if($sTotalPermissions == 17){
 			$sAddUserToDatabase = $database->CachedQuery("GRANT ALL ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
 		} elseif($sTotalPermissions > 0) {
 			foreach($sPermissions as $key => $value){
-				if (in_array($value, $sPermissionList)) {
+				if (in_array($value, $sPermissionsList)) {
 					$sGrantQuery .= $value.", ";
 				}
 			}
