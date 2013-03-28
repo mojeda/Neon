@@ -9,22 +9,24 @@
 	</script>
 {%/if}
 <div align="center" class="Wizard">
-	{%if WizardClosed == false}
-		<div style="z-index: 140;padding-top:10px;" class="simplebox grid740" id="Welcome">
-			<div style="z-index: 130;" class="titleh">
-				<div align="left"><h3>MYSQL Wizard Welcome</h3></div>
-				<div style="z-index: 120;" class="shortcuts-icons">
-					<a class="shortcut tips" href="#">
-						<img src="templates/blue_default/img/icons/shortcut/close.png" alt="icon" height="25" width="25" id="RemoveWelcome">
-					</a>
+	{%if isset|DatabaseReturn == false}
+		{%if WizardClosed == false}
+			<div style="z-index: 140;padding-top:10px;" class="simplebox grid740" id="Welcome">
+				<div style="z-index: 130;" class="titleh">
+					<div align="left"><h3>MYSQL Wizard Welcome</h3></div>
+					<div style="z-index: 120;" class="shortcuts-icons">
+						<a class="shortcut tips" href="#">
+							<img src="templates/blue_default/img/icons/shortcut/close.png" alt="icon" height="25" width="25" id="RemoveWelcome">
+						</a>
+					</div>
+				</div>
+				<div style="z-index: 110;padding:5px 5px 5px 5px;" class="body" align="left">
+					<br>
+					The MYSQL Wizard is intended to quickly generate matching databases and users with a random password. As an example if you enter "test" in both boxes bellow it will create a database and a user titled: {%?Username}_test with a randomly generated password. The user is given all permissions to the database. Be sure that you keep the password in a safe place, NEON will not remember it.
+					<br><br>
 				</div>
 			</div>
-			<div style="z-index: 110;padding:5px 5px 5px 5px;" class="body" align="left">
-				<br>
-				The MYSQL Wizard is intended to quickly generate matching databases and users with a random password. As an example if you enter "test" in both boxes bellow it will create a database and a user titled: {%?Username}_test with a randomly generated password. The user is given all permissions to the database. Be sure that you keep the password in a safe place, NEON will not remember it.
-				<br><br>
-			</div>
-		</div>
+		{%/if}
 	{%/if}
 	{%if isset|DatabaseReturn == true}
 		{%foreach return in DatabaseReturn}
@@ -34,7 +36,7 @@
 					<div style="z-index: 120;" class="shortcuts-icons"></div>
 				</div>
 				<div style="z-index: 110;padding:5px 5px 5px 5px;" class="body" align="left">
-					<br>
+					<br><strong>PLEASE SAVE THESE DETAILS AS NEON WILL NOT REMEMBER THEM!</strong><br><br>
 					Database: {%?return[databasename]}<br>
 					User: {%?return[databaseuser]}<br>
 					Password: {%?return[databasepassword]}<br>
