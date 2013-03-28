@@ -44,14 +44,14 @@ if($LoggedIn === false){
 		$sMysqlPassword = mysql_real_escape_string($_GET['password']);
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlPassword))){
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
-			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sMysqlPassword}'", array(), 1);
+			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sMysqlPassword}';FLUSH PRIVILEGES;", array(), 1);
 		}
 	}
 	
 	if($sAction == deleteuser){
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
 		if(substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_'){
-			$sDeleteUser = $database->CachedQuery("DROP USER '{$sMysqlUsername}'@'localhost'", array(), 1);
+			$sDeleteUser = $database->CachedQuery("DROP USER '{$sMysqlUsername}'@'localhost';FLUSH PRIVILEGES;", array(), 1);
 		}
 	}
 	
@@ -69,7 +69,7 @@ if($LoggedIn === false){
 				$sFirst = 1;
 			}
 		}
-		$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
+		$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost';FLUSH PRIVILEGES;", array(), 1);
 	}
 	
 	if($sAction == removeuser){
@@ -77,8 +77,9 @@ if($LoggedIn === false){
 		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['database']);
 		if((substr($sMysqlUsername,0,$sUsernameLength) == $sUser->sUsername.'_') && (substr($sMysqlDatabase,0,$sUsernameLength) == $sUser->sUsername.'_')){
 			foreach($sPermissionsList as $key => $value){
-				$sRemoveUserDatabase =  $database->CachedQuery("REVOKE {$value} ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost'", array(), 1);
+				$sRemoveUserDatabase =  $database->CachedQuery("REVOKE {$value} ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost';", array(), 1);
 			}
+			$sRemoveUserFinish = $database->CachedQuery("DELETE FROM mysql.db WHERE `Db` = {$sMysqlDatabase} && `User` = {$sMysqlUsername};FLUSH PRIVILEGES;", array(), 1);
 		}
 	}
 	
