@@ -22,7 +22,8 @@ if($LoggedIn === false){
 	
 	// Multi-use variables.
 	$sUsernameLength = strlen($sUser->sUsername) + 1;
-	
+	$sPermissionsList = array("ALTER", "CREATE", "CREATE ROUTINE", "CREATE TEMPORARY TABLES", "CREATE VIEW", "DELETE", "DROP", "EXECUTE", "INDEX", "INSERT", "LOCK TABLES", "REFERENCES", "SELECT", "SHOW", "VIEW", "TRIGGER", "UPDATE");
+		
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
 		if(!empty($sDatabaseName)){
@@ -40,7 +41,7 @@ if($LoggedIn === false){
 	
 	if($sAction == createuser){
 		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['name']);
-		$sMysqlPassword = $_GET['password'];
+		$sMysqlPassword = mysql_real_escape_string($_GET['password']);
 		if((!empty($sMysqlUsername)) && (!empty($sMysqlPassword))){
 			$sMysqlUsername = $sUser->sUsername."_".$sMysqlUsername;
 			$sCreateUser = $database->CachedQuery("CREATE USER '{$sMysqlUsername}'@'localhost' IDENTIFIED BY '{$sMysqlPassword}'", array(), 1);
@@ -55,7 +56,20 @@ if($LoggedIn === false){
 	}
 	
 	if($sAction == adduser){
-		pretty_dump($_POST['permissions']);
+		$sPermissions = $_POST['permissions'];
+		$sTotalPermissions = count($sPermissions);
+		$sMysqlUsername = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqluser']);
+		$sMysqlDatabase = preg_replace("/[^a-z0-9_.]+/i", "", $_GET['mysqldatabase']);
+		if($sTotalPermissions == 16){
+			$sAddUserToDatabase = $database->CachedQuery("GRANT ALL ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
+		} elseif($sTotalPermissions > 0) {
+			foreach($sPermissions as $key => $value){
+				if (in_array($value, $sPermissionList)) {
+					$sGrantQuery .= $value", "
+				}
+			}
+			$sAddUserToDatabase = $database->CachedQuery("GRANT {$sGrantQuery} ON {$sMysqlDatabase}.* TO {$sMysqlUsername}@'localhost'", array(), 1);
+		}
 	}
 	
 	if($sAction == removeuser){
