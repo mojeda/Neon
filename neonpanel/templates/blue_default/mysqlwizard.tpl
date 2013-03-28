@@ -21,7 +21,7 @@
         <div style="z-index: 110;padding:5px 5px 5px 5px;" class="body" align="left">
 			<br>
 			The MYSQL Wizard is intended to quickly generate matching databases and users with a random password. As an example if you enter "test" bellow it will create a database and a user titled: {%?Username}_test with a randomly generated password. The user is given all permissions to the database.
-			<br>
+			<br><br>
 		</div>
     </div>
 {%/if}
