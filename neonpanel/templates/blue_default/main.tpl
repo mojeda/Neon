@@ -44,15 +44,16 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
+          ['60',  1000,      400],
+          ['30',  1170,      460],
+          ['15',  660,       1120],
+          ['5',  1030,      540],
+		  ['1',	1, 1]
         ]);
 
         var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: 'red'}}
+          title: '',
+          hAxis: {title: 'Minutes'}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
