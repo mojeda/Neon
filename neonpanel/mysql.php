@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 include('./includes/loader.php');
 
 if($LoggedIn === false){
@@ -23,7 +22,7 @@ if($LoggedIn === false){
 	
 	// Multi-use variables.
 	$sUsernameLength = strlen($sUser->sUsername) + 1;
-	$sPermissionsList = array("ALTER", "CREATE VIEW", "CREATE", "DELETE", "DROP", "INDEX", "INSERT", "SELECT", "SHOW VIEW", "TRIGGER", "UPDATE", "USAGE");
+	$sPermissionsList = array("ALTER", "CREATE VIEW", "CREATE", "DELETE", "DROP", "INDEX", "INSERT", "SELECT", "SHOW VIEW", "TRIGGER", "UPDATE");
 		
 	if($sAction == createdatabase){
 		$sDatabaseName = preg_replace("/[^a-z0-9.]+/i", "", $_GET['name']);
@@ -80,7 +79,7 @@ if($LoggedIn === false){
 			foreach($sPermissionsList as $key => $value){
 				$sRemoveUserDatabase =  $database->CachedQuery("REVOKE {$value} ON {$sMysqlDatabase}.* FROM '{$sMysqlUsername}'@'localhost';", array(), 1);
 			}
-			$sRemoveUserFinish = $database->CachedQuery("DELETE FROM mysql.db WHERE `Db` = {$sMysqlDatabase} && `User` = {$sMysqlUsername};FLUSH PRIVILEGES;", array(), 1);
+			$sRemoveUserFinish = $database->CachedQuery("DELETE FROM mysql.db WHERE `Db` = '{$sMysqlDatabase}' && `User` = '{$sMysqlUsername}';FLUSH PRIVILEGES;", array(), 1);
 		}
 	}
 	
