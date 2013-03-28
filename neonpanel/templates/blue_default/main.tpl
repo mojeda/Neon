@@ -38,5 +38,32 @@
         </div>
     </div>
 {%/if}
-->Graph of Usage<-
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+	<div class="grid740">
+		<div class="simplebox">
+			<div class="titleh"><h3>System RAM Usage</h3></div>
+				<div class="body padding10"><div id="chart_div" style="width: 740px; height: 300px;"></div></div>
+			</div>
+		</div>
+	</div>
 </div>
