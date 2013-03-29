@@ -43,7 +43,7 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
+          ['Year', 'Free', 'Total'],
           ['60',  1000,      400],
           ['30',  1170,      460],
           ['15',  660,       1120],
