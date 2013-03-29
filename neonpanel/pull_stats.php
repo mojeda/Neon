@@ -38,4 +38,4 @@ $sStat->InsertIntoDatabase();
 
 $sOld = time() - (60 * 60 * 24);
 
-$sStatsTable = $database->CachedQuery("DELTE FROM stats WHERE timestamp < '{$sOld}'", array(), 1);
+$sStatsTable = $database->CachedQuery("DELETE FROM stats WHERE timestamp < '{$sOld}'", array(), 1);
