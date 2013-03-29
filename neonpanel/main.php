@@ -49,7 +49,7 @@ include('./includes/loader.php');
 		'Username'	=>	$sUser->sUsername,
 		'InitialSetup'	=>	$sUser->sInitialSetup,
 		'WelcomeClosed'	=>	$sUser->sWelcomeClosed,
-		'InitialSetupContent'	=>	$sInitialSetupContent
+		'InitialSetupContent'	=>	$sInitialSetupContent,
 		'Load' => $sLoad,
 		'RAM' => $sRAMUsage,
 		));
