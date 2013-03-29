@@ -44,11 +44,9 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Year', 'Free', 'Total'],
-          ['60',  1000,      400],
-          ['30',  1170,      460],
-          ['15',  660,       1120],
-          ['5',  1030,      540],
-		  ['1',	1, 1]
+		  {%foreach entry in RAM}
+			['{%?entry[name]}', {%?entry[used]}, {%?entry[total]}],
+		  {%/foreach}
         ]);
 
         var options = {

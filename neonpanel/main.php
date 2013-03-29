@@ -19,6 +19,30 @@ include('./includes/loader.php');
 		} else {
 			$sInitialSetupContent = "";
 		}
+		
+		$sUsedMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='used_memory' LIMIT 60 ORDER BY id DESC", array(), 1);
+		foreach($sUsedMemory->data as $key => $value){
+			$sUsed[] = $value["result"];
+		}
+		$sTotalMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='total_memory' LIMIT 60 ORDER BY id DESC", array(), 1);
+		foreach($sTotalMemory->data as $key => $value){
+			$sTotal[] = $value["result"];
+		}
+		$sRAMUsage[] = array("name" => "60", "Used" => $sUsed[59], "Total" => $sTotal[59]);
+		$sRAMUsage[] = array("name" => "30", "Used" => $sUsed[29], "Total" => $sTotal[29]);
+		$sRAMUsage[] = array("name" => "15", "Used" => $sUsed[14], "Total" => $sTotal[14]);
+		$sRAMUsage[] = array("name" => "5", "Used" => $sUsed[4], "Total" => $sTotal[4]);
+		$sRAMUsage[] = array("name" => "1", "Used" => $sUsed[0], "Total" => $sTotal[0]);
+		$sLoadAverage = $database->CachedQuery("SELECT * FROM stats WHERE type='load' LIMIT 60 ORDER BY id DESC", array(), 1);
+		foreach($sLoadAverage->data as $key => $value){
+			$sLoads[] = $value["result"];
+		}
+		$sLoad[] = array("name" => 60, "AVG" => $sLoads[59]);
+		$sLoad[] = array("name" => 30, "AVG" => $sLoads[29]);
+		$sLoad[] = array("name" => 15, "AVG" => $sLoads[14]);
+		$sLoad[] = array("name" => 5, "AVG" => $sLoads[4]);
+		$sLoad[] = array("name" => 1, "AVG" => $sLoads[0]);
+		
 		$sContent = Templater::AdvancedParse('/blue_default/main', $locale->strings, array(
 		'PanelTitle'  => $sPanelTitle->sValue,
 		'ErrorMessage'	=>	"",
@@ -26,6 +50,8 @@ include('./includes/loader.php');
 		'InitialSetup'	=>	$sUser->sInitialSetup,
 		'WelcomeClosed'	=>	$sUser->sWelcomeClosed,
 		'InitialSetupContent'	=>	$sInitialSetupContent
+		'Load' => $sLoad,
+		'RAM' => $sRAMUsage,
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 		'PageTitle'  => "Main Dashboard",
