@@ -28,11 +28,11 @@ include('./includes/loader.php');
 		foreach($sTotalMemory->data as $key => $value){
 			$sTotal[] = $value["result"];
 		}
-		$sRAMUsage[] = array("name" => "60", "Used" => $sUsed[59], "Total" => $sTotal[59]);
-		$sRAMUsage[] = array("name" => "30", "Used" => $sUsed[29], "Total" => $sTotal[29]);
-		$sRAMUsage[] = array("name" => "15", "Used" => $sUsed[14], "Total" => $sTotal[14]);
-		$sRAMUsage[] = array("name" => "5", "Used" => $sUsed[4], "Total" => $sTotal[4]);
-		$sRAMUsage[] = array("name" => "1", "Used" => $sUsed[0], "Total" => $sTotal[0]);
+		$sRAMUsage[] = array("name" => "60", "used" => $sUsed[59], "total" => $sTotal[59]);
+		$sRAMUsage[] = array("name" => "30", "used" => $sUsed[29], "total" => $sTotal[29]);
+		$sRAMUsage[] = array("name" => "15", "used" => $sUsed[14], "total" => $sTotal[14]);
+		$sRAMUsage[] = array("name" => "5", "used" => $sUsed[4], "total" => $sTotal[4]);
+		$sRAMUsage[] = array("name" => "1", "used" => $sUsed[0], "total" => $sTotal[0]);
 		$sLoadAverage = $database->CachedQuery("SELECT * FROM stats WHERE type='load' ORDER BY id DESC LIMIT 60", array(), 1);
 		foreach($sLoadAverage->data as $key => $value){
 			$sLoads[] = $value["result"];
