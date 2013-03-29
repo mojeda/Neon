@@ -53,22 +53,18 @@ include('./includes/loader.php');
 		$sLoad[] = array("name" => 1, "AVG" => $sLoads[0]);
 		
 		$sContent = Templater::AdvancedParse('/blue_default/main', $locale->strings, array(
-		'PanelTitle'  => $sPanelTitle->sValue,
-		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername,
-		'InitialSetup'	=>	$sUser->sInitialSetup,
-		'WelcomeClosed'	=>	$sUser->sWelcomeClosed,
-		'InitialSetupContent'	=>	$sInitialSetupContent,
-		'Load' => $sLoad,
-		'RAM' => $sRAMUsage,
+			'ErrorMessage'	=>	"",
+			'InitialSetup'	=>	$sUser->sInitialSetup,
+			'WelcomeClosed'	=>	$sUser->sWelcomeClosed,
+			'InitialSetupContent'	=>	$sInitialSetupContent,
+			'Load' => $sLoad,
+			'RAM' => $sRAMUsage,
 		));
 		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-		'PageTitle'  => "Main Dashboard",
-		'PageName'	=>	"main",
-		'PanelTitle'	=>	$sPanelTitle->sValue,
-		'ErrorMessage'	=>	"",
-		'Username'	=>	$sUser->sUsername,
-		'Content'	=>	$sContent
+			'PageTitle'  => "Main Dashboard",
+			'PageName'	=>	"main",
+			'ErrorMessage'	=>	"",
+			'Content'	=>	$sContent
 		));
 	}
 ?>

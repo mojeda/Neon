@@ -51,7 +51,7 @@
 
         var options = {
           title: '',
-          hAxis: {title: 'Minutes'}
+          hAxis: {title: 'Minutes Ago'}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('ramusage'));
@@ -71,7 +71,7 @@
 
         var options = {
           title: '',
-          hAxis: {title: 'Minutes'}
+          hAxis: {title: 'Minutes Ago'}
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('systemload'));
