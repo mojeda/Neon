@@ -2,7 +2,7 @@
 include('./includes/loader.php');
 
 // Just in case someone has a older version of neon.
-$sStatsTable = $database->CachedQuery("CREATE TABLE IF NOT EXISTS `stats` (`id` int(8) NOT NULL AUTO_INCREMENT, `result` int(8) NOT NULL, `type` varchar(65) NOT NULL, `timestamp` int(16) NOT NULL, PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;", array(), 1);
+$sStatsTable = $database->CachedQuery("CREATE TABLE IF NOT EXISTS `stats` (`id` int(8) NOT NULL AUTO_INCREMENT, `result` varchar(8) NOT NULL, `type` varchar(65) NOT NULL, `timestamp` int(16) NOT NULL, PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;", array(), 1);
 
 // Pull used/total memory for stats
 $sFree = shell_exec('free');
