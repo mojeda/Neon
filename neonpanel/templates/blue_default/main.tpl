@@ -43,7 +43,7 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Free', 'Total'],
+          ['Minutes Ago', 'Free', 'Total'],
 		  {%foreach entry in RAM}
 			['{%?entry[name]}', {%?entry[used]}, {%?entry[total]}],
 		  {%/foreach}
@@ -54,16 +54,46 @@
           hAxis: {title: 'Minutes'}
         };
 
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.AreaChart(document.getElementById('ramusage'));
+        chart.draw(data, options);
+      }
+    </script>
+	<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Minutes Ago', 'Load'],
+		  {%foreach entry in Load}
+			['{%?entry[name]}', {%?entry[AVG]}],
+		  {%/foreach}
+        ]);
+
+        var options = {
+          title: '',
+          hAxis: {title: 'Minutes'}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('systemload'));
         chart.draw(data, options);
       }
     </script>
 	<div class="grid740">
 		<div class="simplebox">
+			<div class="titleh"><h3>System Load Average</h3></div>
+			<div class="body padding10">
+				<div align="center">
+					<div id="systemload" style="width: 700px; height: 200px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid740">
+		<div class="simplebox">
 			<div class="titleh"><h3>System RAM Usage</h3></div>
 			<div class="body padding10">
 				<div align="center">
-					<div id="chart_div" style="width: 700px; height: 200px;"></div>
+					<div id="ramusage" style="width: 700px; height: 200px;"></div>
 				</div>
 			</div>
 		</div>
