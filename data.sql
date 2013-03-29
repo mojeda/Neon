@@ -1,3 +1,5 @@
+USE panel;
+
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
   `username` varchar(65) NOT NULL,
@@ -84,5 +86,52 @@ INSERT INTO `settings` (`id`, `setting_name`, `setting_value`, `setting_group`) 
 (6, 'max_panel_upload_size', '25MB', 'panel_settings'),
 (7, 'version', '0', 'panel_settings');
 
+
+CREATE TABLE IF NOT EXISTS `stats` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `result` varchar(8) NOT NULL,
+  `type` varchar(65) NOT NULL,
+  `timestamp` int(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1678 ;
+
+
 DROP DATABASE test;
 DELETE FROM mysql.user WHERE User='';
+
+USE dns;
+
+create table domains (
+ id              INT auto_increment,
+ name            VARCHAR(255) NOT NULL,
+ master          VARCHAR(128) DEFAULT NULL,
+ last_check      INT DEFAULT NULL,
+ type            VARCHAR(6) NOT NULL,
+ notified_serial INT DEFAULT NULL, 
+ account         VARCHAR(40) DEFAULT NULL,
+ primary key (id)
+) Engine=InnoDB;
+
+CREATE UNIQUE INDEX name_index ON domains(name);
+
+CREATE TABLE records (
+  id              INT auto_increment,
+  domain_id       INT DEFAULT NULL,
+  name            VARCHAR(255) DEFAULT NULL,
+  type            VARCHAR(10) DEFAULT NULL,
+  content         VARCHAR(64000) DEFAULT NULL,
+  ttl             INT DEFAULT NULL,
+  prio            INT DEFAULT NULL,
+  change_date     INT DEFAULT NULL,
+  primary key(id)
+) Engine=InnoDB;
+
+CREATE INDEX rec_name_index ON records(name);
+CREATE INDEX nametype_index ON records(name,type);
+CREATE INDEX domain_id ON records(domain_id);
+
+create table supermasters (
+  ip         VARCHAR(25) NOT NULL, 
+  nameserver VARCHAR(255) NOT NULL, 
+  account    VARCHAR(40) DEFAULT NULL
+) Engine=InnoDB;

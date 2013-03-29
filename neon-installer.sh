@@ -105,6 +105,10 @@ if ! type -p git > /dev/null; then
 	exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y -q  install pdns-server pdns-backend-mysql host >> ~/neon-install/neon-install.log 2>&1
+echo Percent Complete: 39%
+
 mysqlpassword=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 salt=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};`
 export DEBIAN_FRONTEND=noninteractive >> ~/neon-install/neon-install.log 2>&1
@@ -164,15 +168,21 @@ mkdir /home/root/ >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 70%
 
 setfacl -Rm user:www-data:rwx /var/neon/* >> ~/neon-install/neon-install.log 2>&1
-mysql -u root --password="$mysqlpassword" --execute="CREATE DATABASE IF NOT EXISTS panel;"
+mysql -u root --password="$mysqlpassword" --execute="CREATE DATABASE IF NOT EXISTS panel;CREATE DATABASE IF NOT EXISTS dns;"
 mysql -u root --password="$mysqlpassword" panel < /var/neon/data.sql
 echo Percent Complete: 80%
 
 cp /var/neon/data/config.example /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
+mv /etc/powerdns/pdns.conf /etc/powerdns/pdns.old >> ~/neon-install/neon-install.log 2>&1
+cp /var/neon/neonpanel/includes/configs/pdns.conf /etc/powerdns/pdns.conf >> ~/neon-install/neon-install.log 2>&1
+cp /var/neon/data/config.example /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databaseusernamehere/root/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
+sed -i 's/databaseusernamehere/root/g' /etc/powerdns/pdns.conf >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /usr/share/phpmyadmin/pma.php >> ~/neon-install/neon-install.log 2>&1
+sed -i 's/databasepasswordhere/'${mysqlpassword}'/g' /etc/powerdns/pdns.conf >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/databasenamehere/panel/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
+sed -i 's/databasenamehere/dns/g' /etc/powerdns/pdns.conf >> ~/neon-install/neon-install.log 2>&1
 sed -i 's/randomlygeneratedsalthere/'${salt}'/g' /var/neon/data/config.json >> ~/neon-install/neon-install.log 2>&1
 echo Percent Complete: 90%
 
@@ -187,11 +197,13 @@ echo Finishing and cleaning up...
 /etc/init.d/apache stop >> ~/neon-install/neon-install.log 2>&1
 kill -9 $( lsof -i:80 -t ) >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/nginx restart >> ~/neon-install/neon-install.log 2>&1
+/etc/init.d/pdns restart >> ~/neon-install/neon-install.log 2>&1
 /etc/init.d/php5-fpm restart >> ~/neon-install/neon-install.log 2>&1
 cd /var/neon/neonpanel/ >> ~/neon-install/neon-install.log 2>&1
 php init.php >> ~/neon-install/neon-install.log 2>&1
 rm -rf init.php >> ~/neon-install/neon-install.log 2>&1
 cd ~/neon-install/ >> ~/neon-install/neon-install.log 2>&1
+cat <(crontab -l) <(echo "* * * * * sh /var/neon/data/scripts/stats.sh") | crontab -
 echo "=========NEON_INSTALL_COMPLETE========" >> ~/neon-install/neon-install.log 2>&1
 echo "Mysql Root Password: $mysqlpassword" >> ~/neon-install/neon-install.log 2>&1
 echo "You can now login at http://yourip:2026" >> ~/neon-install/neon-install.log 2>&1
