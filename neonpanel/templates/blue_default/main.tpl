@@ -63,7 +63,7 @@
 			<div class="titleh"><h3>System RAM Usage</h3></div>
 			<div class="body padding10">
 				<div align="center">
-					<div id="chart_div" style="width: 700px; height: 300px;"></div>
+					<div id="chart_div" style="width: 700px; height: 200px;"></div>
 				</div>
 			</div>
 		</div>
