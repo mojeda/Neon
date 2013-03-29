@@ -5,6 +5,15 @@ include('./includes/loader.php');
 		header("Location: index.php");
 		die();
 	} else {
+	
+		function check_set($var){
+			if(!empty($var)){
+				return $var;
+			} else {
+				return 0;
+			}
+		}
+		
 		if($sUser->sInitialSetup == 0){
 			if(!$result = $database->CachedQuery("SELECT * FROM mysql.user WHERE `User` = :Username", array(':Username' => $sUser->sUsername), 1)){
 				$result = $database->CachedQuery("CREATE USER :Username@'localhost' IDENTIFIED BY :Password", array(':Username' => $sUser->sUsername, ':Password' => $_SESSION['password']), 1);
@@ -37,26 +46,10 @@ include('./includes/loader.php');
 		foreach($sLoadAverage->data as $key => $value){
 			$sLoads[] = $value["result"];
 		}
-		if(!empty($sLoads[59])){
-			$sLoad[] = array("name" => 60, "AVG" => $sLoads[59]);
-		} else {
-			$sLoad[] = array("name" => 60, "AVG" => 0);
-		}
-		if(!empty($sLoads[29])){
-			$sLoad[] = array("name" => 30, "AVG" => $sLoads[29]);
-		} else {
-			$sLoad[] = array("name" => 30, "AVG" => 0);
-		}
-		if(!empty($sLoads[14])){
-			$sLoad[] = array("name" => 15, "AVG" => $sLoads[14]);
-		} else {
-			$sLoad[] = array("name" => 15, "AVG" => 0);
-		}
-		if(!empty($sLoads[4])){
-			$sLoad[] = array("name" => 5, "AVG" => $sLoads[4]);
-		} else {
-			$sLoad[] = array("name" => 5, "AVG" => 0);
-		}
+		$sLoad[] = array("name" => 60, "AVG" => check_set($sLoads[59]));
+		$sLoad[] = array("name" => 30, "AVG" => check_set($sLoads[29]));
+		$sLoad[] = array("name" => 15, "AVG" => check_set($sLoads[14]));
+		$sLoad[] = array("name" => 5, "AVG" => check_set($sLoads[4]));
 		$sLoad[] = array("name" => 1, "AVG" => $sLoads[0]);
 		
 		$sContent = Templater::AdvancedParse('/blue_default/main', $locale->strings, array(
