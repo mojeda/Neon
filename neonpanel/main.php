@@ -20,11 +20,11 @@ include('./includes/loader.php');
 			$sInitialSetupContent = "";
 		}
 		
-		$sUsedMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='used_memory' LIMIT 60 ORDER BY id DESC", array(), 1);
+		$sUsedMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='used_memory' ORDER BY id DESC LIMIT 60", array(), 1);
 		foreach($sUsedMemory->data as $key => $value){
 			$sUsed[] = $value["result"];
 		}
-		$sTotalMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='total_memory' LIMIT 60 ORDER BY id DESC", array(), 1);
+		$sTotalMemory = $database->CachedQuery("SELECT * FROM stats WHERE type='total_memory' ORDER BY id DESC LIMIT 60", array(), 1);
 		foreach($sTotalMemory->data as $key => $value){
 			$sTotal[] = $value["result"];
 		}
@@ -33,7 +33,7 @@ include('./includes/loader.php');
 		$sRAMUsage[] = array("name" => "15", "Used" => $sUsed[14], "Total" => $sTotal[14]);
 		$sRAMUsage[] = array("name" => "5", "Used" => $sUsed[4], "Total" => $sTotal[4]);
 		$sRAMUsage[] = array("name" => "1", "Used" => $sUsed[0], "Total" => $sTotal[0]);
-		$sLoadAverage = $database->CachedQuery("SELECT * FROM stats WHERE type='load' LIMIT 60 ORDER BY id DESC", array(), 1);
+		$sLoadAverage = $database->CachedQuery("SELECT * FROM stats WHERE type='load' ORDER BY id DESC LIMIT 60", array(), 1);
 		foreach($sLoadAverage->data as $key => $value){
 			$sLoads[] = $value["result"];
 		}
