@@ -8,15 +8,15 @@ $sRegistrationEnabled = Core::GetSetting('registration_enabled');
 NewTemplater::SetGlobalVariable("RegistrationEnabled", $sRegistrationEnabled->sValue);
 $sForgotPasswordEnabled = Core::GetSetting('forgotpassword_enabled');
 NewTemplater::SetGlobalVariable("ForgotPasswordEnabled", $sForgotPasswordEnabled->sValue);
-$sDefaultIP = Core::GetSetting('default_ip');
+$sIP = Core::GetSetting('default_ip');
 
-if($sDefaultIP == localhost){
+if($sIP->sValue == localhost){
 	$sDefaultIP = $_SERVER['SERVER_ADDR'];
 	$sUpdate = Core::UpdateSetting("default_ip", $sDefaultIP);
 	NewTemplater::SetGlobalVariable("DefaultIP", $sDefaultIP);
 } else {
-	$sDefaultIP = $sDefaultIP->sValue;
-	NewTemplater::SetGlobalVariable("DefaultIP", $sDefaultIP);
+	$sDefaultIP = $sIP->sValue;
+	NewTemplater::SetGlobalVariable("DefaultIP", $sIP->sValue);
 }
 
 $sMaxPanelUploadSize = Core::GetSetting('max_panel_upload_size');
