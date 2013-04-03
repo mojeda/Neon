@@ -14,7 +14,7 @@ include('./includes/loader.php');
 		}
 		
 		if($sAction == adddomain){
-		
+			$return = Domain::AddDomain($_GET['name']);
 		}
 		
 		if($sAction == removedomain){
