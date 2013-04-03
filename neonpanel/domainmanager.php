@@ -5,20 +5,48 @@ include('./includes/loader.php');
 		header("Location: index.php");
 		die();
 	} else {
+		if(!empty($_GET['format'])){
+			$sFormat = $_GET['format'];
+		}
+		
+		if(!empty($_GET['action'])){
+			$sAction = $_GET['action'];
+		}
+		
+		if($sAction == adddomain){
+		
+		}
+		
+		if($sAction == removedomain){
+		
+		}
+		
 		$sUserDomains = $database->CachedQuery("SELECT * FROM domains WHERE `user_id` = :UserId ", array(':UserId' => $sUser->sId), 1);
 		foreach($sUserDomains->data as $key => $value){
 			$sDomains[] = array("id" => $value["id"], "domain" => $value["domain_name"]);
 		}
 		
-		$sContent = Templater::AdvancedParse('/blue_default/domainmanager', $locale->strings, array(
+		
+		$sDomainManager = Templater::AdvancedParse('/blue_default/domainmanager', $locale->strings, array(
 			'ErrorMessage'	=>	"",
 			'Domains' => $sDomains,
 		));
-		echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-		'PageTitle'  => "Domain Manager",
-		'PageName'	=>	"domainmanager",
-		'ErrorMessage'	=>	"",
-		'Content'	=>	$sContent,
-		));
+		
+		if(!isset($sFormat)){
+			$sContent = Templater::AdvancedParse('/blue_default/domains', $locale->strings, array(
+				'ErrorMessage'	=>	"",
+				'DomainManagerCode'	=> $sDomainManager
+			));
+			echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
+				'PageTitle'  => "Domain Manager",
+				'PageName'	=>	"domainmanager",
+				'ErrorMessage'	=>	"",
+				'Content'	=>	$sContent
+			));
+		} else {
+			$sContent = preg_replace('/\r\n|\r|\n/', '', $sDomainManager);
+			$sReturnArray = array("content"	=>	$sContent);
+			echo json_encode($sReturnArray);
+		}
 	}
 ?>

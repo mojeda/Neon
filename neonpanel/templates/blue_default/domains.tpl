@@ -1,0 +1,1 @@
+<div align="center" id="DomainManager" style="margin-top:25px;">{%?DomainManagerCode}</div>
