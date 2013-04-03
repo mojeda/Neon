@@ -38,13 +38,16 @@
 			$("#CancelDelete").click(function() {
 				$.modal.close();
 			});
+			$('.noEnterSubmit').keypress(function(e){
+    				if ( e.which == 13 ) e.preventDefault();
+			});
 		});
 	</script>
 	<div class="simplebox grid740">
 		<div class="titleh">
 			<h3>Domain Management</h3>
 			<div class="shortcuts-icons">
-				<a class="shortcut tips" href="#" title="Add New Item"><img src="./templates/blue_default/img/icons/shortcut/plus.png" width="25" height="25" alt="icon" /></a>
+				<a class="shortcut tips" id="NewDomainOpen" title="Add New Item"><img src="./templates/blue_default/img/icons/shortcut/plus.png" width="25" height="25" alt="icon" /></a>
 			</div>
 		</div>
 		<table id="Domains" class="tablesorter"> 
