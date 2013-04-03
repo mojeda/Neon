@@ -23,6 +23,8 @@ class Domain extends CPHPDatabaseRecordClass {
 	public static function AddDomain($uDomain){
 		global $sUser;
 		global $sDefaultIP;
+		global $user_ssh;
+		global $user_sftp;
 	
 		// Filter Domain
 		$uDomain = preg_replace("/[^a-z0-9_ .-]/i", "", $uDomain);
