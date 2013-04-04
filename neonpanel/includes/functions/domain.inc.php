@@ -25,6 +25,7 @@ class Domain extends CPHPDatabaseRecordClass {
 		global $sDefaultIP;
 		global $user_ssh;
 		global $user_sftp;
+		global $database;
 	
 		// Filter Domain
 		$uDomain = preg_replace("/[^a-z0-9_ .-]/i", "", $uDomain);
