@@ -61,11 +61,11 @@ class Domain extends CPHPDatabaseRecordClass {
 			$sReload = $user_ssh->exec("/etc/init.d/nginx reload");
 		
 			// Insert Domain Into Database
-			$sDomain = new Domain(0);
-			$sDomain->uName = $uDomain;
-			$sDomain->uOwner = $sUser->sId;
-			$sDomain->uActive = 1;
-			$sDomain->InsertIntoDatabase();
+			$sCreateDomain = new Domain(0);
+			$sCreateDomain->uName = $uDomain;
+			$sCreateDomain->uOwner = $sUser->sId;
+			$sCreateDomain->uActive = 1;
+			$sCreateDomain->InsertIntoDatabase();
 		
 			// Add DNS Records
 			$sResultOne = $database->CachedQuery("INSERT INTO domains(name, type) VALUES(:Domain, 'NATIVE')", array(':Domain' => $sDomain));
