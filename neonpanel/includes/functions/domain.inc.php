@@ -69,7 +69,8 @@ class Domain extends CPHPDatabaseRecordClass {
 		
 			// Add DNS Records
 			$sResultOne = $database->CachedQuery("INSERT INTO domains(name, type) VALUES(:Domain, 'NATIVE')", array(':Domain' => $sDomain));
-			$sResultTwo = $database->CachedQuery("INSERT INTO records(domain_id, name, content, type, ttl, prio) VALUES(:Id, :Domain, :IPAddress, 'A', '120', 'NULL')", array(':Id' =>  $sResultOne->lastInsertId(), ':Domain' => $sDomain, ':IPAddress' => $sDefaultIP));
+			$sDomainId = $database->lastInsertId();
+			$sResultTwo = $database->CachedQuery("INSERT INTO records(domain_id, name, content, type, ttl, prio) VALUES(:Id, :Domain, :IPAddress, 'A', '120', 'NULL')", array(':Id' =>  $sDomainId, ':Domain' => $sDomain, ':IPAddress' => $sDefaultIP));
 			return true;
 		}
 	}
