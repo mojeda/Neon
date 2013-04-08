@@ -30,7 +30,7 @@
 				var domain = $("#DeleteFormValue").text();
 				$.modal.close();
 				$("#LoadingImage").css({visibility: "visible"});
-				$.getJSON("domainmanager.php?action=deletedomain&name=" + domain + "&format=1",function(result){
+				$.getJSON("domainmanager.php?action=removedomain&name=" + domain + "&format=1",function(result){
 					$("#DomainManager").html(result.content);
 					$("#LoadingImage").css({visibility: "hidden"});
 				});
