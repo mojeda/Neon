@@ -32,7 +32,9 @@ class Domain extends CPHPDatabaseRecordClass {
 		$uDomain = str_replace("www.", "", $uDomain);
 		$sDomain = str_replace("http://", "", $uDomain);
 		
-		if(empty($result = $database->CachedQuery("SELECT * FROM domains WHERE `domain_name` = :Domain", array(':Domain' => $uUsername, ':Active' => '1'), 5))){
+		$result = $database->CachedQuery("SELECT * FROM domains WHERE `domain_name` = :Domain", array(':Domain' => $uUsername, ':Active' => '1'), 5);
+		
+		if(empty($result)){
 		
 			// Validate path information
 			$sUser->sRootDir = '/home/'.$sUser->sUsername.'/';
