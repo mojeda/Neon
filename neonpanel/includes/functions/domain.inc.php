@@ -63,6 +63,7 @@ class Domain extends CPHPDatabaseRecordClass {
 					die("Seems to be a problem setting up the config.");
 				}
 				$sReload = $user_ssh->exec("/etc/init.d/nginx reload");
+				$sReload = $user_ssh->exec("/etc/init.d/pdns reload");
 		
 				// Insert Domain Into Database
 				$sCreateDomain = new Domain(0);
@@ -97,6 +98,22 @@ class Domain extends CPHPDatabaseRecordClass {
 		$sDomain = str_replace("http://", "", $uDomain);
 		
 		// Check to see if domain exists and user owns it
-		
+		$result = $database->CachedQuery("SELECT * FROM domains WHERE `domain_name` = :Domain AND `user_id` = :UserId", array(':Domain' => $sDomain, ':UserId' => $sUser->sId), 5);
+			
+		if(!empty($result)){
+			$sRemoveConfig = $user_ssh->exec('rm -rf /etc/nginx/sites-enabled/'.$sDomain.'.conf');
+			
+			$sDNS = $database->CachedQuery("SELECT * FROM dns.domains WHERE `name` = :Domain", array(':Domain' => $sDomain));
+			$sDeleteRecords = $database->CachedQuery("DELETE FROM dns.records WHERE `domain_id` = :DomainId", array(':DomainId' => $sDNS->sId));
+			$sDeleteDNS = $database->CachedQuery("DELETE FROM dns.domains WHERE `name` = :Domain", array(':Domain' => $sDomain));
+			
+			$sDeleteEntry = $database->CachedQuery("DELETE FROM domains WHERE `domain_name` = :Domain AND `user_id` = :UserId", array(':Domain' => $sDomain, ':UserId' => $sUser->sId), 5);
+			
+			$sReload = $user_ssh->exec("/etc/init.d/nginx reload");
+			$sReload = $user_ssh->exec("/etc/init.d/pdns reload");
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

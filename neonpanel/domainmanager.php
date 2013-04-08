@@ -18,7 +18,7 @@ include('./includes/loader.php');
 		}
 		
 		if($sAction == removedomain){
-		
+			$return = Domain::RemoveDomain($_GET['name']);
 		}
 		
 		$sUserDomains = $database->CachedQuery("SELECT * FROM domains WHERE `user_id` = :UserId ", array(':UserId' => $sUser->sId), 1);
