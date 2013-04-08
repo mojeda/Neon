@@ -22,8 +22,10 @@ include('./includes/loader.php');
 		}
 		
 		$sUserDomains = $database->CachedQuery("SELECT * FROM domains WHERE `user_id` = :UserId ", array(':UserId' => $sUser->sId), 1);
-		foreach($sUserDomains->data as $key => $value){
-			$sDomains[] = array("id" => $value["id"], "domain" => $value["domain_name"]);
+		if(!empty($sUserDomains)){
+			foreach($sUserDomains->data as $key => $value){
+				$sDomains[] = array("id" => $value["id"], "domain" => $value["domain_name"]);
+			}
 		}
 		
 		
