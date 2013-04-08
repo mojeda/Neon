@@ -62,7 +62,7 @@
 					{%foreach domain in Domains}
 						<tr> 
 							<td>{%?domain[domain]}</td> 
-							<td><div align="center"><a original-title="Delete" class="icon-button tips DeleteDomain" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?domain[name]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a></div></td> 
+							<td><div align="center"><a original-title="Delete" class="icon-button tips DeleteDomain" style="padding-left:5px;padding-right:5px;cursor:pointer;" rel="{%?domain[domain]}"><img src="./templates/blue_default/img/icons/32x32/stop32.png" alt="icon" height="16" width="16"></a></div></td> 
 						</tr> 
 					{%/foreach}
 				{%/if}
