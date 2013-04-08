@@ -32,7 +32,7 @@ class Domain extends CPHPDatabaseRecordClass {
 		$uDomain = str_replace("www.", "", $uDomain);
 		$sDomain = str_replace("http://", "", $uDomain);
 		
-		$result = $database->CachedQuery("SELECT * FROM domains WHERE `domain_name` = :Domain", array(':Domain' => $uUsername, ':Active' => '1'), 5);
+		$result = $database->CachedQuery("SELECT * FROM domains WHERE `domain_name` = :Domain", array(':Domain' => $sDomain), 5);
 		
 		if(empty($result)){
 		
