@@ -105,8 +105,7 @@
 		<div class="simplebox">
 			<div class="titleh"><h3>Neon Update Center</h3></div>
 			<div class="body padding10">
-				<div id="news">
-				</div>
+				<div id="news" align="left"></div>
 			</div>
 		</div>
 	</div>
