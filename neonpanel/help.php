@@ -8,7 +8,7 @@ if($LoggedIn === false){
 	$sContent = Templater::AdvancedParse('/blue_default/help', $locale->strings, array(
 		'ErrorMessage'	=>	"",
 	));
-	echo Templater::AdvancedParse('/blue_default/help', $locale->strings, array(
+	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 		'PageTitle'  => "Help & Information",
 		'PageName'	=>	"help",
 		'ErrorMessage'	=>	"",

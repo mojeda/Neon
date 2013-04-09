@@ -8,7 +8,7 @@ if($LoggedIn === false){
 	$sContent = Templater::AdvancedParse('/blue_default/process', $locale->strings, array(
 		'ErrorMessage'	=>	"",
 	));
-	echo Templater::AdvancedParse('/blue_default/process', $locale->strings, array(
+	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
 		'PageTitle'  => "Process Manager",
 		'PageName'	=>	"process",
 		'ErrorMessage'	=>	"",
