@@ -117,7 +117,7 @@
 					<li{%if PageName == domainmanager} class="active"{%/if}><a href="domainmanager.php"><img src="templates/blue_default/img/icons/sidemenu/photo.png" width="16" height="16" alt="icon"/>Domain Manager</a></li>
 					<li{%if PageName == server} class="active"{%/if}><a href="security.php"><img src="templates/blue_default/img/icons/sidemenu/lock.png" width="16" height="16" alt="icon"/>Server Settings</a></li>
                     <li{%if PageName == backups} class="active"{%/if}><a href="backups.php"><img src="templates/blue_default/img/icons/sidemenu/download.png" width="16" height="16" alt="icon"/>Backups</a></li>
-                    <li{%if PageName == errorpages} class="active"{%/if}><a href="errorpages.php"><img src="templates/blue_default/img/icons/sidemenu/error.png" width="16" height="16" alt="icon"/>Error Pages</a></li>
+                    <li{%if PageName == process} class="active"{%/if}><a href="process.php"><img src="templates/blue_default/img/icons/sidemenu/error.png" width="16" height="16" alt="icon"/>Processes</a></li>
                     <li{%if PageName == help} class="active"{%/if}><a href="help.php"><img src="templates/blue_default/img/icons/sidemenu/info.png" width="16" height="16" alt="icon"/>Help & Information</a></li>
 					<li{%if PageName == update} class="active"{%/if}><a href="update.php"><img src="templates/blue_default/img/icons/sidemenu/download.png" width="16" height="16" alt="icon"/>Check For Updates</a></li>
                 </ul>

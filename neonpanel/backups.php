@@ -5,12 +5,12 @@ if($LoggedIn === false){
 	header("Location: index.php");
 	die();
 } else {
-	$sContent = Templater::AdvancedParse('/blue_default/security', $locale->strings, array(
+	$sContent = Templater::AdvancedParse('/blue_default/backups', $locale->strings, array(
 		'ErrorMessage'	=>	"",
 	));
 	echo Templater::AdvancedParse('/blue_default/master', $locale->strings, array(
-		'PageTitle'  => "Server Settings",
-		'PageName'	=>	"security",
+		'PageTitle'  => "Backups",
+		'PageName'	=>	"backups",
 		'ErrorMessage'	=>	"",
 		'Content'	=>	$sContent
 	));
