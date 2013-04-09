@@ -77,6 +77,9 @@
         var chart = new google.visualization.AreaChart(document.getElementById('systemload'));
         chart.draw(data, options);
       }
+	$.getJSON("pull_news.php",function(result){
+		$("#news").html(result.content);
+	});
     </script>
 	<div class="grid740">
 		<div class="simplebox">
@@ -94,6 +97,15 @@
 			<div class="body padding10">
 				<div align="center">
 					<div id="ramusage" style="width: 700px; height: 200px;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid740">
+		<div class="simplebox">
+			<div class="titleh"><h3>Neon Update Center</h3></div>
+			<div class="body padding10">
+				<div id="news">
 				</div>
 			</div>
 		</div>
