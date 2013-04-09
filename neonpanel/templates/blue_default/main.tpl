@@ -83,6 +83,14 @@
     </script>
 	<div class="grid740">
 		<div class="simplebox">
+			<div class="titleh"><h3>Neon Update Center</h3></div>
+			<div class="body padding10">
+				<div id="news" align="left"></div>
+			</div>
+		</div>
+	</div>
+	<div class="grid740">
+		<div class="simplebox">
 			<div class="titleh"><h3>System Load Average</h3></div>
 			<div class="body padding10">
 				<div align="center">
@@ -98,14 +106,6 @@
 				<div align="center">
 					<div id="ramusage" style="width: 700px; height: 200px;"></div>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="grid740">
-		<div class="simplebox">
-			<div class="titleh"><h3>Neon Update Center</h3></div>
-			<div class="body padding10">
-				<div id="news" align="left"></div>
 			</div>
 		</div>
 	</div>
