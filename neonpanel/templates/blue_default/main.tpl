@@ -43,7 +43,7 @@
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Minutes Ago', 'Free', 'Total'],
+          ['Minutes Ago', 'Used', 'Total'],
 		  {%foreach entry in RAM}
 			['{%?entry[name]}', {%?entry[used]}, {%?entry[total]}],
 		  {%/foreach}
