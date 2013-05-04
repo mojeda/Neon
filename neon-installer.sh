@@ -174,6 +174,7 @@ status "Config: 3 / 13"
 
 wget https://raw.github.com/BlueVM/Neon/develop/neonpanel/includes/configs/php.conf
 mv php.conf /etc/php5/fpm/pool.d/www.conf
+mv /etc/php5/conf.d/apc.ini /etc/php5/apc.old
 status "Config: 4 / 13"
 
 mkdir /usr/ssl
