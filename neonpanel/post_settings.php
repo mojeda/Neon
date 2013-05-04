@@ -9,6 +9,8 @@ if($LoggedIn === false){
 		$sDomain = $_POST['domain'];
 		if(!empty($sDomain)){
 			$return = Domain::AddDomain($_POST['domain']);
+			$sUser->uWizardClosed = 1;
+			$sUser->InsertIntoDatabase();
 		} else {
 			header("Location: main.php");
 			die("There seems to be a problem with your request. Please go back and try again.");
