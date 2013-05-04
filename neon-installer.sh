@@ -19,7 +19,7 @@ function remove {
 	service "$1" stop
 	export DEBIAN_PRIORITY=critical
 	export DEBIAN_FRONTEND=noninteractive
-	apt-get -q -y remove --purge "$1"
+	apt-get -q -y remove "$1"
 	apt-get clean
 }
 
@@ -68,18 +68,21 @@ status " "
 status "Neon is now being installed."
 status "Begining cleanup..."
 
-remove="apache2 apache* apach2* apache2-utils mysql* php* nginx lighttpd httpd* php5-fpm vsftpd proftpd exim qmail postfix sendmail"
+remove="apache2 apache* apache2* apache2-utils mysql* php* nginx lighttpd httpd* php5-fpm vsftpd proftpd exim qmail postfix sendmail"
 
 pkill apache
 pkill apache2
 aptitude -y -q purge ~i~napache
 apt-get --purge -y autoremove apache*
+apt-get remove apache2-utils
 for program in $remove
 do
 	remove $program
 	x=$(($x + 1));
 	status "Clean Up: $x / 23"
 done
+apt-get autoremove
+
 kill -9 $( lsof -i:80 -t )
 x=$(($x + 1));
 status "Clean Up: $x / 21"
