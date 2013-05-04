@@ -73,6 +73,7 @@ remove="apache2 apache* apach2* apache2-utils mysql* php* nginx lighttpd httpd* 
 pkill apache
 pkill apache2
 aptitude -y -q purge ~i~napache
+apt-get --purge -y autoremove apache*
 for program in $remove
 do
 	remove $program
