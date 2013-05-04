@@ -23,7 +23,7 @@ As such please only install neon on a blank server/vps with Debian 6.
 
 Copy & paste this command into SSH:
 
-cd ~ && wget --no-check-certificate https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh && sh neon-installer.sh
+cd ~ && wget --no-check-certificate https://raw.github.com/BlueVM/Neon/develop/neon-installer.sh && bash neon-installer.sh
 
 ==========================================
 KNOWN BUGS
