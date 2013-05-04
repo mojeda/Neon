@@ -72,7 +72,7 @@ remove="apache2 apache* apache2* apache2-utils mysql* php* nginx lighttpd httpd*
 
 pkill apache
 pkill apache2
-aptitude -y -q purge ~i~napache
+aptitude -y purge ~i~napache
 apt-get --purge -y autoremove apache*
 apt-get remove apache2-utils
 for program in $remove
@@ -236,6 +236,7 @@ mv id_rsa /var/neon/data/
 setfacl -Rm user:www-data:rwx /var/neon/*
 status "Config: 13 / 13"
 
+aptitude -y purge ~i~napache
 status "Finishing and cleaning up..."
 /etc/init.d/nginx start
 /etc/init.d/pdns start
