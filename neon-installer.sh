@@ -17,7 +17,9 @@ function install {
 function remove {
 	/etc/init.d/"$1" stop
 	service "$1" stop
-	DEBIAN_FRONTEND=noninteractive apt-get -q -y remove --purge "$1"
+	export DEBIAN_PRIORITY=critical
+	export DEBIAN_FRONTEND=noninteractive
+	apt-get -q -y remove --purge "$1"
 	apt-get clean
 }
 
@@ -243,7 +245,7 @@ ipaddress=`ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | grep -v '127.0.0
 
 status "=========NEON_INSTALL_COMPLETE========"
 status "Mysql Root Password: $mysqlpassword"
-status "You can now login at http://$ipaddress:2026"
+status "You can now login at https://$ipaddress:2026"
 status "Username: root"
 status "Password: your_root_password"
 status "====================================="
