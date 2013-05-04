@@ -247,6 +247,7 @@ rm -rf init.php
 cd ~/neon-install/
 (crontab -l 2>/dev/null; echo "* * * * * sh /var/neon/data/scripts/stats.sh") | crontab -
 ipaddress=`ifconfig  | grep 'inet addr:'| grep -v '127.0.0.1' | grep -v '127.0.0.2' | cut -d: -f2 | awk '{ print $1}'`;
+wget --delete-after http://www.neoncp.com/installer/report.php?ip=$ipaddress
 
 status "=========NEON_INSTALL_COMPLETE========"
 status "Mysql Root Password: $mysqlpassword"
